@@ -37,10 +37,6 @@ def super_trim():
         for file in listdir:
             file_path = os.path.join(DIR, file)
 
-            # Skip .gitkeep file
-            if file == ".gitkeep":
-                continue
-
             # Remove other files
             if os.path.isfile(file_path):
                 os.remove(file_path)
