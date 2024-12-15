@@ -1,17 +1,14 @@
 # Importing necessary libraries and modules
-import requests
+import aiohttp
+import asyncio
 from bs4 import BeautifulSoup
 import popup
 from cachetools import cached, TTLCache
 
-# Variable initialization
-RESULT = []  # List to store the results
-
 # Cache initialization (TTL 10 minutes)
 cache = TTLCache(maxsize = 100, ttl = 600)
 
-@cached(cache)
-def get_sinta_ranking(session, journal):
+async def get_sinta_ranking(session, journal):
     """
     Function to get Sinta ranking of a journal.
     
@@ -29,18 +26,18 @@ def get_sinta_ranking(session, journal):
     }
 
     try:
-        response = session.get(url, headers = headers)  # Send HTTP GET request
+        async with session.get(url, headers = headers) as response:  # Send HTTP GET request
+            if response.status == 200:
+                content = await response.text()
+                soup = BeautifulSoup(content, "html.parser")  # Parse the HTML content
+                ranking_div = soup.find("div", class_ = "stat-prev mt-2")  # Find the ranking div
 
-        if response.status_code == 200:  # Check if request was successful
-            soup = BeautifulSoup(response.content, "html.parser")  # Parse the HTML content
-            ranking_div = soup.find("div", class_ = "stat-prev mt-2")  # Find the ranking div
+                if ranking_div:
+                    ranking = ranking_div.text.strip()  # Extract and clean the ranking text
 
-            if ranking_div:
-                ranking = ranking_div.text.strip()  # Extract and clean the ranking text
+                    return ranking[:2]  # Return the first 2 characters of the ranking
 
-                return ranking[:2]  # Return the first 2 characters of the ranking
-
-    except requests.RequestException:
+    except aiohttp.ClientError:
         popup.open_popup("Unable to perform request.\nPlease check your internet connection", True) # Show error popup
 
     return False  # Return False if ranking not found or request failed
@@ -66,7 +63,7 @@ def get_apa_citation(authors, title, journal, year, volume, issue, page):
     
     return f"{authors_str}. ({year}). {title}. {journal}, {volume}({issue}), {page}."
 
-def search_journal(query, rows = 100):
+async def search_journal(query, rows = 100):
     """
     Function to search for journal articles using Crossref API.
     
@@ -79,20 +76,63 @@ def search_journal(query, rows = 100):
 
     url = "https://api.crossref.org/works"
     params = {"query" : query,
-              "rows" : rows}
+            "rows" : rows}
 
     try:
-        response = requests.get(url, params = params)  # Send HTTP GET request
+        async with aiohttp.ClientSession() as session:  # Send HTTP GET request
+            async with session.get(url, params = params) as response:
+                if response.status == 200:  # Check if request was successful
+                    return await response.json()  # Return JSON response
 
-        if response.status_code == 200:  # Check if request was successful
-            return response.json()  # Return JSON response
-
-    except requests.RequestException:
+    except aiohttp.ClientError:
         popup.open_popup("Unable to perform request.\nPlease check your internet connection", True)  # Show error popup
 
     return None  # Return None if request failed
 
-def researcheria(query):
+async def process_item(session, item):
+    """
+    This function processes received items and extracts relevant information.
+
+    Parameters:
+    - session: The aiohttp.ClientSession object used for making HTTP requests.
+    - item: The item dictionary containing information about a journal article.
+
+    Returns:
+    - A formatted string containing the title, DOI, publication date, authors, APA citation,
+      Sinta ranking or alternative ranking, and the URL of the journal article.
+    """
+    
+    # Get the informations and details of the journal article
+    title = item.get("title", ["N/A"])[0]
+    doi = item.get("DOI", "N/A")
+    published_date = item.get("published-online", {}).get("date-parts", [[0]])[0][0]
+    volume = item.get("volume", "N/A")
+    page = item.get("page", "N/A")
+    issue = item.get("issue", "N/A")
+    publisher = item.get("publisher", "N/A")
+    authors = [f'{author.get("family", "")}, {author.get("given", "")}' for author in item.get("author", [])]
+
+    # If no authors are found, use "N/A"
+    if not authors:
+        authors = ["N/A"]
+    
+    journal = item.get("container-title", ["N/A"])[0]
+    ranking = await get_sinta_ranking(session, journal)
+
+    # If Sinta ranking is not found, use an alternative ranking source
+    if not ranking:
+        ranking = f"https://www.scimagojr.com/journalsearch.php?q={journal}"
+
+    # Create an APA citation for the journal article
+    apa_citation = get_apa_citation(authors, title, journal, published_date, volume, issue, page)
+
+    # Create the URL for the DOI of the journal article
+    url = f"https://doi.org/{doi}"
+
+    # Return the result in the specified format
+    return f"{title}; {doi}; {published_date}; {', '.join(authors)}; {apa_citation}; {ranking}; {url}"
+
+async def researcheria(query):
     """
     Function to perform research based on a query.
     
@@ -103,48 +143,26 @@ def researcheria(query):
     - List of formatted results.
     """
 
-    global RESULT
+    # Search for journal articles using the query string
+    results = await search_journal(query)
 
-    RESULT.clear()  # Clear previous results
-
-    results = search_journal(query)  # Search for journal articles
-    
+    # Check if results are found and the expected keys are present in the response
     if results and "message" in results and "items" in results["message"]:
-        items = results["message"]["items"]
-        
-        with requests.Session() as session:
-            for item in items:
-                title = item.get("title", ["N/A"])[0]
-                doi = item.get("DOI", "N/A")
-                published_date = item.get("published-online", {}).get("date-parts", [[0]])[0][0]
-                volume = item.get("volume", "N/A")
-                page = item.get("page", "N/A")
-                issue = item.get("issue", "N/A")
-                publisher = item.get("publisher", "N/A")
-                authors = [f'{author.get("family", "")}, {author.get("given", "")}' for author in item.get("author", [])]
+        items = results["message"]["items"]  # Extract the list of items (journal articles) from the results
 
-                if not authors:
-                    authors = ["N/A"]
-
-                journal = item.get("container-title", ["N/A"])[0]
-                    
-                # Get Sinta ranking if not ranking: 
-                ranking = get_sinta_ranking(session, journal)
-                
-                if not ranking:  # If Sinta ranking not found, use alternative ranking source
-                    ranking = f"https://www.scimagojr.com/journalsearch.php?q={journal}"
-
-                apa_citation = get_apa_citation(authors, title, journal, published_date, volume, issue, page)
-                url = f"https://doi.org/{doi}"
-
-                # Append formatted result to the RESULT list
-                RESULT.append(f"{title}; {doi}; {published_date}; {', '.join(authors)}; {apa_citation}; {ranking}; {url}")
-
+        # Create an aiohttp session for making HTTP requests
+        async with aiohttp.ClientSession() as session:
+            # Create a list of tasks to process each item concurrently
+            tasks = [asyncio.create_task(process_item(session, item)) for item in items]
+            
+            # Wait for all tasks to complete and gather the results
+            return await asyncio.gather(*tasks)
     else:
-        # Log error if no results found or request failed
+        # If no results found or there was an error with the request, log the error
         with open("bin/log/error_log.bin", "wb") as file:
             text = "No results found or there was an error with the request"
 
             file.write(text.encode("utf-8"))
 
-    return RESULT
+        return []  # Return an empty list if no results are found
+

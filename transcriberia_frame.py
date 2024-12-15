@@ -13,8 +13,7 @@ import requests
 # List of supported video file extensions
 VID_EXT = [".mp4", ".avi", ".mov"]
 
-# Variable to keep track of the last pressed button
-LAST_PRESSED = None
+LAST_PRESSED = None  # Variable to keep track of the last pressed button
 
 # Function to initialize the transcriber tool interface
 def transcriber_tool(root, frame):
@@ -257,6 +256,7 @@ def transcriber_tool(root, frame):
                 if response.status_code == 200:
                     # If the connection is successful, start a thread to run the 'transcribe' function
                     thread = threading.Thread(target = transcribe)
+
                     thread.start()
                 else:
                     # If the connection fails (status code is not 200), show a popup message

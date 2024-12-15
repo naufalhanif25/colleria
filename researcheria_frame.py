@@ -10,6 +10,7 @@ import popup
 from tkinter.font import Font
 import researcheria_popup
 import requests
+import asyncio
 
 # Variable initialization
 RESULTS = None  # To store search results
@@ -19,7 +20,7 @@ ANIM = False  # To control loading animation state
 PAGE_SIZE = 10 # Number of results per page 
 CUR_PAGE = 1 # Current page number
 
-LAST_PRESSED = None
+LAST_PRESSED = None  # Variable to keep track of the last pressed button
 
 """
 Initializes the Researcheria tool interface within the given root window. 
@@ -278,7 +279,7 @@ def researcheria_tool(root, frame):
       query = entry.get()
 
       SEARCH = query
-      RESULTS = researcheria.researcheria(query)
+      RESULTS = asyncio.run(researcheria.researcheria(query))
       CUR_PAGE = 1
 
       if len(RESULTS) == 0:

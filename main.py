@@ -47,8 +47,7 @@ TEXT_COLOR = "#2F3542"
 SCROLLBAR_COLOR = "#dfe4ea"
 SCROLLBAR_HOVER_COLOR = "#ced6e0"
 
-LAST_PRESSED = None
-STOP = False  # Global variable to control the stop state
+LAST_PRESSED = None # Variable to keep track of the last pressed button
 
 """
 This main code is a combination of all modules.
