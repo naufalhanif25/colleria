@@ -25,14 +25,14 @@
 
 <h2>
     📖 Details
-    <h4>
+    <h5>
         <b>What features are available? 🤷🏻</b>
         <p>
-            <h5>1. Notepedia</h5>
+            <b>1. Notepedia&nbsp;|&nbsp;</b>
             Notepedia is a notes feature that can be used to record daily tasks, make small notes, diary, or create a to-do list.
         </p>
         <p>
-            <h5>2. DocLab</h5>
+            <b>2. DocLab&nbsp;|&nbsp;</b>
             DocLab is a feature that can be used to convert any document to other formats.
         </p>
         <p>
@@ -40,8 +40,8 @@
             Transcriber is a feature that can transcribe a video of any length into text in a short time.
         </p>
         <p>
-            <h5>4. Researchia</h5>
+            <b>4. Researchia&nbsp;|&nbsp;</b>
             Researcheria is a feature that is very suitable for students who want to search for journals or literature quickly with clear and reliable sources.
         </p>
-    </h4>
+    </h5>
 </h2>
