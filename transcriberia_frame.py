@@ -13,7 +13,8 @@ import requests
 # List of supported video file extensions
 VID_EXT = [".mp4", ".avi", ".mov"]
 
-LAST_PRESSED = None  # Variable to keep track of the last pressed button
+# Variable to keep track of the last pressed button
+LAST_PRESSED = None 
 
 # Function to initialize the transcriber tool interface
 def transcriber_tool(root, frame):

@@ -47,7 +47,8 @@ TEXT_COLOR = "#2F3542"
 SCROLLBAR_COLOR = "#dfe4ea"
 SCROLLBAR_HOVER_COLOR = "#ced6e0"
 
-LAST_PRESSED = None # Variable to keep track of the last pressed button
+# Variable to keep track of the last pressed button
+LAST_PRESSED = None 
 
 """
 This main code is a combination of all modules.

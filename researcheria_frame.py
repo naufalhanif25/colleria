@@ -20,7 +20,8 @@ ANIM = False  # To control loading animation state
 PAGE_SIZE = 10 # Number of results per page 
 CUR_PAGE = 1 # Current page number
 
-LAST_PRESSED = None  # Variable to keep track of the last pressed button
+# Variable to keep track of the last pressed button
+LAST_PRESSED = None 
 
 """
 Initializes the Researcheria tool interface within the given root window. 
