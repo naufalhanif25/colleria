@@ -28,7 +28,7 @@
     <h4>
         <b>What features are available? 🤷🏻</b>
         <h5>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;
+            <div style="padding-left: 20px;">
                 <p>
                     1. Notepedia <br> 
                     Notepedia is a notes feature that can be used to record daily tasks, make small notes, diary, or create a to-do list.
