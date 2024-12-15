@@ -25,9 +25,9 @@
 
 <h2>
     📖 Details
-    <h5>
+    <h4>
         <b>What features are available? 🤷🏻</b>
-        <p>
+        <!-- <p>
             <b>1. Notepedia&nbsp;|&nbsp;</b>
             Notepedia is a notes feature that can be used to record daily tasks, make small notes, diary, or create a to-do list.
         </p>
@@ -42,6 +42,14 @@
         <p>
             <b>4. Researchia&nbsp;|&nbsp;</b>
             Researcheria is a feature that is very suitable for students who want to search for journals or literature quickly with clear and reliable sources.
-        </p>
-    </h5>
+        </p> -->
+    </h4>
 </h2>
+
+| Notepedia | Notepedia is a notes feature that can be used to record daily tasks, make small notes, diary, or create a to-do list. |
+| --- | --- |
+| DocLab | DocLab is a feature that can be used to convert any document to other formats. |
+| --- | --- |
+| Transcriberia | Transcriber is a feature that can transcribe a video of any length into text in a short time. |
+| --- | --- |
+| Researchia | Researcheria is a feature that is very suitable for students who want to search for journals or literature quickly with clear and reliable sources. |
