@@ -6,7 +6,6 @@
     <img src="https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue" /> 
     <img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white" />
 </div>
-<<<<<<< HEAD
 
 <h2>
     📝 Description
@@ -22,9 +21,9 @@
     📖 Details
     <h5>
         <b>What features are available? 🤷🏻</b>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            1. Notepedia
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;Notepedia is a notes feature that can be used to record daily tasks, make small notes, diary, or create a to-do list.</p>
+        <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>1. Notepedia</b>
+            Notepedia is a notes feature that can be used to record daily tasks, make small notes, diary, or create a to-do list.
         </p>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             2. DocLab
