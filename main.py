@@ -154,7 +154,7 @@ if __name__ == "__main__":
 
     # Create the other buttons
     other_buttons = ["Donate", "About us"]
-    commands = [lambda: webbrowser.open_new_tab("https://github.com/naufalhanif25"),
+    commands = [lambda: webbrowser.open_new_tab("https://saweria.co/minkudeveloper"),
                aboutus_popup.open_popup]
     
     for row, (button_text, command) in enumerate(zip(other_buttons, commands)):
