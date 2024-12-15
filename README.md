@@ -22,7 +22,7 @@
     <h5>
         <b>What features are available? 🤷🏻</b>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            1. Notepedia</b>
+            1. Notepedia <br>
             Notepedia is a notes feature that can be used to record daily tasks, make small notes, diary, or create a to-do list.
         </p>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
