@@ -36,8 +36,8 @@
             DocLab is a feature that can be used to convert any document to other formats.
         </p>
         <p>
-            <h5>3. Transcriberia</h5>
-            <div style="padding-left: 32px;">Transcriber is a feature that can transcribe a video of any length into text in a short time.</div>
+            | <b>3. Transcriberia</b> |
+            | Transcriber is a feature that can transcribe a video of any length into text in a short time. |
         </p>
         <p>
             <h5>4. Researchia</h5>
