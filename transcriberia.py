@@ -85,7 +85,7 @@ def transcriber(video_path, lang, label, label_text):
         pass
 
     # Transcribe each audio chunk
-    for index in range(sum_file):
+    for index in range(sum_file - 1):
         audio = sr.AudioFile(os.path.join(audioproc.DIR, f"chunk_{index}.wav"))
 
         with audio as source:
@@ -120,3 +120,4 @@ def transcriber(video_path, lang, label, label_text):
         
         # Remove the processed audio chunk
         os.remove(os.path.join(audioproc.DIR, f"chunk_{index}.wav"))
+
