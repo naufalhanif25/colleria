@@ -25,9 +25,9 @@ def open_popup():
     popup.title("About us")
 
     # Create and place the labels in the popup window
-    text = ["About Colleria", "Colleria is an open source software that provides\ntools that can make the work of students or\ncollege students easier.",
-            "Mission", "Our mission is to create software that can make it\neasier for students to complete their work.",
-            "Contact", "Email: minkudeveloper@gmail.com"]
+    text = ["About Colleria", "Colleria is an open source software that aims to be a tool\nthat can make it easier for students to complete their\nassignments.",
+            "Mission", "Our biggest mission is to make any school or college\nassignment easy to complete in the shortest possible time.",
+            "Contact", "Email: minku.developer23@gmail.com"]
 
     temp_width = []; temp_height = 0
 
@@ -48,7 +48,7 @@ def open_popup():
             enter = label.count("\n")
 
         # Calculate the size of the popup window
-        temp_width.append(message_label.winfo_reqwidth())
+        temp_width.append(message_label.winfo_reqwidth() - 16)
         temp_height = temp_height + (message_label.winfo_reqheight() * enter) + 1
 
     # Configure the grid layout to expand the message label with available space

@@ -64,7 +64,7 @@ if __name__ == "__main__":
     root.configure(bg = BASE_COLOR)
     root.iconbitmap("public/colleria.ico")
     root.title("Colleria")
-    root.resizable(False, False)
+    # root.resizable(False, False)
 
     # Set the dimensions and position of the application window
     width = 1080

@@ -14,7 +14,7 @@ import requests
 VID_EXT = [".mp4", ".avi", ".mov"]
 
 # Variable to keep track of the last pressed button
-last_pressed = None
+LAST_PRESSED = None
 
 # Function to initialize the transcriber tool interface
 def transcriber_tool(root, frame):
@@ -44,7 +44,7 @@ def transcriber_tool(root, frame):
     frame.grid_columnconfigure(0, weight = 1)
 
     # Add a label for the transcriber tool frame
-    transcribe_label = ctk.CTkLabel(frame, text = "Transcriberia", font = ("Arial", 24, "bold"), text_color = main.TEXT_COLOR)
+    transcribe_label = ctk.CTkLabel(frame, text = "Transcriberia", font = ("Arial", 24, "bold"), text_color = main.TEXT_COLOR, justify = "center")
     transcribe_label.grid(row = 0, column = 0, padx = 24, pady = (24, 16), sticky = "nsew")
 
     # Variable to store the path of the dropped video file
@@ -70,7 +70,7 @@ def transcriber_tool(root, frame):
             entry.configure(state = "disabled")
 
     # Entry widget for drag-and-drop video files
-    entry = ctk.CTkEntry(frame, textvariable = entry_var, width = 240, height = 120, justify = "center",
+    entry = ctk.CTkEntry(frame, textvariable = entry_var, height = 120, justify = "center", width = 860,
                          font=("Arial", 16, "bold"), text_color = main.FADED_TEXT_COLOR, border_color = main.BORDER_COLOR,
                          border_width = 2, fg_color = main.ENTRY_COLOR) 
     entry.grid(row = 1, column = 0, padx = 160, pady = (16, 4), sticky = "nsew")
@@ -79,20 +79,21 @@ def transcriber_tool(root, frame):
     entry.drop_target_register(DND_FILES) 
     entry.dnd_bind('<<Drop>>', on_drop)
 
+
     # Label to display supported video file extensions
     ext_label = ctk.CTkLabel(frame, text = f"Extension: {', '.join(VID_EXT)}", font = ("Arial", 10, "normal"), text_color = main.FADED_LABEL_COLOR)
     ext_label.grid(row = 2, column = 0, padx = 12, pady = 0, sticky = "nsew")
 
     # Language selection frames and canvases
-    lang_selection_frame = ctk.CTkFrame(frame, width = 240, height = 32, fg_color = main.FRAME_COLOR) 
+    lang_selection_frame = ctk.CTkFrame(frame, height = 32, fg_color = main.FRAME_COLOR) 
     lang_selection_frame.grid(row = 3, column = 0, padx = 160, pady = 4, sticky = "nsew") 
     lang_selection_frame.grid_columnconfigure(0, weight = 1)
 
-    lang_selection_canvas = ctk.CTkCanvas(lang_selection_frame, width = 220, height = 28) 
+    lang_selection_canvas = ctk.CTkCanvas(lang_selection_frame, height = 28) 
     lang_selection_canvas.grid(row = 0, column = 0, sticky = "nsew") 
     lang_selection_canvas.grid_columnconfigure(0, weight = 1)
 
-    lang_button_frame = ctk.CTkFrame(lang_selection_canvas, width = 300, height = 28, fg_color = main.FRAME_COLOR) 
+    lang_button_frame = ctk.CTkFrame(lang_selection_canvas, height = 28, fg_color = main.FRAME_COLOR) 
     lang_button_frame.grid(row = 0, column = 0, sticky = "nsew") 
 
     frame.grid_columnconfigure(3, weight = 1)
@@ -123,11 +124,11 @@ def transcriber_tool(root, frame):
 
     # Function to change the color of the pressed button
     def change_button_color(button):
-        global last_pressed
+        global LAST_PRESSED
 
         # If there is a previously pressed button, reset its color
-        if last_pressed is not None:
-            last_pressed.configure(fg_color = main.FRAME_COLOR, hover_color = main.ENTRY_COLOR, text_color = main.FADED_TEXT_COLOR, 
+        if LAST_PRESSED is not None:
+            LAST_PRESSED.configure(fg_color = main.FRAME_COLOR, hover_color = main.ENTRY_COLOR, text_color = main.FADED_TEXT_COLOR, 
                                    border_width = 1, border_color = main.BORDER_COLOR)
 
         # Change the color of the currently pressed button
@@ -135,7 +136,7 @@ def transcriber_tool(root, frame):
                          border_width = 0, border_color = main.FRAME_COLOR)
         
         # Update the last pressed button to the current button
-        last_pressed = button
+        LAST_PRESSED = button
 
     # Function to create a language selection button
     def lang_button(text, row, column, frame):
@@ -156,7 +157,7 @@ def transcriber_tool(root, frame):
         lang_button(lang_name, 0, index, lang_button_frame)
 
     # Frame for displaying the transcription result
-    result_frame = ctk.CTkFrame(frame, width = 240, height = 120, fg_color = main.FRAME_COLOR, border_color = main.BORDER_COLOR, border_width = 2)
+    result_frame = ctk.CTkFrame(frame, height = 120, fg_color = main.FRAME_COLOR, border_color = main.BORDER_COLOR, border_width = 2)
     result_frame.grid(row = 5, column = 0, padx = 160, pady = (32, 0), sticky = "nsew")
 
     # Label to display the transcription progress
@@ -166,7 +167,7 @@ def transcriber_tool(root, frame):
     loading_label.grid_forget()  # Hide the label initially
 
     # Textbox to display the transcription result
-    result_box = ctk.CTkTextbox(result_frame, width = 240, height = 120, fg_color = main.BASE_COLOR,
+    result_box = ctk.CTkTextbox(result_frame, height = 120, fg_color = main.BASE_COLOR,
                                 font = ("Arial", 12, "normal"), text_color = main.TEXT_COLOR, 
                                 scrollbar_button_color = main.SCROLLBAR_COLOR, scrollbar_button_hover_color = main.SCROLLBAR_HOVER_COLOR)
     result_box.grid(row = 0, column = 0, padx = 12, pady = 12, sticky = "nsew")
