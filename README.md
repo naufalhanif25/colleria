@@ -37,7 +37,7 @@
         </p>
         <p>
             <h5>3. Transcriberia</h5>
-            Transcriber is a feature that can transcribe a video of any length into text in a short time.
+            <div style="padding-left: 32px;">Transcriber is a feature that can transcribe a video of any length into text in a short time.</div>
         </p>
         <p>
             <h5>4. Researchia</h5>
