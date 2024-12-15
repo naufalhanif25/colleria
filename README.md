@@ -21,7 +21,7 @@
     📖 Details
     <h5>
         <b>What features are available? 🤷🏻</b>
-        <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             1. Notepedia</b>
             Notepedia is a notes feature that can be used to record daily tasks, make small notes, diary, or create a to-do list.
         </p>
