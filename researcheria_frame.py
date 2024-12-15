@@ -40,7 +40,14 @@ def researcheria_tool(root, frame):
    - frame: The current tool_frame to be replaced with the transcriber tool interface
    """
 
-   global CUR_PAGE
+   global RESULTS, SEARCH, DETAIL, ANIM, CUR_PAGE, LAST_PRESSED
+
+   # Resets the values ​​of variables
+   RESULTS = None
+   SEARCH = None
+   DETAIL = {}
+   ANIM = False
+   LAST_PRESSED = None 
 
    # Clean specific files using the cleaner module
    cleaner.clean_file()

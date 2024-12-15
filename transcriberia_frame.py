@@ -32,6 +32,11 @@ def transcriber_tool(root, frame):
     - frame: The current tool_frame to be replaced with the transcriber tool interface
     """
 
+    global LAST_PRESSED
+
+    # Resets variable values
+    LAST_PRESSED = None
+
     # Clean specific files using the cleaner module
     cleaner.clean_file()
 
