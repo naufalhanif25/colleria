@@ -48,7 +48,7 @@
 
 | Feature | Description |
 | --- | --- |
-| Notepedia | Notepedia is a notes feature that can be used to record daily tasks, make small notes, diary, or create a to-do list. |
-| DocLab | DocLab is a feature that can be used to convert any document to other formats. |
-| Transcriberia | Transcriber is a feature that can transcribe a video of any length into text in a short time. |
-| Researchia | Researcheria is a feature that is very suitable for students who want to search for journals or literature quickly with clear and reliable sources. |
+| **Notepedia** | Notepedia is a notes feature that can be used to record daily tasks, make small notes, diary, or create a to-do list. |
+| **DocLab** | DocLab is a feature that can be used to convert any document to other formats. |
+| **Transcriberia** | Transcriber is a feature that can transcribe a video of any length into text in a short time. |
+| **Researchia** | Researcheria is a feature that is very suitable for students who want to search for journals or literature quickly with clear and reliable sources. |
