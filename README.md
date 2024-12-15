@@ -12,13 +12,13 @@
     <h3>
         <b>What's Colleria? 🤷🏻</b>
         <h5>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;Colleria is an open source software that provides tools that can make the work of students or college students easier.</p>
+            <p>Colleria is an open source software that provides tools that can make the work of students or college students easier.</p>
         </h5>
     </h3>
     <h3>
         <b>Our Mission 📜</b>
         <h5>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;Our mission is to create software that can make it easier for students to complete their work.</p>
+            <p>Our mission is to create software that can make it easier for students to complete their work.</p>
         </h5>
     </h3>
 </h2>
