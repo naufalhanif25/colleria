@@ -12,13 +12,13 @@
     <h3>
         <b>What's Colleria? 🤷🏻</b>
         <h5>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;Colleria is an open source software that aims to be a tool that can make it easier for students to complete their assignments. Colleria can only run on Windows operating systems and Linux-based operating systems. Apart from that, Colleria is open source and has fairly complete documentation, so anyone can contribute to the development of this software.</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Colleria is an open source software that aims to be a tool that can make it easier for students to complete their assignments. Colleria can only run on Windows operating systems and Linux-based operating systems. Apart from that, Colleria is open source and has fairly complete documentation, so anyone can contribute to the development of this software.</p>
         </h5>
     </h3>
     <h3>
         <b>Our Mission 📜</b>
         <h5>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;Sometimes a lot of school or college assignments make us overwhelmed to complete them, and even have the potential to cause prolonged stress, that's why Colleria was created. Our biggest mission is to make any school or college assignment easy to complete in the shortest possible time.</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sometimes a lot of school or college assignments make us overwhelmed to complete them, and even have the potential to cause prolonged stress, that's why Colleria was created. Our biggest mission is to make any school or college assignment easy to complete in the shortest possible time.</p>
         </h5>
     </h3>
 </h2>
