@@ -11,9 +11,9 @@
     📝 Description
     <h5>
         <b>What's Colleria? 🤷🏻</b>
-        <p>Colleria is an open source software that provides tools that can make the work of students or college students easier.</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Colleria is an open source software that provides tools that can make the work of students or college students easier.</p>
         <b>Our Mission 📜</b>
-        <p>Our mission is to create software that can make it easier for students to complete their work.</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Our mission is to create software that can make it easier for students to complete their work.</p>
     </h5>
 </h2>
 
@@ -21,9 +21,9 @@
     📖 Details
     <h5>
         <b>What features are available? 🤷🏻</b>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <b>1. Notepedia</b>
-            <p>Notepedia is a notes feature that can be used to record daily tasks, make small notes, diary, or create a to-do list.</p>
+        <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            1. Notepedia</b>
+            Notepedia is a notes feature that can be used to record daily tasks, make small notes, diary, or create a to-do list.
         </p>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             2. DocLab
