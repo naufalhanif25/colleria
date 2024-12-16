@@ -49,7 +49,7 @@ def transcriber_tool(root, frame):
     frame.grid_columnconfigure(0, weight = 1)
 
     # Add a label for the transcriber tool frame
-    transcribe_label = ctk.CTkLabel(frame, text = "Transcriberia", font = ("Arial", 24, "bold"), text_color = main.TEXT_COLOR, justify = "center")
+    transcribe_label = ctk.CTkLabel(frame, text = "Transcriberia", font = (main.FONT, 24, "bold"), text_color = main.TEXT_COLOR, justify = "center")
     transcribe_label.grid(row = 0, column = 0, padx = 24, pady = (24, 16), sticky = "nsew")
 
     # Variable to store the path of the dropped video file
@@ -76,7 +76,7 @@ def transcriber_tool(root, frame):
 
     # Entry widget for drag-and-drop video files
     entry = ctk.CTkEntry(frame, textvariable = entry_var, height = 120, justify = "center", width = 860,
-                         font=("Arial", 16, "bold"), text_color = main.FADED_TEXT_COLOR, border_color = main.BORDER_COLOR,
+                         font = (main.FONT, 16, "bold"), text_color = main.FADED_TEXT_COLOR, border_color = main.BORDER_COLOR,
                          border_width = 2, fg_color = main.ENTRY_COLOR) 
     entry.grid(row = 1, column = 0, padx = 160, pady = (16, 4), sticky = "nsew")
     entry.configure(state = "disabled")
@@ -86,7 +86,7 @@ def transcriber_tool(root, frame):
 
 
     # Label to display supported video file extensions
-    ext_label = ctk.CTkLabel(frame, text = f"Extension: {', '.join(VID_EXT)}", font = ("Arial", 10, "normal"), text_color = main.FADED_LABEL_COLOR)
+    ext_label = ctk.CTkLabel(frame, text = f"Extension: {', '.join(VID_EXT)}", font = (main.FONT, 10, "normal"), text_color = main.FADED_LABEL_COLOR)
     ext_label.grid(row = 2, column = 0, padx = 12, pady = 0, sticky = "nsew")
 
     # Language selection frames and canvases
@@ -145,7 +145,7 @@ def transcriber_tool(root, frame):
 
     # Function to create a language selection button
     def lang_button(text, row, column, frame):
-        button = ctk.CTkButton(frame, text = text, font = ("Arial", 10, "bold"), border_color = main.BORDER_COLOR, 
+        button = ctk.CTkButton(frame, text = text, font = (main.FONT, 10, "bold"), border_color = main.BORDER_COLOR, 
                                text_color = main.FADED_TEXT_COLOR, fg_color = main.FRAME_COLOR, height = 24, width = 86,
                                border_width = 1, hover_color = main.ENTRY_COLOR, command = lambda: change_button_color(button))
         button.grid(row = 0, column = column, padx = 4, pady = 4, sticky = "nsew")
@@ -166,14 +166,13 @@ def transcriber_tool(root, frame):
     result_frame.grid(row = 5, column = 0, padx = 160, pady = (32, 0), sticky = "nsew")
 
     # Label to display the transcription progress
-    loading_label = ctk.CTkLabel(result_frame, text = "Transcribing (0.0%)", font = ("Arial", 16, "bold"), text_color = main.FADED_LABEL_COLOR) 
+    loading_label = ctk.CTkLabel(result_frame, text = "Transcribing (0.0%)", font = (main.FONT, 16, "bold"), text_color = main.FADED_LABEL_COLOR) 
     loading_label.grid(row = 0, column = 0, padx = int((result_frame.winfo_reqwidth() / 2)), pady = int((result_frame.winfo_reqheight() / 2) + 16), 
                     sticky = "nsew") 
     loading_label.grid_forget()  # Hide the label initially
 
     # Textbox to display the transcription result
-    result_box = ctk.CTkTextbox(result_frame, height = 120, fg_color = main.BASE_COLOR,
-                                font = ("Arial", 12, "normal"), text_color = main.TEXT_COLOR, 
+    result_box = ctk.CTkTextbox(result_frame, height = 120, fg_color = main.BASE_COLOR, font = (main.FONT, 12, "normal"), text_color = main.TEXT_COLOR, 
                                 scrollbar_button_color = main.SCROLLBAR_COLOR, scrollbar_button_hover_color = main.SCROLLBAR_HOVER_COLOR)
     result_box.grid(row = 0, column = 0, padx = 12, pady = 12, sticky = "nsew")
     result_box.configure(state = "disabled")  # Disable editing the textbox
@@ -295,11 +294,11 @@ def transcriber_tool(root, frame):
     frame.grid_rowconfigure(5, weight = 1)
 
     # Button to start the transcription process
-    transcribe_button = ctk.CTkButton(frame, text = "Transcribe", font = ("Arial", 12, "bold"), fg_color = main.FG_COLOR,
+    transcribe_button = ctk.CTkButton(frame, text = "Transcribe", font = (main.FONT, 12, "bold"), fg_color = main.FG_COLOR,
                                       hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, height = 32, command = start_transcribe)
     transcribe_button.grid(row = 4, column = 0, padx = 360, pady = (12, 0), sticky = "nsew")
 
     # Button to copy the transcription result to the clipboard
-    copy_button = ctk.CTkButton(frame, text = "Copy", font = ("Arial", 12, "bold"), fg_color = main.FG_COLOR,
+    copy_button = ctk.CTkButton(frame, text = "Copy", font = (main.FONT, 12, "bold"), fg_color = main.FG_COLOR,
                                 hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, height = 32, command = get_value)
     copy_button.grid(row = 6, column = 0, padx = 360, pady = (16, 24), sticky = "nsew")

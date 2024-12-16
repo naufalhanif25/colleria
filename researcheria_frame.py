@@ -65,7 +65,7 @@ def researcheria_tool(root, frame):
    frame.grid_columnconfigure(0, weight = 1)
 
    # Add a label for the researcheria tool frame
-   researcheria_label = ctk.CTkLabel(frame, text = "Researcheria", font = ("Arial", 24, "bold"), text_color = main.TEXT_COLOR)
+   researcheria_label = ctk.CTkLabel(frame, text = "Researcheria", font = (main.FONT, 24, "bold"), text_color = main.TEXT_COLOR)
    researcheria_label.grid(row = 0, column = 0, padx = 24, pady = (24, 16), sticky = "nsew")
 
    # Create a frame for the search entry
@@ -92,14 +92,15 @@ def researcheria_tool(root, frame):
          search_var.set("Search by title")
    
    # Create the search entry widget
-   search_entry = ctk.CTkEntry(search_frame, textvariable = search_var, width = 220, height = 16, fg_color = main.BASE_COLOR)
+   search_entry = ctk.CTkEntry(search_frame, textvariable = search_var, width = 220, height = 16, font = (main.FONT, 12, "normal"), 
+                               fg_color = main.BASE_COLOR)
    search_entry.grid(row = 0, column = 0, padx = (4, 0), pady = 4, sticky = "nsew")
    search_entry.configure(text_color = main.FADED_LABEL_COLOR)
    search_entry.bind("<FocusIn>", on_entry_click) 
    search_entry.bind("<FocusOut>", on_focus_out)
 
    # Create a loading label to show the loading animation
-   loading_label = ctk.CTkLabel(frame, text = "Looking for a match", font = ("Arial", 12, "normal"), text_color = main.FADED_LABEL_COLOR)
+   loading_label = ctk.CTkLabel(frame, text = "Looking for a match", font = (main.FONT, 12, "normal"), text_color = main.FADED_LABEL_COLOR)
    loading_label.grid(row = 2, column = 0, padx = 0, pady = 0, sticky = "nsew")
    loading_label.grid_forget()  # Hide the label initially
 
@@ -150,7 +151,7 @@ def researcheria_tool(root, frame):
       root.after(2000, lambda: label.grid_forget())
 
    # Function to truncate text to fit within a specified width
-   def truncate_text(text, max_length, font = Font(family = "Arial", size = 12, weight = "bold")): 
+   def truncate_text(text, max_length, font = Font(family = main.FONT, size = 12, weight = "bold")): 
       width = font.measure(text)
 
       if width <= max_length: 
@@ -211,7 +212,7 @@ def researcheria_tool(root, frame):
             researcheria_popup.open_popup(DETAIL[button_text])
 
          # Create a button for each search result
-         button = ctk.CTkButton(button_frame, text = truncate_text(text, 780), font = ("Arial", 12, "normal"), anchor = "center", 
+         button = ctk.CTkButton(button_frame, text = truncate_text(text, 780), font = (main.FONT, 12, "normal"), anchor = "center", 
                                 border_color = main.FADED_TEXT_COLOR, text_color = main.TEXT_COLOR, fg_color = main.FRAME_COLOR,
                                 border_width = 1, hover_color = main.ENTRY_COLOR, border_spacing = 8, 
                                 command = lambda text = truncate_text(text, 780): open_detail(text))
@@ -257,7 +258,7 @@ def researcheria_tool(root, frame):
          
       # Create a button for each page
       for index in range(1, total_pages + 1): 
-         button = ctk.CTkButton(page_frame, text = str(index), font = ("Arial", 12, "normal"), anchor = "center", border_color = main.FADED_TEXT_COLOR, 
+         button = ctk.CTkButton(page_frame, text = str(index), font = (main.FONT, 12, "normal"), anchor = "center", border_color = main.FADED_TEXT_COLOR, 
                                 text_color = main.TEXT_COLOR, fg_color = main.FRAME_COLOR, border_width = 1, hover_color = main.ENTRY_COLOR, 
                                 border_spacing = 4, command = lambda index = index: change_page(index)) 
          button.grid(row = 0, column = index, padx = 4, pady = 4, sticky="nsew")
@@ -343,7 +344,7 @@ def researcheria_tool(root, frame):
       check_internet_connection()
 
    # Create the search button
-   search_button = ctk.CTkButton(search_frame, text = "Search", font = ("Arial", 10, "bold"), fg_color = main.FG_COLOR,
+   search_button = ctk.CTkButton(search_frame, text = "Search", font = (main.FONT, 10, "bold"), fg_color = main.FG_COLOR,
                                  hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, width = 86, 
                                  command = lambda: start_search(search_entry))
    search_button.grid(row = 0, column = 1, padx = 4, pady = 4, sticky = "nsew")

@@ -41,11 +41,11 @@ def open_popup(detail):
         else:
             pady = 4
             
-        text_label = tk.Label(popup, text = label, font = ("Arial", 10, "normal"), anchor = "center", 
+        text_label = tk.Label(popup, text = label, font = (main.FONT, 10, "normal"), anchor = "center", 
                               fg = main.TEXT_COLOR, bg = main.BASE_COLOR)
         text_label.grid(row = row, column = 0, padx = (24, 8), pady = pady, sticky = "w")
 
-        text_box = ctk.CTkTextbox(popup, fg_color = main.BASE_COLOR, font = ("Arial", 12, "normal"), border_color = main.FADED_LABEL_COLOR, 
+        text_box = ctk.CTkTextbox(popup, fg_color = main.BASE_COLOR, font = (main.FONT, 12, "normal"), border_color = main.FADED_LABEL_COLOR, 
                                   border_width = 1, text_color = main.TEXT_COLOR, scrollbar_button_color = main.SCROLLBAR_COLOR,
                                   scrollbar_button_hover_color = main.SCROLLBAR_HOVER_COLOR, width = 320, height = 32)
         text_box.grid(row = row, column = 1, padx = (8, 24), pady = pady, sticky = "e")
@@ -81,17 +81,17 @@ def open_popup(detail):
     button_frame.grid(row = 7, column = 1, padx = 24, pady = (0, 24), sticky = "e")
 
     if len(detail[5]) > 2:
-        ranking_button = ctk.CTkButton(button_frame, text = "Ranking", font = ("Arial", 12, "bold"), fg_color = main.FG_COLOR,
+        ranking_button = ctk.CTkButton(button_frame, text = "Ranking", font = (main.FONT, 12, "bold"), fg_color = main.FG_COLOR,
                                        hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, height = 32, width = 64, 
                                        command = browse_ranking)
         ranking_button.grid(row = 0, column = 0, padx = 0, pady = 0, sticky = "e")
 
-    browse_button = ctk.CTkButton(button_frame, text = "Browse", font = ("Arial", 12, "bold"), fg_color = main.FG_COLOR,
+    browse_button = ctk.CTkButton(button_frame, text = "Browse", font = (main.FONT, 12, "bold"), fg_color = main.FG_COLOR,
                                   hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, height = 32, width = 64, 
                                   command = browse_url)
     browse_button.grid(row = 0, column = 1, padx = (8, 0), pady = 0, sticky = "e")
 
-    cite_button = ctk.CTkButton(button_frame, text = "Cite", font = ("Arial", 12, "bold"), fg_color = main.FG_COLOR,
+    cite_button = ctk.CTkButton(button_frame, text = "Cite", font = (main.FONT, 12, "bold"), fg_color = main.FG_COLOR,
                                 hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, height = 32, width = 64, 
                                 command = get_value)
     cite_button.grid(row = 0, column = 2, padx = (8, 0), pady = 0, sticky = "e")

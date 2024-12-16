@@ -50,6 +50,11 @@ SCROLLBAR_HOVER_COLOR = "#ced6e0"
 # Variable to keep track of the last pressed button
 LAST_PRESSED = None 
 
+ctk.FontManager.load_font("public/font/Manrope-Regular.ttf")
+ctk.FontManager.load_font("public/font/Manrope-Bold.ttf")
+
+FONT = "Manrope"
+
 """
 This main code is a combination of all modules.
 All frames and algorithms come together here.
@@ -116,7 +121,7 @@ if __name__ == "__main__":
     tool_frame.grid_columnconfigure(0, weight = 1)
 
     # Label for the tool list
-    menu_label = ctk.CTkLabel(toollist_button_frame, text = "Tool List", font = ("Arial", 16, "bold"), anchor = "w",
+    menu_label = ctk.CTkLabel(toollist_button_frame, text = "Tool List", font = (FONT, 16, "bold"), anchor = "w",
                               text_color = TEXT_COLOR)
     menu_label.grid(row = 0, column = 0, padx = 12, pady = 6, sticky = "nsew")
 
@@ -144,7 +149,7 @@ if __name__ == "__main__":
                 lambda: rf.researcheria_tool(root, tool_frame)]
 
     for row, (button_text, command) in enumerate(zip(buttons, commands)):
-        button = ctk.CTkButton(toollist_button_frame, text = button_text, font = ("Arial", 12, "bold"), fg_color = FG_COLOR, 
+        button = ctk.CTkButton(toollist_button_frame, text = button_text, font = (FONT, 12, "bold"), fg_color = FG_COLOR, 
                                hover_color = FG_HOVER_COLOR, text_color = BASE_COLOR, height = 32, width = 154,
                                command = command)
         button.grid(row = row + 1, column = 0, padx = 12, pady = 4, sticky = "nsew")
@@ -165,7 +170,7 @@ if __name__ == "__main__":
         else:
             pady = 4
 
-        button = ctk.CTkButton(other_frame, text = button_text, font = ("Arial", 12, "bold"), fg_color = FG_COLOR, 
+        button = ctk.CTkButton(other_frame, text = button_text, font = (FONT, 12, "bold"), fg_color = FG_COLOR, 
                                hover_color = FG_HOVER_COLOR, text_color = BASE_COLOR, height = 32, width = 154,
                                command = command)
         button.grid(row = row + 1, column = 0, padx = 12, pady = pady, sticky = "nsew")

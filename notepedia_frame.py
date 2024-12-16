@@ -36,5 +36,5 @@ def notepedia_tool(root, frame):
    frame.grid_columnconfigure(0, weight = 1)
 
    # Add a label for the notepedia tool frame
-   notepedia_label = ctk.CTkLabel(frame, text = "Notepedia", font = ("Arial", 24, "bold"), text_color = main.TEXT_COLOR)
+   notepedia_label = ctk.CTkLabel(frame, text = "Notepedia", font = (main.FONT, 24, "bold"), text_color = main.TEXT_COLOR)
    notepedia_label.grid(row = 0, column = 0, padx = 24, pady = (24, 16), sticky = "nsew")

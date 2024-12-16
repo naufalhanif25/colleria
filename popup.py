@@ -30,7 +30,7 @@ def open_popup(message, sleep = False):
     popup.title("Message Log")
 
     # Create and place the message label in the popup window
-    message_label = tk.Label(popup, text = message, font = ("Arial", 10, "normal"), fg = main.TEXT_COLOR, bg = main.BASE_COLOR)
+    message_label = tk.Label(popup, text = message, font = (main.FONT, 10, "normal"), fg = main.TEXT_COLOR, bg = main.BASE_COLOR)
     message_label.grid(row = 0, column = 0, padx = 12, pady = 12, sticky = "nsew")
 
     # Configure the grid layout to expand the message label with available space

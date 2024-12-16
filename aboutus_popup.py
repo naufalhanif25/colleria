@@ -33,11 +33,11 @@ def open_popup():
 
     for row, label in enumerate(text):
         if row % 2 == 0:
-            message_label = tk.Label(popup, text = label, font = ("Arial", 10, "bold"), fg = main.TEXT_COLOR, bg = main.BASE_COLOR, 
+            message_label = tk.Label(popup, text = label, font = (main.FONT, 10, "bold"), fg = main.TEXT_COLOR, bg = main.BASE_COLOR, 
                                      justify = "left")
             message_label.grid(row = row, column = 0, padx = (14, 12), pady = (8, 4), sticky = "w")
         else:
-            message_label = tk.Label(popup, text = label, font = ("Arial", 10, "normal"), fg = main.TEXT_COLOR, bg = main.BASE_COLOR, 
+            message_label = tk.Label(popup, text = label, font = (main.FONT, 10, "normal"), fg = main.TEXT_COLOR, bg = main.BASE_COLOR, 
                                      justify = "left")
             message_label.grid(row = row, column = 0, padx = (14, 12), pady = (4, 8), sticky = "w")
 
