@@ -23,21 +23,19 @@ CUR_PAGE = 1 # Current page number
 # Variable to keep track of the last pressed button
 LAST_PRESSED = None 
 
-"""
-Initializes the Researcheria tool interface within the given root window. 
-It performs the following steps: 
-1. Cleans specific files by calling the clean_file function from the cleaner module. 
-2. Destroys the existing tool_frame. 
-3. Creates a new custom tkinter frame with specified dimensions and color, 
-   and places it within the root window. 
-"""
-
 # Function to open the Researcheria frame
 def researcheria_tool(root, frame):
    """
+   Initializes the researcheria tool interface within the given root window. 
+   It performs the following steps: 
+   1. Cleans specific files by calling the clean_file function from the cleaner module. 
+   2. Destroys the existing tool_frame. 
+   3. Creates a new custom tkinter frame with specified dimensions and color, 
+      and places it within the root window.
+
    Parameters:
    - root: The root window for the tkinter application
-   - frame: The current tool_frame to be replaced with the transcriber tool interface
+   - frame: The current tool_frame to be replaced with the researcheria tool interface
    """
 
    global RESULTS, SEARCH, DETAIL, ANIM, CUR_PAGE, LAST_PRESSED
@@ -93,7 +91,7 @@ def researcheria_tool(root, frame):
    
    # Create the search entry widget
    search_entry = ctk.CTkEntry(search_frame, textvariable = search_var, width = 220, height = 16, font = (main.FONT, 12, "normal"), 
-                               fg_color = main.BASE_COLOR)
+                               fg_color = main.BASE_COLOR, corner_radius = 16)
    search_entry.grid(row = 0, column = 0, padx = (4, 0), pady = 4, sticky = "nsew")
    search_entry.configure(text_color = main.FADED_LABEL_COLOR)
    search_entry.bind("<FocusIn>", on_entry_click) 
@@ -345,9 +343,9 @@ def researcheria_tool(root, frame):
 
    # Create the search button
    search_button = ctk.CTkButton(search_frame, text = "Search", font = (main.FONT, 10, "bold"), fg_color = main.FG_COLOR,
-                                 hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, width = 86, 
+                                 hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, width = 86, corner_radius = 16,
                                  command = lambda: start_search(search_entry))
-   search_button.grid(row = 0, column = 1, padx = 4, pady = 4, sticky = "nsew")
+   search_button.grid(row = 0, column = 1, padx = (8, 4), pady = 4, sticky = "nsew")
 
    # Bind the Return key to start the search
    search_entry.bind("<Return>", start_search)

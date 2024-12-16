@@ -19,7 +19,7 @@ LAST_PRESSED = None
 # Function to initialize the transcriber tool interface
 def transcriber_tool(root, frame):
     """
-    Initializes the transcriber tool interface within the given root window.
+    Initializes the transcriberia tool interface within the given root window.
     It performs the following steps:
     1. Cleans specific files by calling the clean_file function from the cleaner module.
     2. Destroys the existing frame.
@@ -29,7 +29,7 @@ def transcriber_tool(root, frame):
     
     Parameters:
     - root: The root window for the tkinter application
-    - frame: The current tool_frame to be replaced with the transcriber tool interface
+    - frame: The current tool_frame to be replaced with the transcriberia tool interface
     """
 
     global LAST_PRESSED
@@ -75,7 +75,7 @@ def transcriber_tool(root, frame):
             entry.configure(state = "disabled")
 
     # Entry widget for drag-and-drop video files
-    entry = ctk.CTkEntry(frame, textvariable = entry_var, height = 120, justify = "center", width = 860,
+    entry = ctk.CTkEntry(frame, textvariable = entry_var, height = 120, justify = "center", width = 860, corner_radius = 8,
                          font = (main.FONT, 16, "bold"), text_color = main.FADED_TEXT_COLOR, border_color = main.BORDER_COLOR,
                          border_width = 2, fg_color = main.ENTRY_COLOR) 
     entry.grid(row = 1, column = 0, padx = 160, pady = (16, 4), sticky = "nsew")
@@ -162,7 +162,8 @@ def transcriber_tool(root, frame):
         lang_button(lang_name, 0, index, lang_button_frame)
 
     # Frame for displaying the transcription result
-    result_frame = ctk.CTkFrame(frame, height = 120, fg_color = main.FRAME_COLOR, border_color = main.BORDER_COLOR, border_width = 2)
+    result_frame = ctk.CTkFrame(frame, height = 120, fg_color = main.FRAME_COLOR, border_color = main.BORDER_COLOR, border_width = 2,
+                                corner_radius = 8)
     result_frame.grid(row = 5, column = 0, padx = 160, pady = (32, 0), sticky = "nsew")
 
     # Label to display the transcription progress

@@ -3,21 +3,19 @@ import customtkinter as ctk
 import main
 import cleaner
 
-"""
-This function initializes the Notepedia tool interface 
-within the given root window. It performs the following steps: 
-1. Cleans specific files by calling the clean_file function from the cleaner module. 
-2. Destroys the existing tool_frame. 
-3. Creates a new custom tkinter frame with specified dimensions and color, 
-   and places it within the root window. 
-"""
-
 # Function to open the Notepedia frame
 def notepedia_tool(root, frame):
    """
+   This function initializes the notepedia tool interface 
+   within the given root window. It performs the following steps: 
+   1. Cleans specific files by calling the clean_file function from the cleaner module. 
+   2. Destroys the existing tool_frame. 
+   3. Creates a new custom tkinter frame with specified dimensions and color, 
+      and places it within the root window. 
+
    Parameters:
    - root: The root window for the tkinter application
-   - frame: The current tool_frame to be replaced with the transcriber tool interface
+   - frame: The current tool_frame to be replaced with the notepedia tool interface
    """
 
    # Clean specific files using the cleaner module
