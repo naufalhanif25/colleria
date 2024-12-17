@@ -41,7 +41,7 @@
 | **DocLab** | DocLab is a feature that can be used to convert any document to other formats. |
 | **Transcriberia** | Transcriber is a feature that can transcribe a video of any length into text in a short time. |
 | **Researchia** | Researcheria is a feature that is very suitable for students who want to search for journals or literature quickly with clear and reliable sources. |
-| **Colleria.AI** | Colleria.AI is a free and open source artificial intelligence that can be used to ask any question. |
+| **Colleria.AI** | Colleria.AI is a free and open source artificial intelligence that can be used to ask any question. Colleria.AI uses the Llama 3.3 70B Versatile model. |
 
 <!-- List of libraries and installation commands -->
 <h3>
