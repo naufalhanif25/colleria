@@ -1,12 +1,15 @@
+<!-- Title -->
 <div align="center">
     <h1>Colleria</h1>
 </div>
 
+<!-- Badges -->
 <div align="center">
     <img src="https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue" /> 
     <img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white" />
 </div>
 
+<!-- Descriptions -->
 <h2>
     📝 Description
     <h3>
@@ -23,6 +26,7 @@
     </h3>
 </h2>
 
+<!-- Details -->
 <h2>
     📖 Details
     <h3>
@@ -30,6 +34,7 @@
     </h3>
 </h2>
 
+<!-- Features table -->
 | Feature | Description |
 | --- | --- |
 | **Notepedia** | Notepedia is a notes feature that can be used to record daily tasks, make small notes, diary, or create a to-do list. |
@@ -38,6 +43,7 @@
 | **Researchia** | Researcheria is a feature that is very suitable for students who want to search for journals or literature quickly with clear and reliable sources. |
 | **Colleria.AI** | Colleria.AI is a free and open source artificial intelligence that can be used to ask any question. |
 
+<!-- List of libraries and installation commands -->
 <h3>
     <b>What libraries are used? 📚</b>
     <h5>
@@ -47,4 +53,92 @@
 
 ```
 pip install moviepy
+```
+
+<h5>
+    <p>2. numpy</p>
+</h5>
+
+```
+pip install numpy
+```
+
+<h5>
+    <p>3. pydub</p>
+</h5>
+
+```
+pip install pydub
+```
+
+<h5>
+    <p>4. scipy</p>
+</h5>
+
+```
+pip install scipy
+```
+
+<h5>
+    <p>5. speech_recognition</p>
+</h5>
+
+```
+pip install SpeechRecognition
+```
+
+<h5>
+    <p>6. customtkinter</p>
+</h5>
+
+```
+pip install customtkinter
+```
+
+<h5>
+    <p>7. tkinterdnd2</p>
+</h5>
+
+```
+pip install tkinterdnd2
+```
+
+<h5>
+    <p>8. groq</p>
+</h5>
+
+```
+pip install groq
+```
+
+<h5>
+    <p>9. requests</p>
+</h5>
+
+```
+pip install requests
+```
+
+<h5>
+    <p>10. aiohttp</p>
+</h5>
+
+```
+pip install aiohttp
+```
+
+<h5>
+    <p>11. beautifulsoup4</p>
+</h5>
+
+```
+pip install beautifulsoup4
+```
+
+<h5>
+    <p>12. cachetools</p>
+</h5>
+
+```
+pip install cachetools
 ```
