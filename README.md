@@ -149,7 +149,7 @@ pip install cachetools
     <h5>
         <a href="https://saweria.co/minkudeveloper" target="_blank"> 
             <button style="justify: center;">
-                <img src="https://yt3.googleusercontent.com/ytc/AIdro_l4piIgNt6jLBZYvXiEd-rShtm8lfeQqfDNoN04qwkmhQ=s900-c-k-c0x00ffffff-no-rj" alt="Donate" style="width: 64px; height: 64px; vertical-align: middle; margin-left: 24px;">
+                <img src="https://yt3.googleusercontent.com/ytc/AIdro_l4piIgNt6jLBZYvXiEd-rShtm8lfeQqfDNoN04qwkmhQ=s900-c-k-c0x00ffffff-no-rj" alt="Donate via Saweria" style="width: 64px; height: 64px; vertical-align: middle; margin-left: 24px;">
                 Donate via Saweria
             </button> 
         </a>
