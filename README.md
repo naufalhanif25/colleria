@@ -42,6 +42,7 @@
     <b>What libraries are used? 📚</b>
     <h5>
         <p>1. moviepy</p>
-        `pip install moviepy`
     </h5>
 </h3>
+
+`pip install moviepy`
