@@ -1,11 +1,16 @@
 # Importing necessary libraries
-from openai import OpenAI
+from groq import Groq
+
+# Load model
+MODEL = "llama-3.3-70b-versatile"
+MODEL_NAME = MODEL.replace("-", " ").title()
 
 # Function to run the model
 def colleriaai(prompt):
     """
     This function contains the algorithm for running 
-    the GPT-4o AI model on which ColleriaAI is based
+    the Llama 3.3 70B Instruct Turbo AI model on which 
+    the ColleriaAI is based
     """
 
     # Open the file in read-binary mode
@@ -17,13 +22,17 @@ def colleriaai(prompt):
         file.close()
 
     # Configure the OpenAI client with the base URL and API key
-    client = OpenAI(base_url = "https://api.zukijourney.com/v1", 
-                    api_key = api_key)
+    client = Groq(api_key = api_key)
 
     # Create a chat completion using the specified model and prompt
     response = client.chat.completions.create(
-        model = "gpt-4o", 
-        messages = [{"role": "user", "content": prompt}]
+        model = MODEL, 
+        messages = [
+            {
+                "role": "user", 
+                "content": prompt
+            }
+        ]
     )
 
     # Return the content of the first response choice

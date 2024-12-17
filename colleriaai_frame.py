@@ -51,7 +51,7 @@ def colleriaai_tool(root, frame):
     colleriaai_label = ctk.CTkLabel(frame, text = "Colleria.AI", font = (main.FONT, 24, "bold"), text_color = main.TEXT_COLOR)
     colleriaai_label.grid(row = 0, column = 0, padx = 24, pady = (24, 0), sticky = "nsew")
 
-    model_label = ctk.CTkLabel(frame, text = "GPT-4o", font = (main.FONT, 12, "bold"), text_color = main.TEXT_COLOR)
+    model_label = ctk.CTkLabel(frame, text = colleriaai.MODEL_NAME, font = (main.FONT, 12, "bold"), text_color = main.TEXT_COLOR)
     model_label.grid(row = 1, column = 0, padx = 24, pady = (0, 16), sticky = "nsew")
 
     # Create a frame for the response textbox
@@ -74,7 +74,7 @@ def colleriaai_tool(root, frame):
 
     # Textbox to display the response
     response_box = ctk.CTkTextbox(response_frame, fg_color = main.FRAME_COLOR, font = (main.FONT, 12, "normal"), text_color = main.TEXT_COLOR, 
-                                scrollbar_button_color = main.SCROLLBAR_COLOR, scrollbar_button_hover_color = main.SCROLLBAR_HOVER_COLOR)
+                                  scrollbar_button_color = main.SCROLLBAR_COLOR, scrollbar_button_hover_color = main.SCROLLBAR_HOVER_COLOR)
     response_box.grid(row = 0, column = 0, padx = 0, pady = 0, sticky = "nsew")
     response_box.configure(state = "disabled")
 
@@ -163,6 +163,7 @@ def colleriaai_tool(root, frame):
             response_box.grid(row = 0, column = 0, padx = 12, pady = 12, sticky = "nsew")
             button_frame.grid(row = 3, column = 0, padx = 160, pady = (2, 12), sticky = "e")
 
+    # Function to run the colleria ai function
     def run_prompt(event = None):
         def check_internet_connection(url = "http://www.google.com/"):
             """

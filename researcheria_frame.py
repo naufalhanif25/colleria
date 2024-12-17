@@ -92,7 +92,7 @@ def researcheria_tool(root, frame):
    # Create the search entry widget
    search_entry = ctk.CTkEntry(search_frame, textvariable = search_var, width = 220, height = 16, font = (main.FONT, 12, "normal"), 
                                fg_color = main.BASE_COLOR, corner_radius = 16)
-   search_entry.grid(row = 0, column = 0, padx = (4, 0), pady = 4, sticky = "nsew")
+   search_entry.grid(row = 0, column = 0, padx = 0, pady = 4, sticky = "nsew")
    search_entry.configure(text_color = main.FADED_LABEL_COLOR)
    search_entry.bind("<FocusIn>", on_entry_click) 
    search_entry.bind("<FocusOut>", on_focus_out)
@@ -343,9 +343,9 @@ def researcheria_tool(root, frame):
 
    # Create the search button
    search_button = ctk.CTkButton(search_frame, text = "Search", font = (main.FONT, 10, "bold"), fg_color = main.FG_COLOR,
-                                 hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, width = 86, corner_radius = 16,
+                                 hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, width = 72, corner_radius = 16,
                                  command = lambda: start_search(search_entry))
-   search_button.grid(row = 0, column = 1, padx = (8, 4), pady = 4, sticky = "nsew")
+   search_button.grid(row = 0, column = 1, padx = (8, 0), pady = 4, sticky = "nsew")
 
    # Bind the Return key to start the search
    search_entry.bind("<Return>", start_search)
