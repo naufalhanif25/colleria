@@ -2,8 +2,5 @@
 __pycache__/
 *.pyc
 
-# Ignore all files in the model directory
-model/
-
 # Explicitly ignore key.bin
 model/key.bin
