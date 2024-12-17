@@ -148,6 +148,8 @@ pip install cachetools
     📖 Support us
     <h5>
         Donate via Saweria
+    </h5>
+    <h5>
         <a href="https://saweria.co/minkudeveloper" target="_blank" style="justify: center;"> 
             <button>
                 <img src="https://yt3.googleusercontent.com/ytc/AIdro_l4piIgNt6jLBZYvXiEd-rShtm8lfeQqfDNoN04qwkmhQ=s900-c-k-c0x00ffffff-no-rj" alt="Donate via Saweria" style="width: 64px; height: 64px; vertical-align: middle;">
