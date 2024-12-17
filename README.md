@@ -146,5 +146,6 @@ pip install cachetools
 <!-- Donation -->
 <h2>
     📖 Support us
-    <a href="{https://saweria.co/minkudeveloper}"><img width="185" src="https://yourdonation.rocks/images/badge.svg" alt="Donations Badge"></a>
 </h2>
+<a href="{https://saweria.co/minkudeveloper}"><img width="185" src="https://yourdonation.rocks/images/badge.svg" alt="Donations Badge"></a>
+[![Donate](https://yourdonation.rocks/images/badge.svg)]({https://saweria.co/minkudeveloper})
