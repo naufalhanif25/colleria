@@ -12,7 +12,7 @@ import doclab
 import itertools
 
 # List of supported file extensions
-IMG_EXT = [".png", ".jpg", ".jpeg", ".tiff"]
+IMG_EXT = [".png", ".jpg", ".jpeg"]
 EXT_DICT = [
     {".docx" : ".pdf"},
     {".doc" : ".pdf"},
@@ -114,7 +114,7 @@ def doclab_tool(root, frame):
             entry.configure(state = "disabled")
 
     # Entry widget for drag-and-drop video files
-    entry = ctk.CTkEntry(frame, textvariable = entry_var, height = 120, justify = "center", width = 860, corner_radius = 8,
+    entry = ctk.CTkEntry(frame, textvariable = entry_var, height = 160, justify = "center", width = 860, corner_radius = 8,
                             font = (main.FONT, 16, "bold"), text_color = main.FADED_TEXT_COLOR, border_color = main.BORDER_COLOR,
                             border_width = 2, fg_color = main.ENTRY_COLOR) 
     entry.grid(row = 1, column = 0, padx = 160, pady = (16, 4), sticky = "nsew")
@@ -167,7 +167,7 @@ def doclab_tool(root, frame):
     loading_frame.grid_rowconfigure(0, weight = 1)
 
     # Label to display the transcription progress
-    loading_label = ctk.CTkLabel(loading_frame, text = "Converting", font = (main.FONT, 12, "bold"), text_color = main.FADED_LABEL_COLOR) 
+    loading_label = ctk.CTkLabel(loading_frame, text = "Converting", font = (main.FONT, 16, "bold"), text_color = main.FADED_LABEL_COLOR) 
     loading_label.grid(row = 0, column = 0, padx = 12, pady = 24, sticky = "nsew") 
     loading_label.grid_forget()  # Hide the label initially
 
@@ -288,7 +288,7 @@ def doclab_tool(root, frame):
                     loading_label.grid_forget()
 
                     # Configure the text of the loading animation label
-                    loading_label.configure(text = "Converting")
+                    loading_label.configure(font = (main.FONT, 16, "bold"), text = "Converting")
 
                 if any(input_ext == DICT_KEYS[index] and FILE_EXT == DICT_VALUES[index] for index in range(len(EXT_DICT))):
                     # Start the loading animation
@@ -300,7 +300,8 @@ def doclab_tool(root, frame):
                     # Stop the loading animation
                     stop_animation()
                     
-                    loading_label.configure(text = f"The {input_name}{FILE_EXT}\nhas been saved to the destination")
+                    # Reset the animation
+                    loading_label.configure(font = (main.FONT, 12, "bold"), text = f"The {input_name}{FILE_EXT}\nhas been saved to the destination")
                     root.after(2000, reset_animation)
                 else:
                     popup.open_popup("Destination extensions are not supported", True)

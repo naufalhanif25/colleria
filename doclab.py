@@ -226,6 +226,10 @@ def doclab(input_path, output_path, input_ext, output_ext):
 
         # Open the input image
         image = Image.open(input_path)
+
+        # Convert RGBA to RGB if needed 
+        if image.mode == "RGBA": 
+            image = image.convert("RGB")
         
         # Save the image in the specified output format
         image.save(output_path)
@@ -270,7 +274,7 @@ def doclab(input_path, output_path, input_ext, output_ext):
         pptxtopdf.convert(input_path, output_path)
 
     # List of supported file extensions
-    IMG_EXT = [".png", ".jpg", ".jpeg", ".tiff"]
+    IMG_EXT = [".png", ".jpg", ".jpeg"]
     EXT_DICT = {
         (".pdf", ".docx") : pdf_2_docx,
         (".pdf", ".doc") : pdf_2_docx,
