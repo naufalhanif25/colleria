@@ -144,11 +144,59 @@ pip install cachetools
 ```
 
 <h5>
-    <p>13. aspose.words</p>
+    <p>13. docx2pdf</p>
 </h5>
 
 ```
-pip install aspose-words
+pip install docx2pdf
+```
+
+<h5>
+    <p>14. pdfplumber</p>
+</h5>
+
+```
+pip install pdfplumber
+```
+
+<h5>
+    <p>15. PyPDF2</p>
+</h5>
+
+```
+pip install PyPDF2
+```
+
+<h5>
+    <p>16. python-docx</p>
+</h5>
+
+```
+pip install python-docx
+```
+
+<h5>
+    <p>17. Pillow (PIL)</p>
+</h5>
+
+```
+pip install Pillow
+```
+
+<h5>
+    <p>18. PyMuPDF (fitz)</p>
+</h5>
+
+```
+pip install PyMuPDF
+```
+
+<h5>
+    <p>19. img2pdf</p>
+</h5>
+
+```
+pip install img2pdf
 ```
 
 <!-- Donation -->
