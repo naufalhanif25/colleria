@@ -10,7 +10,7 @@ def clean_file():
     """
 
     transcriber_file = ["bin/out/out.bin", "bin/log/path_log.bin", "bin/log/lang_log.bin",
-                        "bin/log/error_log.bin"]
+                        "bin/log/error_log.bin", "bin/log/ext_log.bin"]
     
     for path in transcriber_file:
         # Open the file in write mode to overwrite its content with empty content

@@ -91,7 +91,7 @@ def researcheria_tool(root, frame):
    
    # Create the search entry widget
    search_entry = ctk.CTkEntry(search_frame, textvariable = search_var, width = 220, height = 16, font = (main.FONT, 12, "normal"), 
-                               fg_color = main.BASE_COLOR, corner_radius = 16)
+                               fg_color = main.BASE_COLOR, corner_radius = 16, border_color = main.FADED_BORDER_COLOR)
    search_entry.grid(row = 0, column = 0, padx = 0, pady = 4, sticky = "nsew")
    search_entry.configure(text_color = main.FADED_LABEL_COLOR)
    search_entry.bind("<FocusIn>", on_entry_click) 
@@ -118,14 +118,14 @@ def researcheria_tool(root, frame):
    def animate_loading(label, text, delay = 400): 
       def update_text(): 
          if ANIM:
-               current_text = label.cget("text") 
+            current_text = label.cget("text") 
 
-               if current_text.endswith("..."): 
-                  label.configure(text = text) 
-               else: 
-                  label.configure(text = current_text + ".") 
+            if current_text.endswith("..."): 
+               label.configure(text = text) 
+            else: 
+               label.configure(text = current_text + ".") 
                
-               root.after(delay, update_text)  # Schedule the function to run again after the delay
+            root.after(delay, update_text)  # Schedule the function to run again after the delay
    
       update_text()
 

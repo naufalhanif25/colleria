@@ -64,7 +64,7 @@ def transcriber_tool(root, frame):
 
         if extension not in VID_EXT:
             entry_var.set("Extension is not supported")
-            entry.after(1000, lambda: entry_var.set("Drop Video Here"))
+            entry.after(2000, lambda: entry_var.set("Drop Video Here"))
         else:
             with open("bin/log/path_log.bin", "wb") as file:
                 file.write(path.encode("utf-8"))
@@ -84,9 +84,8 @@ def transcriber_tool(root, frame):
     entry.drop_target_register(DND_FILES) 
     entry.dnd_bind('<<Drop>>', on_drop)
 
-
     # Label to display supported video file extensions
-    ext_label = ctk.CTkLabel(frame, text = f"Extension: {', '.join(VID_EXT)}", font = (main.FONT, 10, "normal"), text_color = main.FADED_LABEL_COLOR)
+    ext_label = ctk.CTkLabel(frame, text = f"Extension: {", ".join(VID_EXT)}", font = (main.FONT, 10, "normal"), text_color = main.FADED_LABEL_COLOR)
     ext_label.grid(row = 2, column = 0, padx = 12, pady = 0, sticky = "nsew")
 
     # Language selection frames and canvases

@@ -168,7 +168,7 @@ def colleriaai_tool(root, frame):
         def check_internet_connection(url = "http://www.google.com/"):
             """
             This function checks the internet connection by sending an HTTP request to the provided URL.
-            If the connection is successful, it will start a thread to run the 'search_journal' function.
+            If the connection is successful, it will start a thread to run the 'colleria_ai' function.
             If the connection fails, it will show a popup message to check the internet connection.
             
             :param url: URL used to check the internet connection. Default is http://www.google.com/
@@ -219,7 +219,7 @@ def colleriaai_tool(root, frame):
     # Entry to display the response
     prompt_entry = ctk.CTkEntry(prompt_frame, textvariable = prompt_var, height = 32, fg_color = main.BASE_COLOR, font = (main.FONT, 12, "normal"), 
                                 corner_radius = 16, text_color = main.FADED_LABEL_COLOR, border_color = main.FADED_TEXT_COLOR, border_width = 2)
-    prompt_entry.grid(row = 0, column = 0, padx = (12, 0), pady = 12, sticky = "nsew")
+    prompt_entry.grid(row = 0, column = 0, padx = 0, pady = 12, sticky = "nsew")
     prompt_entry.bind("<FocusIn>", on_entry_click) 
     prompt_entry.bind("<FocusOut>", on_focus_out)
     prompt_entry.bind("<Return>", run_prompt)
@@ -228,7 +228,7 @@ def colleriaai_tool(root, frame):
     ask_button = ctk.CTkButton(prompt_frame, text = "Ask", font = (main.FONT, 12, "bold"), fg_color = main.FG_COLOR, corner_radius = 16,
                                hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, width = 86, 
                                command = run_prompt)
-    ask_button.grid(row = 0, column = 1, padx = 8, pady = 12, sticky = "nsew")
+    ask_button.grid(row = 0, column = 1, padx = (8, 0), pady = 12, sticky = "nsew")
 
     # Button to copy the response to the clipboard
     copy_button = ctk.CTkButton(button_frame, text = "Copy", font = (main.FONT, 12, "bold"), fg_color = main.FG_COLOR,

@@ -143,6 +143,14 @@ pip install beautifulsoup4
 pip install cachetools
 ```
 
+<h5>
+    <p>13. aspose.words</p>
+</h5>
+
+```
+pip install aspose-words
+```
+
 <!-- Donation -->
 <h2>
     📖 Support us
