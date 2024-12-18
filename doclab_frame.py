@@ -9,18 +9,34 @@ import os
 import threading
 import requests
 import doclab
+import itertools
 
 # List of supported file extensions
 IMG_EXT = [".png", ".jpg", ".jpeg", ".tiff"]
 EXT_DICT = [
-    {".docx": ".pdf"},
-    {".pdf": ".docx"},
-    {".pdf": ".txt"},
+    {".docx" : ".pdf"},
+    {".doc" : ".pdf"},
+    {".pdf" : ".docx"},
+    {".pdf" : ".doc"},
+    {".xlsx" : ".csv"},
+    {".xls" : ".csv"},
+    {".csv" : ".xlsx"},
+    {".csv" : ".xls"},
+    {".pptx" : ".pdf"},
+    {".ppt" : ".pdf"},
+    {".pdf" : ".pptx"},
+    {".pdf" : ".ppt"},
 ]
 
 # Adding image extensions dynamically to the list
-EXT_DICT.extend([{ext: ".pdf"} for ext in IMG_EXT])
-EXT_DICT.extend([{".pdf": ext} for ext in IMG_EXT])
+EXT_DICT.extend([{ext : ".pdf"} for ext in IMG_EXT])
+EXT_DICT.extend([{".pdf" : ext} for ext in IMG_EXT])
+
+# Adding image extensions dynamically to the list
+for ext_left in IMG_EXT:
+    for ext_right in IMG_EXT:
+        if ext_left != ext_right and [{ext_left : ext_right}] not in EXT_DICT:
+            EXT_DICT.extend([{ext_left : ext_right}])
 
 # Collect keys and values into separate lists
 DICT_KEYS, DICT_VALUES = zip(*[(f"{key}", f"{value}") for ext_dict in EXT_DICT for key, value in ext_dict.items()])
@@ -108,7 +124,8 @@ def doclab_tool(root, frame):
     entry.dnd_bind('<<Drop>>', on_drop)
 
     # Label to display supported video file extensions
-    ext_label = ctk.CTkLabel(frame, text = f"Extension: {", ".join(DICT_VALUES)}", font = (main.FONT, 10, "normal"), text_color = main.FADED_LABEL_COLOR)
+    ext_label = ctk.CTkLabel(frame, text = f"Extension: {", ".join(sorted(list(set(itertools.chain(DICT_VALUES, DICT_KEYS)))))}", 
+                             font = (main.FONT, 10, "normal"), text_color = main.FADED_LABEL_COLOR)
     ext_label.grid(row = 2, column = 0, padx = 12, pady = 0, sticky = "nsew")
 
     # Extension selection frames and canvases
@@ -150,7 +167,7 @@ def doclab_tool(root, frame):
     loading_frame.grid_rowconfigure(0, weight = 1)
 
     # Label to display the transcription progress
-    loading_label = ctk.CTkLabel(loading_frame, text = "Converting", font = (main.FONT, 16, "bold"), text_color = main.FADED_LABEL_COLOR) 
+    loading_label = ctk.CTkLabel(loading_frame, text = "Converting", font = (main.FONT, 12, "bold"), text_color = main.FADED_LABEL_COLOR) 
     loading_label.grid(row = 0, column = 0, padx = 12, pady = 24, sticky = "nsew") 
     loading_label.grid_forget()  # Hide the label initially
 
@@ -219,7 +236,7 @@ def doclab_tool(root, frame):
 
         return button
                     
-    for index, extension in enumerate(sorted(list(set(DICT_VALUES)))): 
+    for index, extension in enumerate(sorted(list(set(itertools.chain(DICT_VALUES, DICT_KEYS))))): 
         ext_button(extension, 0, index, ext_button_frame)
 
     # Function to browse for a directory
@@ -283,7 +300,7 @@ def doclab_tool(root, frame):
                     # Stop the loading animation
                     stop_animation()
                     
-                    loading_label.configure(text = "The output has been saved\nto the destination")
+                    loading_label.configure(text = f"The {input_name}{FILE_EXT}\nhas been saved to the destination")
                     root.after(2000, reset_animation)
                 else:
                     popup.open_popup("Destination extensions are not supported", True)

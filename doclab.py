@@ -8,7 +8,12 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from PIL import Image
 import fitz
 import img2pdf
+import pandas as pd
+import pptxtopdf
+from pptx import Presentation
+from pptx.util import Inches
 import re
+import io
 import os
 
 # Function to run the doclab algorithm (conversion process)
@@ -36,25 +41,8 @@ def doclab(input_path, output_path, input_ext, output_ext):
         the extension of a file from .docx to .pdf
         """
 
+        # Convert docx to pdf
         docx2pdf.convert(input_path, output_path)
-
-    # Function to convert pdf to txt
-    def pdf_2_txt(input_path, output_path):
-        """
-        This function is responsible for changing 
-        the extension of a file from .pdf to .txt
-        """
-
-        reader = PdfReader(input_path)
-        pages = reader.pages
-        text_content = ""
-
-        for page in pages:
-            text_content += page.extract_text()
-            text_content = re.sub(r"[^\x00-\x7F]+|\x0c", " ", text_content)
-
-        with open(output_path, "w", encoding = "utf-8") as txt:
-            txt.write(text_content)
 
     # Function to convert pdf to docx
     def pdf_2_docx(input_path, output_path):
@@ -75,12 +63,12 @@ def doclab(input_path, output_path, input_ext, output_ext):
                 # Add text to the DOCX document
                 if text:
                     for index, line in enumerate(text.split("\n")):
-                        fixed_line = re.sub(r"[^\x00-\x7F]+|\x0c", " ", line)
+                        # fixed_line = re.sub(r"[^\x00-\x7F]+|\x0c", " ", line)
 
                         if index == 0:
-                            doc.add_heading(fixed_line, level = 1)
+                            doc.add_heading(line, level = 1)  # argument: line or fixed_line
                         else:
-                            paragraph = doc.add_paragraph(fixed_line)
+                            paragraph = doc.add_paragraph(line)  # argument: line or fixed_line
 
                             # Set alignment (example: center alignment) 
                             paragraph.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
@@ -127,6 +115,62 @@ def doclab(input_path, output_path, input_ext, output_ext):
         # Save the DOCX document
         doc.save(output_path)
     
+    # Function to convert pdf to pptx
+    def pdf_2_pptx(input_path, output_path):
+        """
+        This function is responsible for changing 
+        the extension of a file from .pdf to .pptx
+        """
+
+        # Load the PDF file
+        with pdfplumber.open(input_path) as pdf:
+            # Create a PowerPoint presentation
+            presentation = Presentation()
+            
+            for page_num, page in enumerate(pdf.pages):
+                # Add a slide for each page
+                slide_layout = presentation.slide_layouts[5]  # Blank layout
+                slide = presentation.slides.add_slide(slide_layout)
+                
+                # Extract text from the page
+                text = page.extract_text()
+                if text:
+                    textbox = slide.shapes.add_textbox(Inches(0.5), Inches(0.5), Inches(9), Inches(5))
+                    text_frame = textbox.text_frame
+
+                    for line in text.split("\n"):
+                        paragraph = text_frame.add_paragraph()
+                        paragraph.text = line
+
+                # Extract images from the page
+                for img_num, img in enumerate(page.images):
+                    x0, y0, x1, y1 = img["x0"], img["top"], img["x1"], img["bottom"]
+                    img_bbox = (x0, y0, x1, y1)
+                    extracted_img = page.within_bbox(img_bbox).to_image(resolution = 300)
+
+                    # Save the image to a byte stream
+                    image_stream = io.BytesIO()
+                    extracted_img.save(image_stream, format = "PNG", bits = 32)
+                    image_stream.seek(0)
+
+                    # Add image to slide
+                    slide.shapes.add_picture(image_stream, Inches(1), Inches(3), width = Inches(3))
+
+            # Iterate through each slide in the presentation
+            for slide in presentation.slides:
+                for shape in slide.shapes:  # Iterate through each shape in the current slide
+                    for placeholder in slide.shapes.placeholders:  # Iterate through each placeholder in the current slide
+                        # Get the underlying XML element of the placeholder
+                        slide_placeholder = placeholder._sp
+
+                        # Remove the XML element from its parent
+                        slide_placeholder.getparent().remove(slide_placeholder)
+
+
+        # Save the PowerPoint presentation
+        presentation.save(output_path)
+    
+    # Function to convert pdf to image
     def pdf_2_image(input_path, output_path):
         """
         This function is responsible for changing 
@@ -151,6 +195,7 @@ def doclab(input_path, output_path, input_ext, output_ext):
             # Save the image
             pix.save(f"{os.path.dirname(output_path)}/{output_name}_{page_num + 1}{output_ext}")
 
+    # Function to convert image to pdf
     def image_2_pdf(input_path, output_path):
         """
         This function is responsible for changing 
@@ -170,18 +215,86 @@ def doclab(input_path, output_path, input_ext, output_ext):
 
         image.close()
 
+    # Function to convert images to other image formats 
+    def image_2_image(input_path, output_path):
+        """
+        This function is responsible for changing 
+        the extension of a file from image
+        (.png, .jpg, .jpeg, .tiff) to other 
+        image formats (.png, .jpg, .jpeg, .tiff)
+        """
+
+        # Open the input image
+        image = Image.open(input_path)
+        
+        # Save the image in the specified output format
+        image.save(output_path)
+
+    # Function to convert xlsx to csv
+    def xlsx_2_csv(input_path, output_path):
+        """
+        This function is responsible for changing 
+        the extension of a file from .xlsx to .csv
+        """
+
+        # Read the Excel file
+        data = pd.read_excel(input_path)
+
+        # Save to CSV file
+        data.to_csv(output_path, index = False)
+
+    # Function to convert csv to xlsx
+    def csv_2_xlsx(input_path, output_path):
+        """
+        This function is responsible for changing 
+        the extension of a file from .csv to .xlsx
+        """
+
+        # Read the Excel file
+        data = pd.read_csv(input_path)
+
+        # Save to CSV file
+        data.to_excel(output_path, index = False)
+
+    # Function to convert pptx to pdf
+    def pptx_2_pdf(input_path, output_path):
+        """
+        This function is responsible for changing 
+        the extension of a file from .pptx to .pdf
+        """
+
+        # Get path directory
+        output_path = f"{os.path.dirname(output_path)}"
+
+        # Convert pptx to pdf
+        pptxtopdf.convert(input_path, output_path)
+
     # List of supported file extensions
     IMG_EXT = [".png", ".jpg", ".jpeg", ".tiff"]
     EXT_DICT = {
         (".pdf", ".docx") : pdf_2_docx,
-        (".pdf", ".txt") : pdf_2_txt,
-        (".docx", ".pdf") : docx_2_pdf
+        (".pdf", ".doc") : pdf_2_docx,
+        (".docx", ".pdf") : docx_2_pdf,
+        (".doc", ".pdf") : docx_2_pdf,
+        (".xlsx", ".csv") : xlsx_2_csv,
+        (".xls", ".csv") : xlsx_2_csv,
+        (".csv", ".xlsx") : csv_2_xlsx,
+        (".csv", ".xls") : csv_2_xlsx,
+        (".pptx", ".pdf") : pptx_2_pdf,
+        (".ppt", ".pdf") : pptx_2_pdf,
+        (".pdf", ".pptx") : pdf_2_pptx,
+        (".pdf", ".ppt") : pdf_2_pptx
     }
 
     # Adding image extensions dynamically to the list
     for ext in IMG_EXT: 
         EXT_DICT[(ext, ".pdf")] = image_2_pdf 
         EXT_DICT[(".pdf", ext)] = pdf_2_image
+
+    for ext_left in IMG_EXT:
+        for ext_right in IMG_EXT:
+            if ext_left != ext_right and (ext_left, ext_right) not in EXT_DICT:
+                EXT_DICT[(ext_left, ext_right)] = image_2_image
 
     if (input_ext, output_ext) in EXT_DICT:
         EXT_DICT[(input_ext, output_ext)](input_path, output_path)

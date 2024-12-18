@@ -6,6 +6,10 @@
 <!-- Badges -->
 <div align="center">
     <img src="https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue" /> 
+    <img src="https://img.shields.io/badge/Pandas-2C2D72?style=for-the-badge&logo=pandas&logoColor=white" /> 
+    <img src="https://img.shields.io/badge/Numpy-777BB4?style=for-the-badge&logo=numpy&logoColor=white" /> 
+    <img src="https://img.shields.io/badge/conda-342B029.svg?&style=for-the-badge&logo=anaconda&logoColor=white" /> 
+    <img src="https://img.shields.io/badge/ChatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white" /> 
     <img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white" />
 </div>
 
@@ -197,6 +201,30 @@ pip install PyMuPDF
 
 ```
 pip install img2pdf
+```
+
+<h5>
+    <p>20. pptxtopdf</p>
+</h5>
+
+```
+pip install pptxtopdf
+```
+
+<h5>
+    <p>21. python-pptx</p>
+</h5>
+
+```
+pip install python-pptx
+```
+
+<h5>
+    <p>22. openpyxl</p>
+</h5>
+
+```
+pip install openpyxl
 ```
 
 <!-- Donation -->
