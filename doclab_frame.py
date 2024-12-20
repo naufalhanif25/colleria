@@ -50,6 +50,9 @@ LAST_PRESSED = None
 # Variable to control loading animation state
 ANIM = False
 
+# Variable to set completed conversions
+DONE = False
+
 # Function to open the DocLab frame
 def doclab_tool(root, frame):
     """
@@ -65,12 +68,13 @@ def doclab_tool(root, frame):
     - frame: The current tool_frame to be replaced with the doclab tool interface
     """
 
-    global LAST_PRESSED, FILE_EXT, ANIM
+    global LAST_PRESSED, FILE_EXT, ANIM, DONE
 
     # Resets variable values
     LAST_PRESSED = None
     FILE_EXT = None
     ANIM = False
+    DONE = False
 
     # Clean specific files using the cleaner module
     cleaner.clean_file()
@@ -160,9 +164,31 @@ def doclab_tool(root, frame):
 
     frame.grid_rowconfigure(5, weight = 1)
 
+    # Create a frame for the log components
+    log_frame = ctk.CTkFrame(frame, fg_color = main.FRAME_COLOR)
+    log_frame.grid(row = 5, column = 0, padx = 160, pady = (0, 24), sticky = "nsew")
+    log_frame.grid_columnconfigure(0, weight = 1)
+    log_frame.grid_rowconfigure(1, weight = 1)
+
+    # Create a frame for the message log frame and direct frame
+    log_header_frame = ctk.CTkFrame(log_frame, fg_color = main.FRAME_COLOR)
+    log_header_frame.grid(row = 0, column = 0, padx = 0, pady = (0, 12), sticky = "nsew")
+    log_header_frame.grid_columnconfigure(0, weight = 1)
+    log_header_frame.grid_columnconfigure(0, weight = 1)
+    log_header_frame.grid_rowconfigure(0, weight = 1)
+
+    # Create a frame for the message log label
+    message_log_frame = ctk.CTkFrame(log_header_frame, fg_color = main.FRAME_COLOR)
+    message_log_frame.grid(row = 0, column = 0, padx = 0, pady = 0, sticky = "nsew")
+    message_log_frame.grid_rowconfigure(0, weight = 1)
+
+    # Create message log label
+    message_log_label = ctk.CTkLabel(message_log_frame, text = "Message Log", font = (main.FONT, 14, "normal"), text_color = main.FADED_LABEL_COLOR) 
+    message_log_label.grid(row = 0, column = 0, padx = 0, pady = (8, 0), sticky = "nsew") 
+
     # Create a frame for the loading label
-    loading_frame = ctk.CTkFrame(frame, fg_color = main.FRAME_COLOR, border_width = 2, border_color = main.BORDER_COLOR, corner_radius = 8)
-    loading_frame.grid(row = 5, column = 0, padx = 160, pady = (0, 24), sticky = "nsew")
+    loading_frame = ctk.CTkFrame(log_frame, fg_color = main.BASE_COLOR, border_width = 2, border_color = main.BORDER_COLOR, corner_radius = 8)
+    loading_frame.grid(row = 1, column = 0, padx = 0, pady = 0, sticky = "nsew")
     loading_frame.grid_columnconfigure(0, weight = 1)
     loading_frame.grid_rowconfigure(0, weight = 1)
 
@@ -255,7 +281,7 @@ def doclab_tool(root, frame):
 
     # Function to convert file into a specific format
     def convert():
-        global FILE_EXT
+        global FILE_EXT, DONE
 
         # Read the document path from the log file
         with open("bin/log/path_log.bin", "rb") as file:
@@ -274,7 +300,7 @@ def doclab_tool(root, frame):
         output_path = output_entry_var.get()
 
         if path == "" or extension == "" or (output_path == "" or output_path == "Browse path"):
-            popup.open_popup("Please drop a file and choose an extension and\nbrowse to the path for the output file", True)
+            popup.open_popup("Please drop a file or choose an extension or\nbrowse to the path for the output file", True)
         else:
             loading_label.grid(row = 0, column = 0, padx = 12, pady = 24, sticky = "nsew") 
 
@@ -283,6 +309,16 @@ def doclab_tool(root, frame):
 
             # Define a function to run doclab and handle stopping the animation
             def run():
+                global DONE
+
+                # Function to truncate a string to a certain length and insert a newline
+                def truncate(text, length = 64):
+                    if len(text) <= length:
+                        return text
+
+                    # Truncate the string at the specified length and add a newline character
+                    return text[:length] + '\n' + text[length:]
+
                 def reset_animation():
                     # Hide the loading animation label
                     loading_label.grid_forget()
@@ -299,10 +335,16 @@ def doclab_tool(root, frame):
 
                     # Stop the loading animation
                     stop_animation()
+
+                    # Truncate the input name
+                    input_name = truncate(input_name)
                     
                     # Reset the animation
-                    loading_label.configure(font = (main.FONT, 12, "bold"), text = f"The {input_name}{FILE_EXT}\nhas been saved to the destination")
+                    loading_label.configure(font = (main.FONT, 14, "bold"), text = f"The {input_name}{FILE_EXT}\nhas been saved to the destination")
                     root.after(2000, reset_animation)
+
+                    # File conversion has been completed
+                    DONE = True
                 else:
                     popup.open_popup("Destination extensions are not supported", True)
 
@@ -347,9 +389,31 @@ def doclab_tool(root, frame):
         # Call the function to check the internet connection
         check_internet_connection()
 
+    # Function to open the output directory
+    def open_directory(): 
+        # Get the output path
+        path = output_entry_var.get()
+
+        if path != "" and DONE == True:
+            # Open the specified directory using the default file manager 
+            os.startfile(path)
+        else:
+            # If the path is empty
+            popup.open_popup("No files have been converted yet", True)
+
+    # Create a frame for the direct button
+    direct_frame = ctk.CTkFrame(log_header_frame, fg_color = main.FRAME_COLOR)
+    direct_frame.grid(row = 0, column = 1, padx = 0, pady = 0, sticky = "e")
+    direct_frame.grid_rowconfigure(0, weight = 1)
+
+    # Button to direct the user to the output directory
+    direct_button = ctk.CTkButton(direct_frame, text = "Direct", font = (main.FONT, 12, "bold"), fg_color = main.FG_COLOR, corner_radius = 16,
+                                  hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, width = 86, command = open_directory)
+    direct_button.grid(row = 0, column = 0, padx = 0, pady = (8, 0), sticky = "nsew")
+
     # Create a frame for the output path entry and button
     output_path_frame = ctk.CTkFrame(frame, height = 32, fg_color = main.FRAME_COLOR)
-    output_path_frame.grid(row = 4, column = 0, padx = 160, pady = (0, 18), sticky = "nsew")
+    output_path_frame.grid(row = 4, column = 0, padx = 160, pady = (0, 8), sticky = "nsew")
     output_path_frame.grid_columnconfigure(0, weight = 1)
     output_path_frame.grid_rowconfigure(0, weight = 1)
 
@@ -368,5 +432,3 @@ def doclab_tool(root, frame):
     convert_button = ctk.CTkButton(output_path_frame, text = "Convert", font = (main.FONT, 12, "bold"), fg_color = main.FG_COLOR, corner_radius = 16,
                                     hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, width = 86, command = run_doclab)
     convert_button.grid(row = 0, column = 2, padx = (8, 0), pady = 12, sticky = "nsew")
-
-    cleaner.clean_file()

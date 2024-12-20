@@ -68,7 +68,7 @@ def colleriaai_tool(root, frame):
     prompt_frame.grid_columnconfigure(0, weight = 1)
     prompt_frame.grid_rowconfigure(0, weight = 1)
 
-    # Create a text variable for the search entry and set a placeholder text
+    # Create a text variable for the prompt entry and set a placeholder text
     prompt_var = tk.StringVar() 
     prompt_var.set("Ask Colleria.AI")
 
@@ -216,7 +216,7 @@ def colleriaai_tool(root, frame):
 
             popup.open_popup("Copied to clipboard", True)
 
-    # Entry to display the response
+    # Entry to display the prompt
     prompt_entry = ctk.CTkEntry(prompt_frame, textvariable = prompt_var, height = 32, fg_color = main.BASE_COLOR, font = (main.FONT, 12, "normal"), 
                                 corner_radius = 16, text_color = main.FADED_LABEL_COLOR, border_color = main.FADED_TEXT_COLOR, border_width = 2)
     prompt_entry.grid(row = 0, column = 0, padx = 0, pady = 12, sticky = "nsew")

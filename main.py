@@ -6,6 +6,7 @@ import doclab_frame as dlf
 import transcriberia_frame as tf
 import researcheria_frame as rf
 import colleriaai_frame as caf
+import yt_courier_frame as ytcf
 import aboutus_popup
 import os
 import cleaner
@@ -144,12 +145,13 @@ if __name__ == "__main__":
         LAST_PRESSED = button
 
     # Create the toollist buttons and commands
-    buttons = ["Notepedia", "DocLab", "Transcriberia", "Researcheria", "Colleria.AI"]
+    buttons = ["Notepedia", "DocLab", "Transcriberia", "Researcheria", "Colleria.AI", "YT Courier"]
     commands = [lambda: npf.notepedia_tool(root, tool_frame),
                 lambda: dlf.doclab_tool(root, tool_frame),
                 lambda: tf.transcriber_tool(root, tool_frame), 
                 lambda: rf.researcheria_tool(root, tool_frame),
-                lambda: caf.colleriaai_tool(root, tool_frame)]
+                lambda: caf.colleriaai_tool(root, tool_frame),
+                lambda: ytcf.yt_courier_tool(root, tool_frame)]
 
     for row, (button_text, command) in enumerate(zip(buttons, commands)):
         button = ctk.CTkButton(toollist_button_frame, text = button_text, font = (FONT, 12, "bold"), fg_color = FG_COLOR, 

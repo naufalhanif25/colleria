@@ -205,7 +205,7 @@ def transcriber_tool(root, frame):
 
         # Check if the path or language is empty
         if path == "" or lang == "":
-            popup.open_popup("Please drop a video and choose a language", True)
+            popup.open_popup("Please drop a video or choose a language", True)
 
             loading_label.grid_forget()
             result_box.grid(row = 0, column = 0, padx = 12, pady = 12, sticky = "nsew")

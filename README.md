@@ -46,6 +46,7 @@
 | **Transcriberia** | Transcriber is a feature that can transcribe a video of any length into text in a short time. |
 | **Researchia** | Researcheria is a feature that is very suitable for students who want to search for journals or literature quickly with clear and reliable sources. |
 | **Colleria.AI** | Colleria.AI is a free and open source artificial intelligence that can be used to ask any question. Colleria.AI uses the Llama 3.3 70B Versatile model. |
+| **YT Courier** | YT Courier is a feature that can be used to download videos from YouTube. |
 
 <!-- List of libraries and installation commands -->
 <h3>
@@ -225,6 +226,22 @@ pip install python-pptx
 
 ```
 pip install openpyxl
+```
+
+<h5>
+    <p>23. pytubefix</p>
+</h5>
+
+```
+pip install pytubefix
+```
+
+<h5>
+    <p>24. speedtest-cli</p>
+</h5>
+
+```
+pip install speedtest-cli
 ```
 
 <!-- Donation -->
