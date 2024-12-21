@@ -286,23 +286,31 @@ def researcheria_tool(root, frame):
       query = entry.get()
 
       SEARCH = query
-      RESULTS = asyncio.run(researcheria.researcheria(query))
-      CUR_PAGE = 1
 
-      if len(RESULTS) == 0:
+      try:
+         # Try to run the researcheria function and get results
+         RESULTS = asyncio.run(researcheria.researcheria(query))
+         CUR_PAGE = 1
+
+         print(RESULTS)
+
+         if len(RESULTS) == 0:
+            stop_animation()
+            no_results_found(loading_label)
+         else:
+            stop_animation()
+            create_buttons(CUR_PAGE) 
+
+            if len(RESULTS) > 10:
+               create_pagination()
+
+            loading_label.grid_forget()
+
+            button_frame.grid(row = 3, column = 0, padx = 0, pady = 0, sticky = "nsew")
+            page_frame.grid(row = 4, column = 0, padx = 160, pady = 0, sticky = "nsew")
+      except Exception as e:
+         # Stop animation if an exception occurs
          stop_animation()
-         no_results_found(loading_label)
-      else:
-         stop_animation()
-         create_buttons(CUR_PAGE) 
-
-         if len(RESULTS) > 10:
-            create_pagination()
-
-         loading_label.grid_forget()
-
-         button_frame.grid(row = 3, column = 0, padx = 0, pady = 0, sticky = "nsew")
-         page_frame.grid(row = 4, column = 0, padx = 160, pady = 0, sticky = "nsew")
 
    # Function to start the search process
    def start_search(event = None):
@@ -334,9 +342,12 @@ def researcheria_tool(root, frame):
                # If the connection fails (status code is not 200), show a popup message
                popup.open_popup("Unable to perform request.\nPlease check your internet connection", True)
 
+               return
          except requests.ConnectionError:
             # If a connection error occurs, show a popup message
             popup.open_popup("Unable to perform request.\nPlease check your internet connection", True)
+
+            return
 
       # Call the function to check the internet connection
       check_internet_connection()

@@ -54,13 +54,36 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
 
     # Function to calculate internet speed
     def speed_test():
-        speed = speedtest.Speedtest()  # Create a Speedtest object
+        try:
+            speed = speedtest.Speedtest()  # Create a Speedtest object
 
-        speed.download() # Perform a download speed test
-        speed.upload()  # Perform an upload speed test
+            speed.download() # Perform a download speed test
+            speed.upload()  # Perform an upload speed test
 
-        # Return the results of the speed test as a dictionary
-        return speed.results.dict()
+            # Return the results of the speed test as a dictionary
+            return speed.results.dict()
+        except speedtest.ConfigRetrievalError as e:
+            # If an error occurs, log the error
+            with open(error_log, "wb") as file:
+                text = f"An error occurred: {e}"
+                file.write(text.encode("utf-8"))
+                file.close()
+
+            # Displays the log in the log box (textbox)
+            log_message(f"[ERROR] Failed to retrieve internet speed test configuration")
+
+            return None
+        except Exception as e:
+            # If an error occurs, log the error
+            with open(error_log, "wb") as file:
+                text = f"An error occurred: {e}"
+                file.write(text.encode("utf-8"))
+                file.close()
+
+            # Displays the log in the log box (textbox)
+            log_message(f"[ERROR] An error occurred during the speed test")
+
+            return None
 
     # Function to get the title of the YouTube video from its URL
     def get_title(url):

@@ -308,7 +308,7 @@ def doclab_tool(root, frame):
             input_name, input_ext = os.path.splitext(temp_path)
 
             # Define a function to run doclab and handle stopping the animation
-            def run():
+            def run(input_name, input_ext):
                 global DONE
 
                 # Function to truncate a string to a certain length and insert a newline
@@ -352,7 +352,7 @@ def doclab_tool(root, frame):
                     loading_label.grid_forget()
 
             # Start the doclab process in a separate thread
-            thread = threading.Thread(target = run)
+            thread = threading.Thread(target = run, args = (input_name, input_ext,))
             
             thread.start()
 

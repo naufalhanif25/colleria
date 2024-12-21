@@ -37,8 +37,10 @@ async def get_sinta_ranking(session, journal):
 
                     return ranking[:2]  # Return the first 2 characters of the ranking
 
-    except aiohttp.ClientError:
+    except aiohttp.ClientError as e:
         popup.open_popup("Unable to perform request.\nPlease check your internet connection", True) # Show error popup
+
+        raise SystemExit(f"Program terminated due to exception: {e}")
 
     return False  # Return False if ranking not found or request failed
 
@@ -84,8 +86,10 @@ async def search_journal(query, rows = 100):
                 if response.status == 200:  # Check if request was successful
                     return await response.json()  # Return JSON response
 
-    except aiohttp.ClientError:
+    except aiohttp.ClientError as e:
         popup.open_popup("Unable to perform request.\nPlease check your internet connection", True)  # Show error popup
+
+        raise SystemExit(f"Program terminated due to exception: {e}")
 
     return None  # Return None if request failed
 
@@ -165,4 +169,3 @@ async def researcheria(query):
             file.write(text.encode("utf-8"))
 
         return []  # Return an empty list if no results are found
-
