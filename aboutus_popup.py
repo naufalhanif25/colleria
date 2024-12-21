@@ -26,7 +26,7 @@ def open_popup():
 
     # Create and place the labels in the popup window
     text = ["About Colleria", "Colleria is an open source software that aims to be a tool\nthat can make it easier for students to complete their\nassignments.",
-            "Mission", "Our biggest mission is to make any school or college\nassignment easy to complete in the shortest possible time.",
+            "Our Mission", "Our biggest mission is to make any school or college\nassignment easy to complete in the shortest possible time.",
             "Contact", "Email: minku.developer23@gmail.com"]
 
     temp_width = []; temp_height = 0

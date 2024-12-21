@@ -7,8 +7,9 @@ import transcriberia_frame as tf
 import researcheria_frame as rf
 import colleriaai_frame as caf
 import yt_courier_frame as ytcf
-import aboutus_popup
+from PIL import Image
 import os
+import aboutus_popup
 import cleaner
 import webbrowser
 
@@ -71,7 +72,7 @@ if __name__ == "__main__":
     root = TkinterDnD.Tk()
     root.configure(bg = BASE_COLOR)
     root.iconbitmap("public/colleria.ico")
-    root.title("Colleria")
+    root.title("Colleria v1.0 Beta")
     # root.resizable(False, False)
 
     # Set the dimensions and position of the application window
@@ -122,6 +123,31 @@ if __name__ == "__main__":
     tool_frame = ctk.CTkFrame(root, width = 760, height = 640, fg_color = FRAME_COLOR)
     tool_frame.grid(row = 0, column = 1, padx = (8, 16), pady = 16, sticky = "nsew")
     tool_frame.grid_columnconfigure(0, weight = 1)
+
+    # Add a welcome label 
+    welcome_label = ctk.CTkLabel(tool_frame, text = "Welcome to Colleria", font = (FONT, 36, "bold"), text_color = FADED_TEXT_COLOR)
+    welcome_label.grid(row = 0, column = 0, padx = 24, pady = (86, 0), sticky = "nsew")
+
+    # Load the image using PIL and convert it to CTkImage
+    image = Image.open("public/colleria.png")
+    image = ctk.CTkImage(light_image = image, size = (160, 160))
+    
+    # Add an icon label with the loaded image
+    icon = ctk.CTkLabel(tool_frame, text = "", image = image)
+    icon.grid(row = 1, column = 0, padx = 24, pady = (32, 0), sticky = "nsew")
+
+    # Define the message to be displayed in the message label
+    message = ("Colleria provides various tools that will support\n"
+               "student productivity to complete their assignments\n"
+               "effectively and efficiently")
+
+    # Add a message label 
+    message_label = ctk.CTkLabel(tool_frame, text = message, font = (FONT, 16, "normal"), text_color = TEXT_COLOR)
+    message_label.grid(row = 2, column = 0, padx = 24, pady = (48, 0), sticky = "nsew")
+
+    # Add a support label
+    support_label = ctk.CTkLabel(tool_frame, text = "Don't forget to support us by donating :)", font = (FONT, 14, "bold"), text_color = TEXT_COLOR)
+    support_label.grid(row = 3, column = 0, padx = 24, pady = (12, 0), sticky = "nsew")
 
     # Label for the tool list
     menu_label = ctk.CTkLabel(toollist_button_frame, text = "Tool List", font = (FONT, 16, "bold"), anchor = "w",

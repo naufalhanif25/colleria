@@ -35,5 +35,9 @@ def colleriaai(prompt):
         ]
     )
 
+    # Removed markdown punctuation in response
+    response = response.choices[0].message.content
+    response = response.replace("*", "").replace("#", "").replace("`", "")
+
     # Return the content of the first response choice
-    return response.choices[0].message.content
+    return response
