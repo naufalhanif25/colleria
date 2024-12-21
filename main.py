@@ -72,7 +72,7 @@ if __name__ == "__main__":
     root = TkinterDnD.Tk()
     root.configure(bg = BASE_COLOR)
     root.iconbitmap("public/colleria.ico")
-    root.title("Colleria v1.0 Beta")
+    root.title("Colleria v1.0.0-alpha")
     # root.resizable(False, False)
 
     # Set the dimensions and position of the application window

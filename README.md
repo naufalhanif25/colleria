@@ -1,6 +1,7 @@
 <!-- Title -->
 <div align="center">
     <h1>Colleria</h1>
+    <h5>Version 1.0 Beta</h5>
 </div>
 
 <!-- Badges -->
