@@ -1,0 +1,26 @@
+@echo off
+pip install moviepy
+pip install numpy
+pip install pydub
+pip install scipy
+pip install SpeechRecognition
+pip install customtkinter
+pip install tkinterdnd2
+pip install groq
+pip install requests
+pip install aiohttp
+pip install beautifulsoup4
+pip install cachetools
+pip install pandas
+pip install docx2pdf
+pip install pdfplumber
+pip install PyPDF2
+pip install python-docx
+pip install Pillow
+pip install PyMuPDF
+pip install img2pdf
+pip install pptxtopdf
+pip install python-pptx
+pip install openpyxl
+pip install pytubefix
+pip install speedtest-cli

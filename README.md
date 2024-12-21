@@ -1,7 +1,6 @@
 <!-- Title -->
 <div align="center">
-    <h1>Colleria</h1>
-    <h5>Version 1.0 Beta</h5>
+    <h1>Colleria v1.0.0-alpha</h1>
 </div>
 
 <!-- Badges -->
@@ -243,6 +242,14 @@ pip install pytubefix
 
 ```
 pip install speedtest-cli
+```
+
+<h5>
+    <p>25. pandas</p>
+</h5>
+
+```
+pip install pandas
 ```
 
 <!-- Donation -->
