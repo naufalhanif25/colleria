@@ -271,7 +271,7 @@ pip install soundfile
 
 <!-- Setuo -->
 <h3>
-    <b>How to set up Colleria? 🔧</b>
+    <b>How to set up Colleria? 🛠️</b>
 </h3>
 
 1. Download and install **Python 3** at [Python](https://www.python.org)
@@ -282,7 +282,7 @@ pip install soundfile
 
 <!-- Donation -->
 <h2>
-    📖 Support us
+    ❤️ Support us
     <h5>
         <a href="https://saweria.co/minkudeveloper" target="_blank" style="justify: center;"> 
             <button>
