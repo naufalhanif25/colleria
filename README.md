@@ -238,11 +238,11 @@ pip install pytubefix
 ```
 
 <h5>
-    <p>24. speedtest-cli</p>
+    <p>24. pyspeedtest</p>
 </h5>
 
 ```
-pip install speedtest-cli
+pip install pyspeedtest
 ```
 
 <h5>

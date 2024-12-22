@@ -4,7 +4,7 @@ from pytubefix.cli import on_progress
 from moviepy.editor import VideoFileClip, AudioFileClip
 from bs4 import BeautifulSoup
 import customtkinter as ctk
-import speedtest
+import pyspeedtest
 import os
 
 # Function to run yt courier algorithm
@@ -53,14 +53,12 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
     # Function to calculate internet speed
     def speed_test(error_log = "bin/log/error_log.bin"):
         try:
-            speed = speedtest.Speedtest()  # Create a Speedtest object
+            test = pyspeedtest.SpeedTest("www.google.com")  # Create a pyspeedtest object
+            speed = test.download()  # Perform a download speed test
 
-            speed.get_closest_servers()  # Get the nearest server
-            speed.download()  # Perform a download speed test
-
-            # Return the results of the speed test as a dictionary
-            return speed.results.dict()["download"]
-        except speedtest.ConfigRetrievalError as e:
+            # Return the results of the speed test
+            return speed
+        except pyspeedtest.ConnectionError as e:
             # If an error occurs, log the error
             with open(error_log, "wb") as file:
                 text = f"An error occurred: {e}"
