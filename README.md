@@ -23,7 +23,7 @@
         </h5>
     </h3>
     <h3>
-        <b>Our Mission 📜</b>
+        <b>Our mission 📜</b>
         <h5>
             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sometimes a lot of school or college assignments make us overwhelmed to complete them, and even have the potential to cause prolonged stress, that's why Colleria was created. Our biggest mission is to make any school or college assignment easy to complete in the shortest possible time.</p>
         </h5>
@@ -282,7 +282,7 @@ pip install soundfile
 
 <!-- Donation -->
 <h2>
-    ❤️ Support us
+    ❤️ Support Us
     <h5>
         <a href="https://saweria.co/minkudeveloper" target="_blank" style="justify: center;"> 
             <button>
