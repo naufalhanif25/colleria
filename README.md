@@ -280,6 +280,9 @@ pip install soundfile
 4. Run `set-up.bat` to install the required libraries.
 5. Run `run.bat` to run **Colleria**
 
+**Alternative:**
+Download Colleria via [Google Drive](https://drive.google.com/file/d/1uqm4WmsDMZ5jR03a-iDnFpyGpGokAxdW/view?usp=drive_link)
+
 <!-- Donation -->
 <h2>
     ❤️ Support Us
