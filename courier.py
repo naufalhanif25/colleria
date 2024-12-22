@@ -67,7 +67,7 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
                 file.close()
 
             # Displays the log in the log box (textbox)
-            log_message(f"[ERROR] Failed to retrieve internet speed test configuration")
+            log_message(f"[ERROR] A connection error occurred during the speed test")
 
             return 0.0
         except Exception as e:
