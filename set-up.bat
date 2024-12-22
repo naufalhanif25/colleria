@@ -23,6 +23,6 @@ pip install pptxtopdf
 pip install python-pptx
 pip install openpyxl
 pip install pytubefix
-pip install speedtest-cli
+pip install pyspeedtest
 pip install sounddevice
 pip install soundfile
