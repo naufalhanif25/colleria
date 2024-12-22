@@ -13,6 +13,7 @@ import os
 import aboutus_popup
 import cleaner
 import webbrowser
+import getpath
 
 # Language options available for transcription
 LANG = {"Afrikaans" : "af-ZA",
@@ -55,8 +56,8 @@ SCROLLBAR_HOVER_COLOR = "#ced6e0"
 # Variable to keep track of the last pressed button
 LAST_PRESSED = None 
 
-ctk.FontManager.load_font("public/font/Manrope-Regular.ttf")
-ctk.FontManager.load_font("public/font/Manrope-Bold.ttf")
+ctk.FontManager.load_font(getpath.base("public/font/Manrope-Regular.ttf"))
+ctk.FontManager.load_font(getpath.base("public/font/Manrope-Bold.ttf"))
 
 FONT = "Manrope"
 
@@ -72,7 +73,7 @@ if __name__ == "__main__":
     # Initialize the main application window with drag-and-drop functionality
     root = TkinterDnD.Tk()
     root.configure(bg = BASE_COLOR)
-    root.iconbitmap("public/colleria.ico")
+    root.iconbitmap(getpath.base("public/colleria.ico"))
     root.title("Colleria v1.0.0-alpha")
     # root.resizable(False, False)
 
@@ -130,7 +131,7 @@ if __name__ == "__main__":
     welcome_label.grid(row = 0, column = 0, padx = 24, pady = (86, 0), sticky = "nsew")
 
     # Load the image using PIL and convert it to CTkImage
-    image = Image.open("public/colleria.png")
+    image = Image.open(getpath.base("public/colleria.png"))
     image = ctk.CTkImage(light_image = image, size = (160, 160))
     
     # Add an icon label with the loaded image

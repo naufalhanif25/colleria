@@ -2,6 +2,7 @@
 import tkinter as tk
 import player
 import main
+import getpath
 
 """
 This code contains the function 
@@ -27,7 +28,7 @@ def open_popup(message, sleep = False):
     popup = tk.Tk()
     popup.withdraw()  # Hide the popup window until it's fully configured
     popup.configure(bg = main.BASE_COLOR)
-    popup.iconbitmap("public/message_log.ico")
+    popup.iconbitmap(getpath.base("public/message_log.ico"))
     popup.title("Message Log")
 
     # Create and place the message label in the popup window
@@ -71,7 +72,7 @@ def open_popup(message, sleep = False):
         popup.after(2000, popup.destroy)
 
     # Plays log sound effects
-    player.playsound("public/sfx/log_sfx.wav")
+    player.playsound(getpath.base("public/sfx/log_sfx.wav"))
 
     # Start the main event loop to display the popup window
     popup.mainloop()

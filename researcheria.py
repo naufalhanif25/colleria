@@ -4,6 +4,7 @@ import asyncio
 from bs4 import BeautifulSoup
 import popup
 from cachetools import cached, TTLCache
+import getpath
 
 # Cache initialization (TTL 10 minutes)
 cache = TTLCache(maxsize = 100, ttl = 600)
@@ -78,7 +79,7 @@ async def search_journal(query, rows = 100):
 
     url = "https://api.crossref.org/works"
     params = {"query" : query,
-            "rows" : rows}
+              "rows" : rows}
 
     try:
         async with aiohttp.ClientSession() as session:  # Send HTTP GET request
@@ -163,7 +164,7 @@ async def researcheria(query):
             return await asyncio.gather(*tasks)
     else:
         # If no results found or there was an error with the request, log the error
-        with open("bin/log/error_log.bin", "wb") as file:
+        with open(getpath.base("bin/log/error_log.bin"), "wb") as file:
             text = "No results found or there was an error with the request"
 
             file.write(text.encode("utf-8"))

@@ -1,5 +1,6 @@
 # Importing necessary libraries
 from groq import Groq
+import getpath
 
 # Load model
 MODEL = "llama-3.3-70b-versatile"
@@ -15,7 +16,7 @@ def colleriaai(prompt):
 
     # Open the file in read-binary mode
     # Note that it should be "rb" for reading, not "wb" for writing
-    with open("model/key.bin", "rb") as file:
+    with open(getpath.base("model/key.bin"), "rb") as file:
         api_key = file.read()  # Read the API key from the file
         api_key = api_key.decode("utf-8")
 

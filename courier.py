@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 import customtkinter as ctk
 import pyspeedtest
 import os
+import getpath
 
 # Function to run yt courier algorithm
 def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality = "360p"):
@@ -51,7 +52,7 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
         return video_size, audio_size
 
     # Function to calculate internet speed
-    def speed_test(error_log = "bin/log/error_log.bin"):
+    def speed_test(error_log = getpath.base("bin/log/error_log.bin")):
         try:
             test = pyspeedtest.SpeedTest("www.google.com")  # Create a pyspeedtest object
             speed = test.download()  # Perform a download speed test
@@ -84,7 +85,7 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
             return 0.0
 
     # Function to get the title of the YouTube video from its URL
-    def get_title(url, error_log = "bin/log/error_log.bin"):
+    def get_title(url, error_log = getpath.base("bin/log/error_log.bin")):
         try:
             response = requests.get(url)
             soup = BeautifulSoup(response.text, "html.parser")
@@ -137,13 +138,13 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
     log_message("[TASK 1] Initializing...")
 
     # Temp directory
-    path = "temp"
+    path = getpath.base("temp")
 
     # Get internet speed
     internet_speed = speed_test()
 
     # Error log path
-    error_log = "bin/log/error_log.bin"
+    error_log = getpath.base("bin/log/error_log.bin")
 
     # Get the current directory
     cur_path = os.path.abspath(__file__)

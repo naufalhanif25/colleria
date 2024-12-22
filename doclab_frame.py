@@ -10,6 +10,7 @@ import threading
 import requests
 import doclab
 import itertools
+import getpath
 
 # List of supported file extensions
 IMG_EXT = [".png", ".jpg", ".jpeg"]
@@ -197,6 +198,10 @@ def doclab_tool(root, frame):
     loading_label.grid(row = 0, column = 0, padx = 12, pady = 24, sticky = "nsew") 
     loading_label.grid_forget()  # Hide the label initially
 
+    # Get the absolute path of the file
+    ext_path = getpath.base("bin/log/ext_log.bin")
+    path_log = getpath.base("bin/log/path_log.bin")
+
     # Function to animate the loading label
     def animate_loading(label, text, delay = 400): 
         def update_text(): 
@@ -230,7 +235,7 @@ def doclab_tool(root, frame):
     def ext(event, button):
         button_name = button.cget("text")
 
-        with open("bin/log/ext_log.bin", "wb") as file:
+        with open(ext_path, "wb") as file:
             if button_name in sorted(list(set(DICT_VALUES))):
                 file.write(button_name.encode("utf-8"))
 
@@ -284,14 +289,14 @@ def doclab_tool(root, frame):
         global FILE_EXT, DONE
 
         # Read the document path from the log file
-        with open("bin/log/path_log.bin", "rb") as file:
+        with open(path_log, "rb") as file:
             path = file.read()
             path = path.decode("utf-8")
 
             file.close()
 
         # Read the extension path from the log file
-        with open("bin/log/ext_log.bin", "rb") as file:
+        with open(ext_path, "rb") as file:
             FILE_EXT = file.read()
             FILE_EXT = FILE_EXT.decode("utf-8")
 

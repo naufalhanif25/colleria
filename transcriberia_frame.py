@@ -9,6 +9,7 @@ import popup
 import threading
 import cleaner
 import requests
+import getpath
 
 # List of supported video file extensions
 VID_EXT = [".mp4", ".avi", ".mov"]
@@ -56,6 +57,10 @@ def transcriber_tool(root, frame):
     entry_var = ctk.StringVar()
     entry_var.set("Drop Video Here")
 
+    # Get the absolute path of the file
+    path_log = getpath.base("bin/log/path_log.bin")
+    lang_path = getpath.base("bin/log/lang_log.bin")
+
     # Function to handle the drop event for the entry widget
     def on_drop(event): 
         path = event.data.strip("{}")
@@ -66,7 +71,7 @@ def transcriber_tool(root, frame):
             entry_var.set("Extension is not supported")
             entry.after(2000, lambda: entry_var.set("Drop Video Here"))
         else:
-            with open("bin/log/path_log.bin", "wb") as file:
+            with open(path_log, "wb") as file:
                 file.write(path.encode("utf-8"))
                 file.close()
 
@@ -118,7 +123,7 @@ def transcriber_tool(root, frame):
     def lang(event, button):
         button_name = button.cget("text")
 
-        with open("bin/log/lang_log.bin", "wb") as file:
+        with open(lang_path, "wb") as file:
             if button_name in main.LANG:
                 bin_lang = main.LANG[button_name]
 
@@ -190,14 +195,14 @@ def transcriber_tool(root, frame):
         """
 
         # Read the video path from the log file
-        with open("bin/log/path_log.bin", "rb") as file:
+        with open(path_log, "rb") as file:
             path = file.read()
             path = path.decode("utf-8")
 
             file.close()
 
         # Read the language from the log file
-        with open("bin/log/lang_log.bin", "rb") as file:
+        with open(lang_path, "rb") as file:
             lang = file.read()
             lang = lang.decode("utf-8")
 
@@ -219,7 +224,7 @@ def transcriber_tool(root, frame):
             transcriberia.transcriber(path, lang, loading_label, "Transcribing")
             
             # Read the transcription result from the output file
-            with open("bin/out/out.bin", "rb") as file:
+            with open(getpath.base("bin/out/out.bin"), "rb") as file:
                 result = file.read()
                 result = result.decode("utf-8")
 

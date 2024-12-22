@@ -1,5 +1,6 @@
 # Importing necessary libraries
 import os
+import getpath
 
 # Function to cleans specified files
 def clean_file():
@@ -17,6 +18,8 @@ def clean_file():
                         "bin/log/ext_log.bin", "bin/log/q_log.bin"]
     
     for path in transcriber_file:
+        path = getpath.base(path)  # Get the absolute path of the file
+
         # Open the file in write mode to overwrite its content with empty content
         with open(path, "wb") as file:
             pass
@@ -26,5 +29,7 @@ def clean_file():
 
     # Deletes audio and video in temp directory if files exist
     for file_path in ["temp/video.mp4", "temp/audio.mp4"]:
+        file_path = getpath.base(file_path)  # Get the absolute path of the file
+
         if os.path.exists(file_path):
             os.remove(file_path)

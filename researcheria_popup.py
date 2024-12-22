@@ -5,6 +5,7 @@ import webbrowser
 import player
 import main
 import popup as pop
+import getpath
 
 """
 This code contains the function 
@@ -28,7 +29,7 @@ def open_popup(detail):
     popup = tk.Tk()
     popup.withdraw()  # Hide the popup window until it's fully configured
     popup.configure(bg = main.BASE_COLOR)
-    popup.iconbitmap("public/researcheria_popup.ico")
+    popup.iconbitmap(getpath.base("public/researcheria_popup.ico"))
     popup.title("Detail")
 
     labels = ["Title", "DOI", "Pub. Date", "Authors", "Citation", "Ranking", "Source"]
@@ -117,7 +118,7 @@ def open_popup(detail):
     popup.deiconify()
 
     # Plays log sound effects
-    player.playsound("public/sfx/research_sfx.wav")
+    player.playsound(getpath.base("public/sfx/research_sfx.wav"))
 
     # Start the main event loop to display the popup window
     popup.mainloop()

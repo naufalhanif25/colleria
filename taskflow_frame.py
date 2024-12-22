@@ -5,6 +5,7 @@ import threading
 import main
 import popup
 import cleaner
+import getpath
 
 # Global variable to hold the current task line value
 ROW = 0
@@ -56,6 +57,9 @@ def taskflow_tool(root, frame):
    # Create a text variable for the search entry and set a placeholder text
    addtask_var = tk.StringVar()
    addtask_var.set("Add Task")
+
+   # Get the absolute path of the file
+   task_path = getpath.base("bin/log/task_log.bin")
 
    # Function to handle entry click (focus in)
    def on_entry_click(event):
@@ -116,7 +120,7 @@ def taskflow_tool(root, frame):
       row = button.grid_info()["row"]
 
       # Open the task log file in binary read mode
-      with open("bin/log/task_log.bin", "rb") as file:
+      with open(task_path, "rb") as file:
          lines = file.read().decode("utf-8").split("\n")  # Read and decode the file contents into a list of lines
 
       # Remove the line with the specific row
@@ -125,7 +129,7 @@ def taskflow_tool(root, frame):
             lines.pop(index)
 
       # Write the updated lines back to the file
-      with open("bin/log/task_log.bin", "wb") as file:
+      with open(task_path, "wb") as file:
          file.write("\n".join(lines).encode("utf-8"))
 
       # Update the button's appearance to indicate the task is done
@@ -154,7 +158,7 @@ def taskflow_tool(root, frame):
          root.focus_set()
 
          # Append the new task to the task log file
-         with open("bin/log/task_log.bin", "ab") as file:
+         with open(task_path, "ab") as file:
             file.write(f"{ROW}; {text}\n".encode("utf-8"))
 
          # Create a button for the new task
@@ -178,11 +182,11 @@ def taskflow_tool(root, frame):
 
       try:
          # Open the task log file in binary read mode
-         with open("bin/log/task_log.bin", "rb") as file:
+         with open(task_path, "rb") as file:
             lines = file.read().decode("utf-8").split("\n")  # Read and decode the file contents into a list of lines
 
          # Clear the contents of the task log file
-         with open("bin/log/task_log.bin", "wb") as file:
+         with open(task_path, "wb") as file:
             pass
 
          # Add each task to the GUI
@@ -196,7 +200,7 @@ def taskflow_tool(root, frame):
                ROW += 1
       except FileNotFoundError as e:
          # Log an error if the task log file is not found
-         with open("bin/log/error_log.bin", "wb") as file:
+         with open(getpath.base("bin/log/error_log.bin"), "wb") as file:
             text = "Task log file not found. Starting with an empty task list"
 
             file.write(text.encode("utf-8"))

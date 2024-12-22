@@ -8,6 +8,7 @@ import main
 import cleaner
 import popup
 import courier
+import getpath
 
 # List of supported video quality
 QUALITY = ["144p", "240p", "360p", "480p", "720p", "1080p"]
@@ -98,6 +99,8 @@ def yt_courier_tool(root, frame):
 
    frame.grid_rowconfigure(4, weight = 1)
 
+   q_path = getpath.base("bin/log/q_log.bin")  # Get the absolute path of the file
+
    # Function to handle entry click (focus in)
    def on_entry_click(event): 
       if url_var.get() == "Enter the YouTube URL": 
@@ -119,7 +122,7 @@ def yt_courier_tool(root, frame):
       output_path = output_path_entry.get()
 
       # Open the binary log file to read the quality setting
-      with open("bin/log/q_log.bin", "rb") as file:
+      with open(q_path, "rb") as file:
          quality = file.read()  # Read the quality setting from the file
          quality = quality.decode("utf-8")  # Decode the binary data to a UTF-8 string
 
@@ -224,7 +227,7 @@ def yt_courier_tool(root, frame):
    def quality(event, button):
       button_name = button.cget("text")
 
-      with open("bin/log/q_log.bin", "wb") as file:
+      with open(q_path, "wb") as file:
          if button_name in QUALITY:
             file.write(button_name.encode("utf-8"))
 

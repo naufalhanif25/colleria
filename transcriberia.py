@@ -3,10 +3,11 @@ import moviepy.editor as mp
 import speech_recognition as sr
 import audioproc
 import os
+import getpath
 
 # Variable initialization
-RAW = "audio/raw.wav"
-OUT = "audio/out.wav"
+RAW = getpath.base("audio/raw.wav")
+OUT = getpath.base("audio/out.wav")
 
 # Function to calculate an inverse percentage
 def inverse_percentage(value, count, scale):
@@ -80,8 +81,12 @@ def transcriber(video_path, lang, label, label_text):
     listdir = os.listdir(audioproc.DIR)
     sum_file = sum(1 for file in listdir if os.path.isfile(os.path.join(audioproc.DIR, file)))
 
+    # Get the absolute path of the file
+    out_path = getpath.base("bin/out/out.bin")
+    error_path = getpath.base("bin/log/error_log.bin")
+
     # Create or clean the output binary file
-    with open("bin/out/out.bin", "wb") as file:
+    with open(out_path, "wb") as file:
         pass
 
     # Transcribe each audio chunk
@@ -95,7 +100,7 @@ def transcriber(video_path, lang, label, label_text):
             # Recognize speech using Google Web Speech API
             text = recognizer.recognize_google(audio_data, language = lang)
 
-            with open("bin/out/out.bin", "ab") as file:
+            with open(out_path, "ab") as file:
                 text = text + " "
                 bin_text = text.encode("utf-8")
 
@@ -103,13 +108,13 @@ def transcriber(video_path, lang, label, label_text):
                 file.close()
 
         except sr.UnknownValueError:
-            with open("bin/log/error_log.bin", "wb") as file:
+            with open(error_path, "wb") as file:
                 text = "Audio not recognized"
 
                 file.write(text.encode("utf-8"))
                 file.close()
         except sr.RequestError as e:
-            with open("bin/log/error_log.bin", "wb") as file:
+            with open(error_path, "wb") as file:
                 text = f"Requests to the Google Speech Recognition service failed; {e}"
                 
                 file.write(text.encode("utf-8"))

@@ -7,9 +7,10 @@ from scipy.signal import butter, lfilter
 import speech_recognition as sr
 import transcriberia
 import os
+import getpath
 
 # Variable initialization
-DIR = "temp"
+DIR = getpath.base("temp")
 BITRATE = "8k"
 
 """
