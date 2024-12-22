@@ -269,7 +269,7 @@ pip install sounddevice
 pip install soundfile
 ```
 
-<!-- Setuo -->
+<!-- Setup -->
 <h3>
     <b>How to set up Colleria? 🛠️</b>
 </h3>
@@ -277,11 +277,17 @@ pip install soundfile
 1. Download and install **Python 3** at [Python](https://www.python.org)
 2. Add **Python 3** to `PATH`
 3. Download and install **Anaconda** at [Anaconda](https://www.anaconda.com/download)
-4. Run `set-up.bat` to install the required libraries.
-5. Run `run.bat` to run **Colleria**
+4. Download and install **Git** at [Git](https://git-scm.com/downloads)
+5. Clone the repository, `git clone https://github.com/naufalhanif25/colleria.git`
+6. Run `set-up.bat` to install the required libraries.
+7. Run `run.bat` to run **Colleria**
 
 **Alternative:**
-Download Colleria via [Google Drive](https://drive.google.com/file/d/1uqm4WmsDMZ5jR03a-iDnFpyGpGokAxdW/view?usp=drive_link)
+
+1. Download **Colleria** via [Google Drive](https://drive.google.com/file/d/1uqm4WmsDMZ5jR03a-iDnFpyGpGokAxdW/view?usp=drive_link)
+2. Move zip file to another partition (e.g D: or E:, except C:)
+3. Extract the zip file
+4. Run **Colleria v1.0.0-alpha**
 
 <!-- Donation -->
 <h2>
