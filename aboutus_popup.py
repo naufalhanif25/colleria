@@ -1,5 +1,6 @@
 # Importing necessary libraries and modules
 import tkinter as tk
+import player
 import main
 
 """
@@ -79,6 +80,9 @@ def open_popup():
     
     # Show the configured popup window
     popup.deiconify()
+
+    # Plays log sound effects
+    player.playsound("public/sfx/info_sfx.wav")
 
     # Start the main event loop to display the popup window
     popup.mainloop()

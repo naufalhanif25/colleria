@@ -1,9 +1,10 @@
 # Importing necessary libraries and modules
 import customtkinter as ctk
 import tkinter as tk
+import webbrowser
+import player
 import main
 import popup as pop
-import webbrowser
 
 """
 This code contains the function 
@@ -114,6 +115,9 @@ def open_popup(detail):
     
     # Show the configured popup window
     popup.deiconify()
+
+    # Plays log sound effects
+    player.playsound("public/sfx/research_sfx.wav")
 
     # Start the main event loop to display the popup window
     popup.mainloop()

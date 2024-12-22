@@ -7,6 +7,7 @@ import transcriberia_frame as tf
 import researcheria_frame as rf
 import colleriaai_frame as caf
 import yt_courier_frame as ytcf
+import taskflow_frame as tff
 from PIL import Image
 import os
 import aboutus_popup
@@ -171,8 +172,9 @@ if __name__ == "__main__":
         LAST_PRESSED = button
 
     # Create the toollist buttons and commands
-    buttons = ["Notepedia", "DocLab", "Transcriberia", "Researcheria", "Colleria.AI", "YT Courier"]
+    buttons = ["Notepedia", "TaskFlow", "DocLab", "Transcriberia", "Researcheria", "Colleria.AI", "YT Courier"]
     commands = [lambda: npf.notepedia_tool(root, tool_frame),
+                lambda: tff.taskflow_tool(root, tool_frame),
                 lambda: dlf.doclab_tool(root, tool_frame),
                 lambda: tf.transcriber_tool(root, tool_frame), 
                 lambda: rf.researcheria_tool(root, tool_frame),

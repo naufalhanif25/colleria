@@ -1,4 +1,4 @@
-How to install Colleria:
+How to set up Colleria:
 1. Download and install Python 3 at https://www.python.org
 2. Add Python 3 to PATH
 3. Download and install Anaconda at https://www.anaconda.com/download

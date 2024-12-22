@@ -1,5 +1,6 @@
 # Importing necessary libraries and modules
 import tkinter as tk
+import player
 import main
 
 """
@@ -68,6 +69,9 @@ def open_popup(message, sleep = False):
         # If sleep is True, automatically close the popup after 2 seconds
         popup.protocol("WM_DELETE_WINDOW", True)
         popup.after(2000, popup.destroy)
+
+    # Plays log sound effects
+    player.playsound("public/sfx/log_sfx.wav")
 
     # Start the main event loop to display the popup window
     popup.mainloop()

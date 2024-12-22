@@ -5,8 +5,6 @@ from moviepy.editor import VideoFileClip, AudioFileClip
 from bs4 import BeautifulSoup
 import customtkinter as ctk
 import speedtest
-import threading
-import sys
 import os
 
 # Function to run yt courier algorithm
@@ -53,40 +51,42 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
         return video_size, audio_size
 
     # Function to calculate internet speed
-    def speed_test():
+    def speed_test(error_log = "bin/log/error_log.bin"):
         try:
             speed = speedtest.Speedtest()  # Create a Speedtest object
 
-            speed.download() # Perform a download speed test
-            speed.upload()  # Perform an upload speed test
+            speed.get_closest_servers()  # Get the nearest server
+            speed.download()  # Perform a download speed test
 
             # Return the results of the speed test as a dictionary
-            return speed.results.dict()
+            return speed.results.dict()["download"]
         except speedtest.ConfigRetrievalError as e:
             # If an error occurs, log the error
             with open(error_log, "wb") as file:
                 text = f"An error occurred: {e}"
+
                 file.write(text.encode("utf-8"))
                 file.close()
 
             # Displays the log in the log box (textbox)
             log_message(f"[ERROR] Failed to retrieve internet speed test configuration")
 
-            return None
+            return 0.0
         except Exception as e:
             # If an error occurs, log the error
             with open(error_log, "wb") as file:
                 text = f"An error occurred: {e}"
+
                 file.write(text.encode("utf-8"))
                 file.close()
 
             # Displays the log in the log box (textbox)
             log_message(f"[ERROR] An error occurred during the speed test")
 
-            return None
+            return 0.0
 
     # Function to get the title of the YouTube video from its URL
-    def get_title(url):
+    def get_title(url, error_log = "bin/log/error_log.bin"):
         try:
             response = requests.get(url)
             soup = BeautifulSoup(response.text, "html.parser")
@@ -97,6 +97,7 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
             # If an error occurs, log the error
             with open(error_log, "wb") as file:
                 text = f"An error occurred: {e}"
+
                 file.write(text.encode("utf-8"))
                 file.close()
 
@@ -140,6 +141,9 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
     # Temp directory
     path = "temp"
 
+    # Get internet speed
+    internet_speed = speed_test()
+
     # Error log path
     error_log = "bin/log/error_log.bin"
 
@@ -161,11 +165,9 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
     # Get the video size and audio size in bytes
     video_size, audio_size = estimate_file_size(quality, duration)
 
-    speed = speed_test() # Get the internet speed
-
     # Displays the log in the log box (textbox)
     log_message(f"[SUCCESS] Successfully initialized [path: {cur_path}/{path}, youtube: {url}, duration: {(duration / 60):.2f} min]")
-    log_message(f"[TASK 2] Downloading video... [size (estimate): {video_size:.2f} MB, bandwidth: {((speed["download"] / 1_000_000) / 8):.2f} MBps]")
+    log_message(f"[TASK 2] Downloading video... [size (estimate): {video_size:.2f} MB, bandwidth: {((internet_speed / 1_000_000) / 8):.2f} MBps]")
     
     # Get the video stream with the specified quality and file extension
     video_stream = youtube.streams.filter(res = quality, file_extension = "mp4").first()
@@ -186,11 +188,9 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
 
         return  # Stop the function execution
 
-    speed = speed_test() # Get the internet speed
-
     # Displays the log in the log box (textbox)
     log_message(f"[SUCCESS] Successfully downloaded the video [saved to: {cur_path}/{path}/video.mp4]")
-    log_message(f"[TASK 3] Downloading audio... [size (estimate): {audio_size:.2f} MB, bandwidth: {speed["download"] / 1_000_000:.2f} Mbps]")
+    log_message(f"[TASK 3] Downloading audio... [size (estimate): {audio_size:.2f} MB, bandwidth: {internet_speed / 1_000_000:.2f} Mbps]")
 
     # Get the audio stream with the specified file extension
     audio_stream = youtube.streams.filter(only_audio = True, file_extension = "mp4").first()

@@ -292,8 +292,6 @@ def researcheria_tool(root, frame):
          RESULTS = asyncio.run(researcheria.researcheria(query))
          CUR_PAGE = 1
 
-         print(RESULTS)
-
          if len(RESULTS) == 0:
             stop_animation()
             no_results_found(loading_label)

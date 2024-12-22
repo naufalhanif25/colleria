@@ -52,11 +52,11 @@ def colleriaai_tool(root, frame):
     colleriaai_label.grid(row = 0, column = 0, padx = 24, pady = (24, 0), sticky = "nsew")
 
     model_label = ctk.CTkLabel(frame, text = colleriaai.MODEL_NAME, font = (main.FONT, 12, "bold"), text_color = main.TEXT_COLOR)
-    model_label.grid(row = 1, column = 0, padx = 24, pady = (0, 16), sticky = "nsew")
+    model_label.grid(row = 1, column = 0, padx = 24, pady = (0, 8), sticky = "nsew")
 
     # Create a frame for the response textbox
     response_frame = ctk.CTkFrame(frame, fg_color = main.FRAME_COLOR)
-    response_frame.grid(row = 2, column = 0, padx = 160, pady = (8, 2), sticky = "nsew")
+    response_frame.grid(row = 2, column = 0, padx = 120, pady = 0, sticky = "nsew")
     response_frame.grid_columnconfigure(0, weight = 1)
     response_frame.grid_rowconfigure(0, weight = 1)
 
@@ -86,9 +86,11 @@ def colleriaai_tool(root, frame):
 
     # Create a button frame to hold the copy button
     button_frame = ctk.CTkFrame(frame, height = 28, fg_color = main.FRAME_COLOR)
-    button_frame.grid(row = 3, column = 0, padx = 160, pady = (2, 12), sticky = "e")
+    button_frame.grid(row = 3, column = 0, padx = 120, pady = (0, 12), sticky = "e")
     button_frame.grid_forget()
     button_frame.grid_rowconfigure(0, weight = 1)
+
+    frame.grid_columnconfigure(0, weight = 1)
 
     # Function to handle entry click (focus in)
     def on_entry_click(event): 

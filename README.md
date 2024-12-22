@@ -42,6 +42,7 @@
 | Feature | Description |
 | --- | --- |
 | **Notepedia** | Notepedia is a notes feature that can be used to record daily tasks, make small notes, diary, or create a to-do list. |
+| **TaskFlow** | TaskFlow is a feature for creating to-do lists and marking completed tasks as done. |
 | **DocLab** | DocLab is a feature that can be used to convert any document to other formats. |
 | **Transcriberia** | Transcriber is a feature that can transcribe a video of any length into text in a short time. |
 | **Researchia** | Researcheria is a feature that is very suitable for students who want to search for journals or literature quickly with clear and reliable sources. |
@@ -251,6 +252,33 @@ pip install speedtest-cli
 ```
 pip install pandas
 ```
+
+<h5>
+    <p>26. sounddevice</p>
+</h5>
+
+```
+pip install sounddevice
+```
+
+<h5>
+    <p>27. soundfile</p>
+</h5>
+
+```
+pip install soundfile
+```
+
+<!-- Setuo -->
+<h3>
+    <b>How to set up Colleria? 🔧</b>
+</h3>
+
+1. Download and install **Python 3** at [Python](https://www.python.org)
+2. Add **Python 3** to `PATH`
+3. Download and install **Anaconda** at [Anaconda](https://www.anaconda.com/download)
+4. Run `set-up.bat` to install the required libraries.
+5. Run `run.bat` to run **Colleria**
 
 <!-- Donation -->
 <h2>

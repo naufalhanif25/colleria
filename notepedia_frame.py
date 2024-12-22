@@ -61,7 +61,7 @@ def notepedia_tool(root, frame):
 
    # Create a frame as a container
    container = ctk.CTkFrame(frame, fg_color = main.FRAME_COLOR)
-   container.grid(row = 1, column = 0, padx = 12, pady = (0, 12), sticky = "nsew")
+   container.grid(row = 1, column = 0, padx = 16, pady = (0, 16), sticky = "nsew")
    container.grid_columnconfigure(0, weight = 1)
    container.grid_rowconfigure(1, weight = 1)
 
