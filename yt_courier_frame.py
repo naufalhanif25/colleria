@@ -9,6 +9,7 @@ import cleaner
 import popup
 import courier
 import getpath
+import is_widget
 
 # List of supported video quality
 QUALITY = ["144p", "240p", "360p", "480p", "720p", "1080p"]
@@ -132,7 +133,7 @@ def yt_courier_tool(root, frame):
       # Check if the URL, output path, and quality are not empty
       if (url != "" and url != "Enter the YouTube URL") and (output_path != "" and output_path != "Browse path") and quality != "":
          # Run the courier function with the provided URL, output path, and quality
-         courier.run_courier(log_box, url, output_path, quality)
+         courier.run_courier(frame, log_box, url, output_path, quality)
 
          # The video download has been completed
          DONE = True
@@ -308,3 +309,6 @@ def yt_courier_tool(root, frame):
                                 hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, width = 86, 
                                 command = run_yt_courier)
    start_button.grid(row = 0, column = 2, padx = (8, 0), pady = 12, sticky = "nsew")
+
+   # Get the current children of the frame
+   is_widget.WIDGETS = frame.winfo_children()

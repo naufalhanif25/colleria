@@ -6,6 +6,7 @@ import os
 import popup
 import main
 import cleaner
+import is_widget
 
 # Global variables to manage the state of the note
 TITLE = "Untitled"
@@ -240,3 +241,6 @@ def notepedia_tool(root, frame):
    
    # Bind the update_title function to the KeyRelease event
    notepad_box.bind("<KeyRelease>", update_title)
+
+   # Get the current children of the frame
+   is_widget.WIDGETS = frame.winfo_children()

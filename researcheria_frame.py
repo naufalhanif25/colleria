@@ -11,6 +11,7 @@ from tkinter.font import Font
 import researcheria_popup
 import requests
 import asyncio
+import is_widget
 
 # Variable initialization
 RESULTS = None  # To store search results
@@ -143,6 +144,7 @@ def researcheria_tool(root, frame):
       
       ANIM = False
 
+   # Function to display "no results found"
    def no_results_found(label):
       label.configure(text = "No results found")
 
@@ -284,29 +286,50 @@ def researcheria_tool(root, frame):
       start_animation()
 
       query = entry.get()
-
       SEARCH = query
 
       try:
          # Try to run the researcheria function and get results
-         RESULTS = asyncio.run(researcheria.researcheria(query))
+         RESULTS = asyncio.run(researcheria.researcheria(frame, query))
          CUR_PAGE = 1
 
          if len(RESULTS) == 0:
-            stop_animation()
-            no_results_found(loading_label)
+            stop_animation()  # Stop the animation 
+            no_results_found(loading_label)  # Show a message indicating no results were found
+         elif RESULTS is None:
+            start_animation()  # Stop the animation 
+
+            RESULTS = asyncio.run(researcheria.researcheria(frame, query))
+
+            if len(RESULTS) == 0:
+               stop_animation()
+               no_results_found(loading_label)
+            else:
+               stop_animation()  # Stop the animation 
+               create_buttons(CUR_PAGE)  # Create the buttons for the results
+
+               if len(RESULTS) > 10:
+                  create_pagination()  # Create the pagination buttons
+
+               loading_label.grid_forget()  # Hide the loading label
+
+               button_frame.grid(row = 3, column = 0, padx = 0, pady = 0, sticky = "nsew")
+               page_frame.grid(row = 4, column = 0, padx = 160, pady = 0, sticky = "nsew")
          else:
-            stop_animation()
-            create_buttons(CUR_PAGE) 
+            stop_animation()  # Stop the animation 
+            create_buttons(CUR_PAGE) # Create the buttons for the results
 
             if len(RESULTS) > 10:
-               create_pagination()
+               create_pagination()  # Create the pagination buttons
 
-            loading_label.grid_forget()
+            loading_label.grid_forget()  # Hide the loading label
 
             button_frame.grid(row = 3, column = 0, padx = 0, pady = 0, sticky = "nsew")
             page_frame.grid(row = 4, column = 0, padx = 160, pady = 0, sticky = "nsew")
       except Exception as e:
+         search_journal(search_entry)
+         SEARCH = None  # Stop the animation if the connection fails
+
          # Stop animation if an exception occurs
          stop_animation()
 
@@ -320,6 +343,8 @@ def researcheria_tool(root, frame):
          
          :param url: URL used to check the internet connection. Default is http://www.google.com/
          """
+
+         global SEARCH
 
          try:
             response = requests.get(url, timeout = 5)  # Send an HTTP request with a timeout of 5 seconds
@@ -337,11 +362,21 @@ def researcheria_tool(root, frame):
 
                thread.start()
             else:
+               stop_animation()  # Stop the animation if the connection fails
+               root.after(2000, loading_label.grid_forget())  # Hide the loading label after 2 seconds
+
+               SEARCH = None  # Resets the values ​​of SEARCH
+
                # If the connection fails (status code is not 200), show a popup message
                popup.open_popup("Unable to perform request.\nPlease check your internet connection", True)
 
                return
          except requests.ConnectionError:
+            stop_animation()  # Stop the animation if the connection fails
+            root.after(2000, loading_label.grid_forget())  # Hide the loading label after 2 seconds
+
+            SEARCH = None  # Resets the values ​​of SEARCH
+
             # If a connection error occurs, show a popup message
             popup.open_popup("Unable to perform request.\nPlease check your internet connection", True)
 
@@ -358,3 +393,6 @@ def researcheria_tool(root, frame):
 
    # Bind the Return key to start the search
    search_entry.bind("<Return>", start_search)
+
+   # Get the current children of the frame
+   is_widget.WIDGETS = frame.winfo_children()

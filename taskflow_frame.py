@@ -2,10 +2,13 @@
 import customtkinter as ctk
 import tkinter as tk
 import threading
+import datetime
+import pywinstyles
 import main
 import popup
 import cleaner
 import getpath
+import is_widget
 
 # Global variable to hold the current task line value
 ROW = 0
@@ -114,23 +117,34 @@ def taskflow_tool(root, frame):
    # Update scroll region when the frame size changes
    task_buttons_frame.bind("<Configure>", lambda event: task_panel_canvas.configure(scrollregion = task_buttons_frame.bbox("all")))
 
+   # Function to delete empty lines
+   def del_null(lines):
+      lines = [line for line in lines if line != ""]  # Delete empty lines
+
+      return lines  # Returns clean lines
+
    # Function to mark tasks as done
-   def task_done(button):
+   def task_done(button, time_label, task_label):
       # Get the row information from the button
       row = button.grid_info()["row"]
 
       # Open the task log file in binary read mode
       with open(task_path, "rb") as file:
          lines = file.read().decode("utf-8").split("\n")  # Read and decode the file contents into a list of lines
+         lines = del_null(lines)  # Delete empty lines
 
       # Remove the line with the specific row
       for index, line in enumerate(lines):
-         if str(row) in line:
+         if row == int(line.split("; ")[0]):
             lines.pop(index)
 
       # Write the updated lines back to the file
       with open(task_path, "wb") as file:
+         lines.append("")
          file.write("\n".join(lines).encode("utf-8"))
+
+      time_label.destroy()  # Destroy time label
+      task_label.destroy()  # Destroy task label
 
       # Update the button's appearance to indicate the task is done
       button.configure(fg_color = main.FG_COLOR, text = "Task done", text_color = main.BASE_COLOR, hover_color = main.FG_HOVER_COLOR,
@@ -140,12 +154,13 @@ def taskflow_tool(root, frame):
       root.after(2000, button.destroy)
 
    # Function to add a new task
-   def add_task(event = None, text = None):
+   def add_task(event = None, time = None, text = None):
       global ROW
 
       # Get the task text from the entry if not provided
       if text is None:
-         text = addtask_entry.get()
+         text = addtask_entry.get()  # Gets input from the entry
+         time = datetime.datetime.now().strftime(f"%d %b %Y %I:%M:%S %p")  # Gets the current date and time
 
       # Check if the task text is valid
       if text != "" and text != "Add Task":
@@ -159,14 +174,45 @@ def taskflow_tool(root, frame):
 
          # Append the new task to the task log file
          with open(task_path, "ab") as file:
-            file.write(f"{ROW}; {text}\n".encode("utf-8"))
+            file.write(f"{ROW}; {time}; {text}\n".encode("utf-8"))
 
          # Create a button for the new task
-         button = ctk.CTkButton(task_buttons_frame, text = text, font = (main.FONT, 12, "normal"), anchor = "center",
+         button = ctk.CTkButton(task_buttons_frame, text = "", font = (main.FONT, 12, "normal"), anchor = "center",
                                 border_color = main.FADED_TEXT_COLOR, text_color = main.TEXT_COLOR, fg_color = main.FRAME_COLOR,
                                 border_width = 1, hover_color = main.ENTRY_COLOR, border_spacing = 8,
-                                command = lambda: task_done(button))
+                                command = lambda: task_done(button, time_label, task_label))
          button.grid(row = ROW, column = 0, padx = 0, pady = 4, sticky = "nsew")
+         button.grid_columnconfigure(1, weight = 1)
+         button.grid_rowconfigure(0, weight = 1)
+
+         # Define function to change button color on hover enter
+         def on_enter(event, button):
+            button.configure(fg_color = main.ENTRY_COLOR)
+
+         # Define function to change button color back on hover leave
+         def on_leave(event, button):
+            button.configure(fg_color = main.FRAME_COLOR)
+
+         # Create a label for displaying time within the button
+         time_label = ctk.CTkButton(button, text = time, font = (main.FONT, 12, "normal"), text_color = main.TEXT_COLOR, fg_color = main.FRAME_COLOR, 
+                                    hover_color = main.FRAME_COLOR, anchor = "w", command = lambda: task_done(button, time_label, task_label))
+         time_label.grid(row = 0, column = 0, padx = (12, 0), pady = 4, sticky = "w")
+
+         # Bind hover enter and leave events to the time label
+         time_label.bind("<Enter>", lambda event: on_enter(event, button))
+         time_label.bind("<Leave>", lambda event: on_leave(event, button))
+
+         # Create a label for displaying task text within the button
+         task_label = ctk.CTkButton(button, text = text, font = (main.FONT, 12, "bold"), text_color = main.TEXT_COLOR, fg_color = main.FRAME_COLOR, 
+                                    hover_color = main.FRAME_COLOR, anchor = "w", command = lambda: task_done(button, time_label, task_label))
+         task_label.grid(row = 0, column = 1, padx = (0, 12), pady = 4, sticky = "w")
+
+         # Bind hover enter and leave events to the task label
+         task_label.bind("<Enter>", lambda event: on_enter(event, button))
+         task_label.bind("<Leave>", lambda event: on_leave(event, button))
+
+         pywinstyles.set_opacity(time_label, color = main.FRAME_COLOR)  # Set the opacity of the time label
+         pywinstyles.set_opacity(task_label, color = main.FRAME_COLOR)  # Set the opacity of the task label
 
          # Ensure the task buttons frame layout is configured
          task_buttons_frame.grid(row = 0, column = 0, sticky = "nsew")
@@ -184,6 +230,7 @@ def taskflow_tool(root, frame):
          # Open the task log file in binary read mode
          with open(task_path, "rb") as file:
             lines = file.read().decode("utf-8").split("\n")  # Read and decode the file contents into a list of lines
+            lines = del_null(lines)  # Delete empty lines
 
          # Clear the contents of the task log file
          with open(task_path, "wb") as file:
@@ -192,12 +239,16 @@ def taskflow_tool(root, frame):
          # Add each task to the GUI
          for line in lines:
             if line.strip():  # Check if the line is not empty
-               index, tasks = line.split("; ", 1)
+               index, time, task = line.split("; ")
                ROW = int(index)
 
-               add_task(text = tasks.strip())  # Add task to the GUI
+               add_task(time = time, text = task)  # Add task to the GUI
 
                ROW += 1
+
+         # Fixed row value
+         if ROW > 0:
+            ROW -= 1
       except FileNotFoundError as e:
          # Log an error if the task log file is not found
          with open(getpath.base("bin/log/error_log.bin"), "wb") as file:
@@ -217,4 +268,7 @@ def taskflow_tool(root, frame):
 
    # Bind the Return key to start the add task
    addtask_entry.bind("<Return>", lambda event: add_task(addtask_entry.get()))
+
+   # Get the current children of the frame
+   is_widget.WIDGETS = frame.winfo_children()
    

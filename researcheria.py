@@ -5,6 +5,10 @@ from bs4 import BeautifulSoup
 import popup
 from cachetools import cached, TTLCache
 import getpath
+import is_widget
+
+# Declare global variable FRAME
+FRAME = None
 
 # Cache initialization (TTL 10 minutes)
 cache = TTLCache(maxsize = 100, ttl = 600)
@@ -20,6 +24,10 @@ async def get_sinta_ranking(session, journal):
     Returns:
     - The Sinta ranking of the journal if found, otherwise False.
     """
+
+    # Check if frame is destroyed if 
+    if is_widget.is_exist(FRAME): 
+        return
 
     url = f"https://sinta.kemdikbud.go.id/journals/?q={journal}"
     headers = {
@@ -62,6 +70,10 @@ def get_apa_citation(authors, title, journal, year, volume, issue, page):
     - Formatted APA citation string.
     """
 
+    # Check if frame is destroyed if 
+    if is_widget.is_exist(FRAME): 
+        return
+
     authors_str = ", ".join(authors)
     
     return f"{authors_str}. ({year}). {title}. {journal}, {volume}({issue}), {page}."
@@ -76,6 +88,10 @@ async def search_journal(query, rows = 100):
     Returns:
     - JSON response if the request is successful, otherwise None.
     """
+
+    # Check if frame is destroyed if 
+    if is_widget.is_exist(FRAME): 
+        return
 
     url = "https://api.crossref.org/works"
     params = {"query" : query,
@@ -106,6 +122,10 @@ async def process_item(session, item):
     - A formatted string containing the title, DOI, publication date, authors, APA citation,
       Sinta ranking or alternative ranking, and the URL of the journal article.
     """
+
+    # Check if frame is destroyed if 
+    if is_widget.is_exist(FRAME): 
+        return
     
     # Get the informations and details of the journal article
     title = item.get("title", ["N/A"])[0]
@@ -137,7 +157,7 @@ async def process_item(session, item):
     # Return the result in the specified format
     return f"{title}; {doi}; {published_date}; {', '.join(authors)}; {apa_citation}; {ranking}; {url}"
 
-async def researcheria(query):
+async def researcheria(frame, query):
     """
     Function to perform research based on a query.
     
@@ -147,6 +167,14 @@ async def researcheria(query):
     Returns:
     - List of formatted results.
     """
+
+    global FRAME
+
+    FRAME = frame  # Assign the frame to the global variable FRAME
+
+    # Check if frame is destroyed if 
+    if is_widget.is_exist(FRAME): 
+        return  # If the frame is destroyed, exit the function
 
     # Search for journal articles using the query string
     results = await search_journal(query)

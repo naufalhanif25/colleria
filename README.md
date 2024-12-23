@@ -1,6 +1,6 @@
 <!-- Title -->
 <div align="center">
-    <h1>Colleria v1.0.0-alpha</h1>
+    <h1>Colleria v1.0.0-beta</h1>
 </div>
 
 <!-- Badges -->
@@ -267,6 +267,22 @@ pip install sounddevice
 
 ```
 pip install soundfile
+```
+
+<h5>
+    <p>28. datetime</p>
+</h5>
+
+```
+pip install datetime
+```
+
+<h5>
+    <p>29. pywinstyles</p>
+</h5>
+
+```
+pip install pywinstyles
 ```
 
 <!-- Setup -->

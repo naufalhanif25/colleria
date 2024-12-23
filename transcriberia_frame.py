@@ -10,6 +10,7 @@ import threading
 import cleaner
 import requests
 import getpath
+import is_widget
 
 # List of supported video file extensions
 VID_EXT = [".mp4", ".avi", ".mov"]
@@ -221,7 +222,7 @@ def transcriber_tool(root, frame):
             result_box.grid_forget()
             
             # Call the transcriber function to process the video
-            transcriberia.transcriber(path, lang, loading_label, "Transcribing")
+            transcriberia.transcriber(frame, path, lang, loading_label, "Transcribing")
             
             # Read the transcription result from the output file
             with open(getpath.base("bin/out/out.bin"), "rb") as file:
@@ -307,3 +308,6 @@ def transcriber_tool(root, frame):
     copy_button = ctk.CTkButton(frame, text = "Copy", font = (main.FONT, 12, "bold"), fg_color = main.FG_COLOR,
                                 hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, height = 32, command = get_value)
     copy_button.grid(row = 6, column = 0, padx = 360, pady = (16, 24), sticky = "nsew")
+
+    # Get the current children of the frame
+    is_widget.WIDGETS = frame.winfo_children()

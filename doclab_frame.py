@@ -11,6 +11,7 @@ import requests
 import doclab
 import itertools
 import getpath
+import is_widget
 
 # List of supported file extensions
 IMG_EXT = [".png", ".jpg", ".jpeg"]
@@ -110,7 +111,7 @@ def doclab_tool(root, frame):
             entry_var.set("Extension is not supported")
             entry.after(2000, lambda: entry_var.set("Drop File Here"))
         else:
-            with open("bin/log/path_log.bin", "wb") as file:
+            with open(getpath.base("bin/log/path_log.bin"), "wb") as file:
                 file.write(path.encode("utf-8"))
                 file.close()
 
@@ -336,7 +337,7 @@ def doclab_tool(root, frame):
                     start_animation()
 
                     # Run doclab
-                    doclab.doclab(path, output_path, input_ext, FILE_EXT)
+                    doclab.doclab(frame, path, output_path, input_ext, FILE_EXT)
 
                     # Stop the loading animation
                     stop_animation()
@@ -437,3 +438,6 @@ def doclab_tool(root, frame):
     convert_button = ctk.CTkButton(output_path_frame, text = "Convert", font = (main.FONT, 12, "bold"), fg_color = main.FG_COLOR, corner_radius = 16,
                                     hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, width = 86, command = run_doclab)
     convert_button.grid(row = 0, column = 2, padx = (8, 0), pady = 12, sticky = "nsew")
+
+    # Get the current children of the frame
+    is_widget.WIDGETS = frame.winfo_children()

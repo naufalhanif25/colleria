@@ -33,3 +33,25 @@ def clean_file():
 
         if os.path.exists(file_path):
             os.remove(file_path)
+
+def clean_audio(directory="temp"):
+    """
+    Function to clean audio files from a specified directory,
+    except for the .gitkeep file.
+
+    Parameters:
+    - directory: The directory to clean audio files from (default is "temp").
+
+    """
+
+    path = getpath.base(directory)  # Get the absolute path of the specified directory
+    files = os.listdir(path)  # Get a list of all files in the directory
+
+    # Iterate through each file in the directory
+    for file in files:
+        # Get the absolute path of the current file
+        file_path = getpath.base(f"{directory}/{file}")
+
+        # Check if the current item is a file and not .gitkeep
+        if os.path.isfile(file_path) and file != ".gitkeep":
+            os.remove(file_path)  # Remove the file

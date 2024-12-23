@@ -12,12 +12,16 @@ import pandas as pd
 import pptxtopdf
 from pptx import Presentation
 from pptx.util import Inches
+import is_widget
 import re
 import io
 import os
 
+# Declare global variable FRAME
+FRAME = None
+
 # Function to run the doclab algorithm (conversion process)
-def doclab(input_path, output_path, input_ext, output_ext):
+def doclab(frame, input_path, output_path, input_ext, output_ext):
     """
     This function is used to convert any 
     type of document into another extension
@@ -28,6 +32,14 @@ def doclab(input_path, output_path, input_ext, output_ext):
     - pdf_2_image (convert .pdf to images)
     - image_2_pdf (convert image to .pdf)
     """
+
+    global FRAME
+
+    FRAME = frame  # Assign the frame to the global variable FRAME
+
+    # Check if frame is destroyed if 
+    if is_widget.is_exist(FRAME): 
+        return  # If the frame is destroyed, exit the function
 
     # Extract base file name and extension and modify the input path
     temp_input_path = os.path.basename(input_path)
@@ -41,6 +53,10 @@ def doclab(input_path, output_path, input_ext, output_ext):
         the extension of a file from .docx to .pdf
         """
 
+        # Check if frame is destroyed if 
+        if is_widget.is_exist(FRAME): 
+            return  # If the frame is destroyed, exit the function
+
         # Convert docx to pdf
         docx2pdf.convert(input_path, output_path)
 
@@ -50,6 +66,10 @@ def doclab(input_path, output_path, input_ext, output_ext):
         This function is responsible for changing 
         the extension of a file from .pdf to .docx
         """
+
+        # Check if frame is destroyed if 
+        if is_widget.is_exist(FRAME): 
+            return  # If the frame is destroyed, exit the function
 
         # Create a new DOCX document
         doc = docx.Document()
@@ -122,6 +142,10 @@ def doclab(input_path, output_path, input_ext, output_ext):
         the extension of a file from .pdf to .pptx
         """
 
+        # Check if frame is destroyed if 
+        if is_widget.is_exist(FRAME): 
+            return  # If the frame is destroyed, exit the function
+
         # Load the PDF file
         with pdfplumber.open(input_path) as pdf:
             # Create a PowerPoint presentation
@@ -178,6 +202,10 @@ def doclab(input_path, output_path, input_ext, output_ext):
         (.png, .jpg, .jpeg, .tiff)
         """
 
+        # Check if frame is destroyed if 
+        if is_widget.is_exist(FRAME): 
+            return  # If the frame is destroyed, exit the function
+
         # Extract base file name and extension and modify the output path
         temp_output_path = os.path.basename(output_path)
         output_name, output_ext = os.path.splitext(temp_output_path)
@@ -203,6 +231,10 @@ def doclab(input_path, output_path, input_ext, output_ext):
         (.png, .jpg, .jpeg, .tiff) to .pdf
         """
 
+        # Check if frame is destroyed if 
+        if is_widget.is_exist(FRAME): 
+            return  # If the frame is destroyed, exit the function
+
         # opening image
         image = Image.open(input_path)
 
@@ -224,6 +256,10 @@ def doclab(input_path, output_path, input_ext, output_ext):
         image formats (.png, .jpg, .jpeg, .tiff)
         """
 
+        # Check if frame is destroyed if 
+        if is_widget.is_exist(FRAME): 
+            return  # If the frame is destroyed, exit the function
+
         # Open the input image
         image = Image.open(input_path)
 
@@ -241,6 +277,10 @@ def doclab(input_path, output_path, input_ext, output_ext):
         the extension of a file from .xlsx to .csv
         """
 
+        # Check if frame is destroyed if 
+        if is_widget.is_exist(FRAME): 
+            return  # If the frame is destroyed, exit the function
+
         # Read the Excel file
         data = pd.read_excel(input_path)
 
@@ -254,6 +294,10 @@ def doclab(input_path, output_path, input_ext, output_ext):
         the extension of a file from .csv to .xlsx
         """
 
+        # Check if frame is destroyed if 
+        if is_widget.is_exist(FRAME): 
+            return  # If the frame is destroyed, exit the function
+
         # Read the Excel file
         data = pd.read_csv(input_path)
 
@@ -266,6 +310,10 @@ def doclab(input_path, output_path, input_ext, output_ext):
         This function is responsible for changing 
         the extension of a file from .pptx to .pdf
         """
+
+        # Check if frame is destroyed if 
+        if is_widget.is_exist(FRAME): 
+            return  # If the frame is destroyed, exit the function
 
         # Get path directory
         output_path = f"{os.path.dirname(output_path)}"

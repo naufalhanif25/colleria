@@ -7,6 +7,7 @@ import colleriaai
 import threading
 import popup
 import requests
+import is_widget
 
 PROMPT = None  # To store the current prompt
 ANIM = False  # To control loading animation state
@@ -149,7 +150,7 @@ def colleriaai_tool(root, frame):
             prompt_entry.configure(text_color = main.TEXT_COLOR)
             prompt_var.set("Ask Colleria.AI") 
 
-            response = colleriaai.colleriaai(str(prompt))
+            response = colleriaai.colleriaai(frame, str(prompt))
 
             response_box.configure(state = "normal")
 
@@ -237,3 +238,6 @@ def colleriaai_tool(root, frame):
                                 hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, width = 64,
                                 command = get_value)
     copy_button.grid(row = 0, column = 0, padx = 0, pady = 0, sticky = "nsew")
+
+    # Get the current children of the frame
+    is_widget.WIDGETS = frame.winfo_children()

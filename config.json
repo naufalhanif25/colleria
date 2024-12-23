@@ -1,0 +1,169 @@
+{
+ "version": "auto-py-to-exe-configuration_v1",
+ "pyinstallerOptions": [
+  {
+   "optionDest": "noconfirm",
+   "value": true
+  },
+  {
+   "optionDest": "filenames",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/main.py"
+  },
+  {
+   "optionDest": "onefile",
+   "value": false
+  },
+  {
+   "optionDest": "console",
+   "value": false
+  },
+  {
+   "optionDest": "icon_file",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/public/colleria.ico"
+  },
+  {
+   "optionDest": "name",
+   "value": "Colleria v1.0.0-alpha"
+  },
+  {
+   "optionDest": "clean_build",
+   "value": false
+  },
+  {
+   "optionDest": "strip",
+   "value": false
+  },
+  {
+   "optionDest": "noupx",
+   "value": false
+  },
+  {
+   "optionDest": "disable_windowed_traceback",
+   "value": false
+  },
+  {
+   "optionDest": "uac_admin",
+   "value": false
+  },
+  {
+   "optionDest": "uac_uiaccess",
+   "value": false
+  },
+  {
+   "optionDest": "argv_emulation",
+   "value": false
+  },
+  {
+   "optionDest": "bootloader_ignore_signals",
+   "value": false
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/aboutus_popup.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/audioproc.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/cleaner.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/colleriaai.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/colleriaai_frame.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/courier.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/doclab.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/doclab_frame.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/getpath.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/notepedia_frame.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/player.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/popup.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/README.md;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/researcheria.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/researcheria_frame.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/researcheria_popup.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/taskflow_frame.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/transcriberia.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/transcriberia_frame.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/yt_courier_frame.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/audio;audio/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/bin;bin/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/model;model/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/public;public/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/temp;temp/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/tkinterdnd2;tkinterdnd2/"
+  }
+ ],
+ "nonPyinstallerOptions": {
+  "increaseRecursionLimit": true,
+  "manualArguments": ""
+ }
+}

@@ -8,10 +8,14 @@ import speech_recognition as sr
 import transcriberia
 import os
 import getpath
+import is_widget
 
 # Variable initialization
 DIR = getpath.base("temp")
 BITRATE = "8k"
+
+# Declare global variable FRAME
+FRAME = None
 
 """
 This code contains functions for processing audio 
@@ -21,10 +25,18 @@ into several parts and denoising.
 """
 
 # Function to split audio into parts
-def super_trim():
+def super_trim(frame):
     """
     Splits the audio file into chunks based on silence and exports the chunks as separate wav files.
     """
+
+    global FRAME
+
+    FRAME = frame  # Assign the frame to the global variable FRAME
+
+    # Check if frame is destroyed if 
+    if is_widget.is_exist(FRAME): 
+        return  # If the frame is destroyed, exit the function
 
     SILENCE_THRESH = -50 # Threshold for silence detection in dB
     MIN_SILENCE = 200 # Minimum silence duration in ms
@@ -73,6 +85,10 @@ def super_trim():
 
 # Function to return the filter coefficients
 def butter_bandpass(lowcut, highcut, fs, order = 5):
+    # Check if frame is destroyed if 
+    if is_widget.is_exist(FRAME): 
+        return  # If the frame is destroyed, exit the function
+    
     nyq = 0.5 * fs # Nyquist frequency
     low = lowcut / nyq # Normalized low cutoff frequency
     high = highcut / nyq # Normalized high cutoff frequency
@@ -82,13 +98,25 @@ def butter_bandpass(lowcut, highcut, fs, order = 5):
 
 # Function to apply the filter to the audio
 def bandpass_filter(data, lowcut, highcut, fs, order = 5):
+    # Check if frame is destroyed if 
+    if is_widget.is_exist(FRAME): 
+        return  # If the frame is destroyed, exit the function
+
     b, a = butter_bandpass(lowcut, highcut, fs, order = order) # Get the filter coefficients
     y = lfilter(b, a, data) # Apply the filter
 
     return y
 
 # Function to denoiser the audio
-def audio_denoiser(input_path):
+def audio_denoiser(frame, input_path):
+    global FRAME
+
+    FRAME = frame  # Assign the frame to the global variable FRAME
+
+    # Check if frame is destroyed if 
+    if is_widget.is_exist(FRAME): 
+        return  # If the frame is destroyed, exit the function
+
     LOWCUT = 300 # Low cutoff frequency for the bandpass filter in Hz
     HIGHCUT = 3000 # High cutoff frequency for the bandpass filter in Hz
 

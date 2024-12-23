@@ -26,3 +26,5 @@ pip install pytubefix
 pip install pyspeedtest
 pip install sounddevice
 pip install soundfile
+pip install datetime
+pip install pywinstyles

@@ -7,9 +7,13 @@ import customtkinter as ctk
 import pyspeedtest
 import os
 import getpath
+import is_widget
+
+# Declare global variable FRAME
+FRAME = None
 
 # Function to run yt courier algorithm
-def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality = "360p"):
+def run_courier(frame, textbox, url, output_path = "C:/Users/ASUS/Downloads", quality = "360p"):
     """
     This function contains an algorithm for downloading 
     videos from YouTube with a certain resolution
@@ -18,8 +22,20 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
     Default quality: 360p
     """
 
+    global FRAME
+
+    FRAME = frame  # Assign the frame to the global variable FRAME
+
+    # Check if frame is destroyed if 
+    if is_widget.is_exist(FRAME): 
+        return  # If the frame is destroyed, exit the function
+
     # Function to displays the log in the log box (textbox)
     def log_message(message):
+        # Check if frame is destroyed if 
+        if is_widget.is_exist(FRAME): 
+            return  # If the frame is destroyed, exit the function
+
         textbox.configure(state = "normal")
         textbox.insert(ctk.END, message + "\n")
         textbox.configure(state = "disabled")
@@ -27,6 +43,10 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
 
     # Function to calculate estimated video and audio size
     def estimate_file_size(quality, duration):
+        # Check if frame is destroyed if 
+        if is_widget.is_exist(FRAME): 
+            return  # If the frame is destroyed, exit the function
+
         # Dictionary containing video bitrates in kbps for different video qualities
         video_bitrates = {
             "144p": 100,
@@ -53,6 +73,10 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
 
     # Function to calculate internet speed
     def speed_test(error_log = getpath.base("bin/log/error_log.bin")):
+        # Check if frame is destroyed if 
+        if is_widget.is_exist(FRAME): 
+            return  # If the frame is destroyed, exit the function
+
         try:
             test = pyspeedtest.SpeedTest("www.google.com")  # Create a pyspeedtest object
             speed = test.download()  # Perform a download speed test
@@ -86,6 +110,10 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
 
     # Function to get the title of the YouTube video from its URL
     def get_title(url, error_log = getpath.base("bin/log/error_log.bin")):
+        # Check if frame is destroyed if 
+        if is_widget.is_exist(FRAME): 
+            return  # If the frame is destroyed, exit the function
+
         try:
             response = requests.get(url)
             soup = BeautifulSoup(response.text, "html.parser")
@@ -101,12 +129,16 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
                 file.close()
 
             # Displays the log in the log box (textbox)
-            log_message(f"[ERROR] Failed to get the video title [saved to: {cur_path}/{error_log}]")
+            log_message(f"[ERROR] Failed to get the video title [saved to: {error_log}]")
 
             return None
 
     # Function to get the size of a file
     def get_size(path):
+        # Check if frame is destroyed if 
+        if is_widget.is_exist(FRAME): 
+            return  # If the frame is destroyed, exit the function
+
         # Get the size of the file in bytes
         file_size_bytes = os.path.getsize(path)
         
@@ -117,6 +149,10 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
 
     # Function to create unique filename
     def create_unique(path, base_name = "Untitled_", ext = ".mp4", number = []):
+        # Check if frame is destroyed if 
+        if is_widget.is_exist(FRAME): 
+            return  # If the frame is destroyed, exit the function
+
         # List all files in the directory
         files = os.listdir(path)
 
@@ -146,11 +182,6 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
     # Error log path
     error_log = getpath.base("bin/log/error_log.bin")
 
-    # Get the current directory
-    cur_path = os.path.abspath(__file__)
-    cur_path = os.path.dirname(cur_path)
-    cur_path = cur_path.replace("\\", "/")
-
     # Create the temporary directory if it does not exist
     if not os.path.exists(path): 
         os.makedirs(path)
@@ -165,7 +196,7 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
     video_size, audio_size = estimate_file_size(quality, duration)
 
     # Displays the log in the log box (textbox)
-    log_message(f"[SUCCESS] Successfully initialized [path: {cur_path}/{path}, youtube: {url}, duration: {(duration / 60):.2f} min]")
+    log_message(f"[SUCCESS] Successfully initialized [path: {path}, youtube: {url}, duration: {(duration / 60):.2f} min]")
     log_message(f"[TASK 2] Downloading video... [size (estimate): {video_size:.2f} MB, bandwidth: {((internet_speed / 1_000_000) / 8):.2f} MBps]")
     
     # Get the video stream with the specified quality and file extension
@@ -183,12 +214,12 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
             file.close()
 
         # Displays the log in the log box (textbox)
-        log_message(f"[ERROR] Failed to download the video [saved to: {cur_path}/{error_log}]")
+        log_message(f"[ERROR] Failed to download the video [saved to: {error_log}]")
 
         return  # Stop the function execution
 
     # Displays the log in the log box (textbox)
-    log_message(f"[SUCCESS] Successfully downloaded the video [saved to: {cur_path}/{path}/video.mp4]")
+    log_message(f"[SUCCESS] Successfully downloaded the video [saved to: {path}/video.mp4]")
     log_message(f"[TASK 3] Downloading audio... [size (estimate): {audio_size:.2f} MB, bandwidth: {internet_speed / 1_000_000:.2f} Mbps]")
 
     # Get the audio stream with the specified file extension
@@ -206,12 +237,12 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
             file.close()
 
         # Displays the log in the log box (textbox)
-        log_message(f"[ERROR] Failed to download the audio [saved to: {cur_path}/{error_log}]")
+        log_message(f"[ERROR] Failed to download the audio [saved to: {error_log}]")
 
         return  # Stop the function execution
 
     # Displays the log in the log box (textbox)
-    log_message(f"[SUCCESS] Successfully downloaded the audio [saved to: {cur_path}/{path}/audio.mp4]")
+    log_message(f"[SUCCESS] Successfully downloaded the audio [saved to: {path}/audio.mp4]")
     log_message(f"[TASK 4] Getting the video title... [url: {url}]")
 
     # Get the video title
@@ -254,7 +285,7 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
             file.close()
 
         # Displays the log in the log box (textbox)
-        log_message(f"[ERROR] Failed to combine video and audio [saved to: {cur_path}/{error_log}]")
+        log_message(f"[ERROR] Failed to combine video and audio [saved to: {error_log}]")
 
         return  # Stop the function execution 
 
@@ -263,7 +294,7 @@ def run_courier(textbox, url, output_path = "C:/Users/ASUS/Downloads", quality =
 
     # Displays the log in the log box (textbox)
     log_message(f"[SUCCESS] Successfully combines video and audio [path: {output_path}]")
-    log_message(f"[TASK 6] Delete temporary files... [video_path: {cur_path}/{video_path}, size: {video_size:.2f} MB; audio_path: {cur_path}/{audio_path}, size: {audio_size:.2f} MB]")
+    log_message(f"[TASK 6] Delete temporary files... [video_path: {video_path}, size: {video_size:.2f} MB; audio_path: {audio_path}, size: {audio_size:.2f} MB]")
 
     # Deletes audio and video in temp directory if files exist
     for file_path in [video_path, audio_path]:

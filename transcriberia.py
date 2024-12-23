@@ -4,10 +4,15 @@ import speech_recognition as sr
 import audioproc
 import os
 import getpath
+import cleaner
+import is_widget
 
 # Variable initialization
 RAW = getpath.base("audio/raw.wav")
 OUT = getpath.base("audio/out.wav")
+
+# Declare global variable FRAME
+FRAME = None
 
 # Function to calculate an inverse percentage
 def inverse_percentage(value, count, scale):
@@ -22,6 +27,12 @@ def inverse_percentage(value, count, scale):
     Returns:
     - The calculated percentage, or 0.0 if conditions are not met.
     """
+
+    # Check if frame is destroyed if 
+    if is_widget.is_exist(FRAME): 
+        cleaner.clean_audio()  # Delete the audio files
+
+        return  # If the frame is destroyed, exit the function
 
     listdir = os.listdir(audioproc.DIR)
 
@@ -42,6 +53,12 @@ def percentage_label(label, text, count):
     - count: The current count or iteration number
     """
 
+    # Check if frame is destroyed if 
+    if is_widget.is_exist(FRAME): 
+        cleaner.clean_audio()  # Delete the audio files
+
+        return  # If the frame is destroyed, exit the function
+
     listdir = os.listdir(audioproc.DIR)
     scale = len(listdir) / 100
     percentage = inverse_percentage(len(listdir), count, scale)
@@ -53,7 +70,7 @@ def percentage_label(label, text, count):
     label.after(1000, percentage_label, label, text, count + 1)
 
 # Function to transcribe audio from a video file
-def transcriber(video_path, lang, label, label_text):
+def transcriber(frame, video_path, lang, label, label_text):
     """
     Transcribes audio from a video file and updates the transcription progress in a GUI.
     
@@ -64,18 +81,31 @@ def transcriber(video_path, lang, label, label_text):
     - label_text: The text to display along with the progress percentage
     """
 
+    global FRAME
+
+    FRAME = frame  # Assign the frame to the global variable FRAME
+
+    # Check if frame is destroyed if 
+    if is_widget.is_exist(FRAME): 
+        cleaner.clean_audio()  # Delete the audio files
+        
+        return  # If the frame is destroyed, exit the function
+
     transcribe = []
 
-    # Extract audio from the video file and save as raw.wav
-    video = mp.VideoFileClip(video_path)
-    video.audio.write_audiofile(RAW)
+    try:
+        # Extract audio from the video file and save as raw.wav
+        video = mp.VideoFileClip(video_path)
+        video.audio.write_audiofile(RAW)
 
-    recognizer = sr.Recognizer()
-    sr.AudioFile(RAW)
-    audioproc.audio_denoiser(RAW)
-    os.remove(RAW)
-    audioproc.super_trim()
-    os.remove(OUT)
+        recognizer = sr.Recognizer()
+        sr.AudioFile(RAW)
+        audioproc.audio_denoiser(frame, RAW)
+        os.remove(RAW)
+        audioproc.super_trim(frame)
+        os.remove(OUT)
+    except FileNotFoundError:
+        return
 
     # Count the number of audio chunks
     listdir = os.listdir(audioproc.DIR)
@@ -91,38 +121,44 @@ def transcriber(video_path, lang, label, label_text):
 
     # Transcribe each audio chunk
     for index in range(sum_file - 1):
-        audio = sr.AudioFile(os.path.join(audioproc.DIR, f"chunk_{index}.wav"))
-
-        with audio as source:
-            audio_data = recognizer.record(source)
-
         try:
-            # Recognize speech using Google Web Speech API
-            text = recognizer.recognize_google(audio_data, language = lang)
+            audio = sr.AudioFile(os.path.join(audioproc.DIR, f"chunk_{index}.wav"))
 
-            with open(out_path, "ab") as file:
-                text = text + " "
-                bin_text = text.encode("utf-8")
+            with audio as source:
+                audio_data = recognizer.record(source)
 
-                file.write(bin_text)
-                file.close()
+            try:
+                # Recognize speech using Google Web Speech API
+                text = recognizer.recognize_google(audio_data, language = lang)
 
-        except sr.UnknownValueError:
-            with open(error_path, "wb") as file:
-                text = "Audio not recognized"
+                with open(out_path, "ab") as file:
+                    text = text + " "
+                    bin_text = text.encode("utf-8")
 
-                file.write(text.encode("utf-8"))
-                file.close()
-        except sr.RequestError as e:
-            with open(error_path, "wb") as file:
-                text = f"Requests to the Google Speech Recognition service failed; {e}"
-                
-                file.write(text.encode("utf-8"))
-                file.close()
+                    file.write(bin_text)
+                    file.close()
 
-        # Update the percentage label in the GUI
-        percentage_label(label, label_text, 0) 
-        
-        # Remove the processed audio chunk
-        os.remove(os.path.join(audioproc.DIR, f"chunk_{index}.wav"))
+            except sr.UnknownValueError:
+                with open(error_path, "wb") as file:
+                    text = "Audio not recognized"
+
+                    file.write(text.encode("utf-8"))
+                    file.close()
+            except sr.RequestError as e:
+                with open(error_path, "wb") as file:
+                    text = f"Requests to the Google Speech Recognition service failed; {e}"
+                    
+                    file.write(text.encode("utf-8"))
+                    file.close()
+
+            # Update the percentage label in the GUI
+            percentage_label(label, label_text, 0) 
+            
+            try:
+                # Remove the processed audio chunk
+                os.remove(os.path.join(audioproc.DIR, f"chunk_{index}.wav"))
+            except FileNotFoundError:
+                return
+        except FileNotFoundError:
+            return
 
