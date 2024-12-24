@@ -11,7 +11,7 @@
   },
   {
    "optionDest": "onefile",
-   "value": false
+   "value": true
   },
   {
    "optionDest": "console",
@@ -23,7 +23,7 @@
   },
   {
    "optionDest": "name",
-   "value": "Colleria v1.0.0-alpha"
+   "value": "Colleria v1.0.0-beta"
   },
   {
    "optionDest": "clean_build",
@@ -56,6 +56,26 @@
   {
    "optionDest": "bootloader_ignore_signals",
    "value": false
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/audio;audio/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/bin;bin/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/model;model/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/public;public/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/temp;temp/"
   },
   {
    "optionDest": "datas",
@@ -95,6 +115,10 @@
   },
   {
    "optionDest": "datas",
+   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/is_widget.py;."
+  },
+  {
+   "optionDest": "datas",
    "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/notepedia_frame.py;."
   },
   {
@@ -104,10 +128,6 @@
   {
    "optionDest": "datas",
    "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/popup.py;."
-  },
-  {
-   "optionDest": "datas",
-   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/README.md;."
   },
   {
    "optionDest": "datas",
@@ -139,27 +159,351 @@
   },
   {
    "optionDest": "datas",
-   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/audio;audio/"
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/aiohttp;aiohttp/"
   },
   {
    "optionDest": "datas",
-   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/bin;bin/"
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/asyncio;asyncio/"
   },
   {
    "optionDest": "datas",
-   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/model;model/"
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/bs4;bs4/"
   },
   {
    "optionDest": "datas",
-   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/public;public/"
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/cachetools;cachetools/"
   },
   {
    "optionDest": "datas",
-   "value": "C:/Users/ASUS/OneDrive/Documents/Project/Colleria/temp;temp/"
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/customtkinter;customtkinter/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/docx;docx/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/docx2pdf;docx2pdf/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/fitz;fitz/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/groq;groq/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/moviepy;moviepy/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/numpy;numpy/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/pandas;pandas/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/pdfplumber;pdfplumber/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/PIL;PIL/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/pptx;pptx/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/pptxtopdf;pptxtopdf/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/pydub;pydub/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/PyPDF2;PyPDF2/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/pytubefix;pytubefix/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/pywinstyles;pywinstyles/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/requests;requests/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/scipy;scipy/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/speech_recognition;speech_recognition/"
   },
   {
    "optionDest": "datas",
    "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/tkinterdnd2;tkinterdnd2/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/certifi;certifi/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/chardet;chardet/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/idna;idna/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/httpcore;httpcore/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/httplib2;httplib2/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/httpx;httpx/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/pikepdf;pikepdf/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/pdfminer;pdfminer/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/pyglet;pyglet/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/pymupdf;pymupdf/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/pypdfium2;pypdfium2/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/grpc;grpc/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/urllib3;urllib3/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/site-packages/aifc;aifc/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/asyncio;asyncio/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/html;html/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/http;http/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/tkinter;tkinter/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/ASUS/AppData/Local/Programs/Python/Python313/Lib/urllib;urllib/"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "aiohttp"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "asyncio"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "bs4"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "cachetools"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "customtkinter"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "docx"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "docx2pdf"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "fitz"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "groq"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "moviepy"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "numpy"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "pandas"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "pdfplumber"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "PIL"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "pptx"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "pptxtopdf"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "pydub"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "PyPDF2"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "pytubefix"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "pywinstyles"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "requests"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "scipy"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "speech_recognition"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "tkinterdnd2"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "speech_recognition"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "certifi"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "chardet"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "idna"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "httpcore"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "httplib2"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "httpx"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "pikepdf"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "pdfminer"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "pyglet"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "pymupdf"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "pypdfium2"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "grpc"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "urllib3"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "asyncio"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "html"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "http"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "tkinter"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "urllib"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "aifc"
   }
  ],
  "nonPyinstallerOptions": {

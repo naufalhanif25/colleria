@@ -1,6 +1,7 @@
 # Ignore Python bytecode
 __pycache__/
 *.pyc
+config.json
 
 # Explicitly ignore key.bin
 model/key.bin
