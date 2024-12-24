@@ -59,7 +59,7 @@ def open_popup():
     # Calculate the size and position to center the popup window on the screen
     if message_label.winfo_exists() or popup.winfo_exists():
         max_width = max(temp_width) + 48
-        max_height = temp_height + 24
+        max_height = temp_height + 16
         min_width = 240
         min_height = max_height
 

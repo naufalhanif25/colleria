@@ -74,7 +74,7 @@ if __name__ == "__main__":
     root = TkinterDnD.Tk()
     root.configure(bg = BASE_COLOR)
     root.iconbitmap(getpath.base("public/colleria.ico"))
-    root.title("Colleria v1.0.0-beta")
+    root.title("Colleria")
     # root.resizable(False, False)
 
     # Set the dimensions and position of the application window
@@ -130,13 +130,17 @@ if __name__ == "__main__":
     welcome_label = ctk.CTkLabel(tool_frame, text = "Welcome to Colleria", font = (FONT, 36, "bold"), text_color = FADED_TEXT_COLOR)
     welcome_label.grid(row = 0, column = 0, padx = 24, pady = (86, 0), sticky = "nsew")
 
+    # Add a version label
+    version_label = ctk.CTkLabel(tool_frame, text = "Version 1.0.0 Beta", font = (FONT, 10, "normal"), text_color = TEXT_COLOR)
+    version_label.grid(row = 1, column = 0, padx = 24, pady = (0, 0), sticky = "nsew")
+
     # Load the image using PIL and convert it to CTkImage
     image = Image.open(getpath.base("public/colleria.png"))
     image = ctk.CTkImage(light_image = image, size = (160, 160))
     
     # Add an icon label with the loaded image
     icon = ctk.CTkLabel(tool_frame, text = "", image = image)
-    icon.grid(row = 1, column = 0, padx = 24, pady = (32, 0), sticky = "nsew")
+    icon.grid(row = 2, column = 0, padx = 24, pady = (32, 0), sticky = "nsew")
 
     # Define the message to be displayed in the message label
     message = ("Colleria provides various tools that will support\n"
@@ -145,11 +149,11 @@ if __name__ == "__main__":
 
     # Add a message label 
     message_label = ctk.CTkLabel(tool_frame, text = message, font = (FONT, 16, "normal"), text_color = TEXT_COLOR)
-    message_label.grid(row = 2, column = 0, padx = 24, pady = (48, 0), sticky = "nsew")
+    message_label.grid(row = 3, column = 0, padx = 24, pady = (48, 0), sticky = "nsew")
 
     # Add a support label
     support_label = ctk.CTkLabel(tool_frame, text = "Don't forget to support us by donating :)", font = (FONT, 14, "bold"), text_color = TEXT_COLOR)
-    support_label.grid(row = 3, column = 0, padx = 24, pady = (12, 0), sticky = "nsew")
+    support_label.grid(row = 4, column = 0, padx = 24, pady = (12, 0), sticky = "nsew")
 
     # Label for the tool list
     menu_label = ctk.CTkLabel(toollist_button_frame, text = "Tool List", font = (FONT, 16, "bold"), anchor = "w",
