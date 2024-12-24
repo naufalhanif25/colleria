@@ -307,7 +307,7 @@ pip install pywinstyles
 
 <!-- Donation -->
 <h2>
-    ❤️ Support Us
+    ❤️ Support us
     <h5>
         <a href="https://saweria.co/minkudeveloper" target="_blank" style="justify: center;"> 
             <button>
