@@ -27,14 +27,13 @@ def colleriaai(frame, prompt):
         return  # If the frame is destroyed, exit the function
 
     # Open the file in read-binary mode
-    # Note that it should be "rb" for reading, not "wb" for writing
     with open(getpath.base("model/key.bin"), "rb") as file:
         api_key = file.read()  # Read the API key from the file
         api_key = api_key.decode("utf-8")
 
         file.close()
 
-    # Configure the OpenAI client with the base URL and API key
+    # Configure the Groq client with the API key
     client = Groq(api_key = api_key)
 
     # Create a chat completion using the specified model and prompt

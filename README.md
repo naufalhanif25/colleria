@@ -7,9 +7,9 @@
 <div align="center">
     <img src="https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue" /> 
     <img src="https://img.shields.io/badge/Pandas-2C2D72?style=for-the-badge&logo=pandas&logoColor=white" /> 
+    <img src="https://img.shields.io/badge/SciPy-654FF0?style=for-the-badge&logo=SciPy&logoColor=white" /> 
     <img src="https://img.shields.io/badge/Numpy-777BB4?style=for-the-badge&logo=numpy&logoColor=white" /> 
-    <img src="https://img.shields.io/badge/conda-342B029.svg?&style=for-the-badge&logo=anaconda&logoColor=white" /> 
-    <img src="https://img.shields.io/badge/ChatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white" /> 
+    <img src="https://img.shields.io/badge/Google_Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white" />
     <img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white" />
 </div>
 
@@ -292,11 +292,10 @@ pip install pywinstyles
 
 1. Download and install **Python 3** at [Python](https://www.python.org)
 2. Add **Python 3** to `PATH`
-3. Download and install **Anaconda** at [Anaconda](https://www.anaconda.com/download)
-4. Download and install **Git** at [Git](https://git-scm.com/downloads)
-5. Clone the repository, `git clone https://github.com/naufalhanif25/colleria.git`
-6. Run `set-up.bat` to install the required libraries.
-7. Run `run.bat` to run **Colleria**
+3. Download and install **Git** at [Git](https://git-scm.com/downloads)
+4. Clone the repository, `git clone https://github.com/naufalhanif25/colleria.git`
+5. Run `set-up.bat` to install the required libraries.
+6. Run `run.bat` to run **Colleria**
 
 <!-- Donation -->
 <h2>
