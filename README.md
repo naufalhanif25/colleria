@@ -298,13 +298,6 @@ pip install pywinstyles
 6. Run `set-up.bat` to install the required libraries.
 7. Run `run.bat` to run **Colleria**
 
-<!-- **Alternative:**
-
-1. Download **Colleria** via [Google Drive](https://drive.google.com/file/d/1uqm4WmsDMZ5jR03a-iDnFpyGpGokAxdW/view?usp=drive_link)
-2. Move zip file to another partition (e.g D: or E:, except C:)
-3. Extract the zip file
-4. Run **Colleria v1.0.0-alpha** -->
-
 <!-- Donation -->
 <h2>
     ❤️ Support us
