@@ -71,9 +71,15 @@ def colleriaai_tool(root, frame):
         model_label = ctk.CTkLabel(frame, text = f"with {colleriaai.MODEL_NAME}", font = (main.FONT, 12, "bold"), text_color = main.TEXT_COLOR)
         model_label.grid(row = 1, column = 0, padx = 24, pady = (0, 8), sticky = "nsew")
 
+        # Create a frame as a container
+        response_container = ctk.CTkFrame(frame, fg_color = main.BASE_COLOR, corner_radius = 8)
+        response_container.grid(row = 2, column = 0, padx = 120, pady = 0, sticky = "nsew")
+        response_container.grid_columnconfigure(0, weight = 1)
+        response_container.grid_rowconfigure(0, weight = 1)
+
         # Create a frame for the response textbox
-        response_frame = ctk.CTkFrame(frame, fg_color = main.FRAME_COLOR)
-        response_frame.grid(row = 2, column = 0, padx = 120, pady = 0, sticky = "nsew")
+        response_frame = ctk.CTkFrame(response_container, fg_color = main.BASE_COLOR, corner_radius = 0)
+        response_frame.grid(row = 0, column = 0, padx = 0, pady = 0, sticky = "nsew")
         response_frame.grid_columnconfigure(0, weight = 1)
         response_frame.grid_rowconfigure(0, weight = 1)
 
@@ -81,7 +87,7 @@ def colleriaai_tool(root, frame):
 
         # Create a frame for the prompt entry and button
         prompt_frame = ctk.CTkFrame(frame, height = 64, fg_color = main.FRAME_COLOR)
-        prompt_frame.grid(row = 4, column = 0, padx = 160, pady = (0, 24), sticky = "nsew")
+        prompt_frame.grid(row = 3, column = 0, padx = 160, pady = (0, 24), sticky = "nsew")
         prompt_frame.grid_columnconfigure(0, weight = 1)
         prompt_frame.grid_rowconfigure(0, weight = 1)
 
@@ -90,22 +96,28 @@ def colleriaai_tool(root, frame):
         prompt_var.set("Ask Colleria.AI")
 
         # Textbox to display the response
-        response_box = ctk.CTkTextbox(response_frame, fg_color = main.FRAME_COLOR, font = (main.FONT, 12, "normal"), text_color = main.TEXT_COLOR, 
-                                    scrollbar_button_color = main.SCROLLBAR_COLOR, scrollbar_button_hover_color = main.SCROLLBAR_HOVER_COLOR)
-        response_box.grid(row = 0, column = 0, padx = 0, pady = 0, sticky = "nsew")
+        response_box = ctk.CTkTextbox(response_frame, fg_color = main.BASE_COLOR, font = (main.FONT, 12, "normal"), text_color = main.TEXT_COLOR, 
+                                      scrollbar_button_color = main.SCROLLBAR_COLOR, scrollbar_button_hover_color = main.SCROLLBAR_HOVER_COLOR,
+                                      border_width = 0, corner_radius = 8)
+        response_box.grid(row = 0, column = 0, padx = 12, pady = (12, 0), sticky = "nsew")
         response_box.configure(state = "disabled")
 
         # Create a loading label to show the loading animation
-        loading_label = ctk.CTkLabel(response_frame, text = "Let me think for a moment", font = (main.FONT, 12, "normal"), 
+        loading_label = ctk.CTkLabel(response_container, text = "Let me think for a moment", font = (main.FONT, 12, "normal"), 
                                     text_color = main.FADED_LABEL_COLOR)
         loading_label.grid(row = 0, column = 0, padx = 0, pady = (0, 320), sticky = "nsew")
         loading_label.grid_forget()  # Hide the label initially
 
         # Create a button frame to hold the copy button
-        button_frame = ctk.CTkFrame(frame, height = 28, fg_color = main.FRAME_COLOR)
-        button_frame.grid(row = 3, column = 0, padx = 120, pady = (0, 12), sticky = "e")
+        button_frame = ctk.CTkFrame(response_container, height = 28, fg_color = main.BASE_COLOR)
+        button_frame.grid(row = 1, column = 0, padx = 12, pady = (0, 12), sticky = "e")
         button_frame.grid_forget()
+        button_frame.grid_columnconfigure(0, weight = 1)
         button_frame.grid_rowconfigure(0, weight = 1)
+
+        response_container.grid(row = 2, column = 0, padx = 120, pady = (6, 8), sticky = "nsew")
+        response_container.grid_rowconfigure(0, weight = 1)
+        response_container.grid_columnconfigure(0, weight = 1)
 
         frame.grid_columnconfigure(0, weight = 1)
 
@@ -179,8 +191,8 @@ def colleriaai_tool(root, frame):
                 stop_animation()
 
                 loading_label.grid_forget()
-                response_box.grid(row = 0, column = 0, padx = 12, pady = 12, sticky = "nsew")
-                button_frame.grid(row = 3, column = 0, padx = 160, pady = (2, 12), sticky = "e")
+                response_box.grid(row = 0, column = 0, padx = 12, pady = (12, 0), sticky = "nsew")
+                button_frame.grid(row = 1, column = 0, padx = 12, pady = (0, 12), sticky = "e")
 
         # Function to run the colleria ai function
         def run_prompt(event = None):
@@ -253,7 +265,7 @@ def colleriaai_tool(root, frame):
         copy_button = ctk.CTkButton(button_frame, text = "Copy", font = (main.FONT, 12, "bold"), fg_color = main.FG_COLOR,
                                     hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, width = 64,
                                     command = get_value)
-        copy_button.grid(row = 0, column = 0, padx = 0, pady = 0, sticky = "nsew")
+        copy_button.grid(row = 0, column = 0, padx = 0, pady = 0, sticky = "e")
 
         # Get the current children of the frame
         is_widget.WIDGETS = frame.winfo_children()

@@ -213,7 +213,7 @@ def researcheria_tool(root, frame):
 
          # Create a button for each search result
          button = ctk.CTkButton(button_frame, text = truncate_text(text, 780), font = (main.FONT, 12, "normal"), anchor = "center", 
-                                border_color = main.FADED_TEXT_COLOR, text_color = main.TEXT_COLOR, fg_color = main.FRAME_COLOR,
+                                border_color = main.FADED_TEXT_COLOR, text_color = main.TEXT_COLOR, fg_color = main.BASE_COLOR,
                                 border_width = 1, hover_color = main.ENTRY_COLOR, border_spacing = 8, 
                                 command = lambda text = truncate_text(text, 780): open_detail(text))
          button.grid(row = index, column = 0, padx = 120, pady = 4, sticky = "nsew")
@@ -224,7 +224,7 @@ def researcheria_tool(root, frame):
 
       # If there is a previously pressed button, reset its color
       if LAST_PRESSED is not None:
-         LAST_PRESSED.configure(fg_color = main.FRAME_COLOR, hover_color = main.ENTRY_COLOR, text_color = main.TEXT_COLOR, 
+         LAST_PRESSED.configure(fg_color = main.BASE_COLOR, hover_color = main.ENTRY_COLOR, text_color = main.TEXT_COLOR, 
                                 border_width = 1, border_color = main.FADED_TEXT_COLOR)
 
       # Change the color of the currently pressed button
@@ -259,7 +259,7 @@ def researcheria_tool(root, frame):
       # Create a button for each page
       for index in range(1, total_pages + 1): 
          button = ctk.CTkButton(page_frame, text = str(index), font = (main.FONT, 12, "normal"), anchor = "center", border_color = main.FADED_TEXT_COLOR, 
-                                text_color = main.TEXT_COLOR, fg_color = main.FRAME_COLOR, border_width = 1, hover_color = main.ENTRY_COLOR, 
+                                text_color = main.TEXT_COLOR, fg_color = main.BASE_COLOR, border_width = 1, hover_color = main.ENTRY_COLOR, 
                                 border_spacing = 4, command = lambda index = index: change_page(index)) 
          button.grid(row = 0, column = index, padx = 4, pady = 4, sticky="nsew")
 

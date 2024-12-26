@@ -98,7 +98,7 @@ def taskflow_tool(root, frame):
    task_panel_frame.grid_columnconfigure(0, weight = 1)
    task_panel_frame.grid_rowconfigure(0, weight = 1)
 
-   task_panel_canvas = ctk.CTkCanvas(task_panel_frame)
+   task_panel_canvas = ctk.CTkCanvas(task_panel_frame, bg = main.FRAME_COLOR, highlightthickness = 0)
    task_panel_canvas.grid(row = 0, column = 0, sticky = "nsew")
    task_panel_canvas.grid_columnconfigure(0, weight = 1)
    task_panel_canvas.grid_rowconfigure(0, weight = 1)
@@ -178,7 +178,7 @@ def taskflow_tool(root, frame):
 
          # Create a button for the new task
          button = ctk.CTkButton(task_buttons_frame, text = "", font = (main.FONT, 12, "normal"), anchor = "center",
-                                border_color = main.FADED_TEXT_COLOR, text_color = main.TEXT_COLOR, fg_color = main.FRAME_COLOR,
+                                border_color = main.FADED_TEXT_COLOR, text_color = main.TEXT_COLOR, fg_color = main.BASE_COLOR,
                                 border_width = 1, hover_color = main.ENTRY_COLOR, border_spacing = 8,
                                 command = lambda: task_done(button, time_label, task_label))
          button.grid(row = ROW, column = 0, padx = 0, pady = 4, sticky = "nsew")

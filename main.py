@@ -41,17 +41,17 @@ LANG = {"Afrikaans" : "af-ZA",
 
 # Color constants for the application interface
 BASE_COLOR = "#FFFFFF"
-FRAME_COLOR = "#F1F2F6"
-FG_COLOR = "#70A1FF"
-FG_HOVER_COLOR = "#1E90FF"
-FADED_BORDER_COLOR = "#A4B0BE"
-BORDER_COLOR = "#70A1FF"
-FADED_TEXT_COLOR = "#70A1FF"
-FADED_LABEL_COLOR = "#747D8C"
-ENTRY_COLOR = "#DFE4EA"
-TEXT_COLOR = "#2F3542"
-SCROLLBAR_COLOR = "#dfe4ea"
-SCROLLBAR_HOVER_COLOR = "#ced6e0"
+FRAME_COLOR = "#F0F9FF"
+FG_COLOR = "#38BDF8"
+FG_HOVER_COLOR = "#0EA5E9"
+FADED_BORDER_COLOR = "#7DD3FC"
+BORDER_COLOR = "#38BDF8"
+FADED_TEXT_COLOR = "#38BDF8"
+FADED_LABEL_COLOR = "#38BDF8"
+ENTRY_COLOR = "#E0F2FE"
+TEXT_COLOR = "#082F49"
+SCROLLBAR_COLOR = "#E0F2FE"
+SCROLLBAR_HOVER_COLOR = "#BAE6FD"
 
 # Variable to keep track of the last pressed button
 LAST_PRESSED = None 
@@ -93,21 +93,26 @@ if __name__ == "__main__":
     left_panel_frame.grid_rowconfigure(0, weight = 1)
 
     # Create a frame for the tool list on the left panel frame
-    toollist_frame = ctk.CTkFrame(left_panel_frame, width = 164, height = 640, fg_color = FRAME_COLOR)
-    toollist_frame.grid(row = 0, column = 0, padx = 0, pady = (0, 8), sticky = "nsew")
+    toollist_container = ctk.CTkFrame(left_panel_frame, width = 164, height = 640, fg_color = FRAME_COLOR)
+    toollist_container.grid(row = 0, column = 0, padx = 0, pady = (0, 8), sticky = "nsew")
+    toollist_container.grid_columnconfigure(0, weight = 1)
+    toollist_container.grid_rowconfigure(1, weight = 1)
+
+    toollist_frame = ctk.CTkFrame(toollist_container, width = 164, height = 640, fg_color = FRAME_COLOR)
+    toollist_frame.grid(row = 1, column = 0, padx = 0, pady = (0, 8), sticky = "nsew")
     toollist_frame.grid_columnconfigure(0, weight = 1)
     toollist_frame.grid_rowconfigure(0, weight = 1)
 
-    toollist_canvas = ctk.CTkCanvas(toollist_frame, width = 164, height = 636) 
+    toollist_canvas = ctk.CTkCanvas(toollist_frame, width = 164, height = 632, bg = FRAME_COLOR, highlightthickness = 0)
     toollist_canvas.grid(row = 0, column = 0, sticky = "nsew") 
     toollist_canvas.grid_columnconfigure(0, weight = 1)
 
-    toollist_button_frame = ctk.CTkFrame(toollist_canvas, width = 152, height = 636, fg_color = FRAME_COLOR) 
+    toollist_button_frame = ctk.CTkFrame(toollist_canvas, width = 152, height = 632, fg_color = FRAME_COLOR) 
     toollist_button_frame.grid(row = 0, column = 0, sticky = "nsew") 
 
-    scrollbar = ctk.CTkScrollbar(toollist_frame, orientation = "vertical", command = toollist_canvas.yview, width = 12,
+    scrollbar = ctk.CTkScrollbar(toollist_frame, orientation = "vertical", command = toollist_canvas.yview, width = 12, fg_color = FRAME_COLOR, 
                                  button_color = SCROLLBAR_COLOR, button_hover_color = SCROLLBAR_HOVER_COLOR) 
-    scrollbar.grid(row = 0, column = 1, padx = 4, pady = 8, sticky = "nsew") 
+    scrollbar.grid(row = 0, column = 1, padx = 4, pady = 0, sticky = "nsew") 
 
     # Configure canvas for scrollbar 
     toollist_canvas.configure(yscrollcommand = scrollbar.set) 
@@ -156,8 +161,7 @@ if __name__ == "__main__":
     support_label.grid(row = 4, column = 0, padx = 24, pady = (12, 0), sticky = "nsew")
 
     # Label for the tool list
-    menu_label = ctk.CTkLabel(toollist_button_frame, text = "Tool List", font = (FONT, 16, "bold"), anchor = "w",
-                              text_color = TEXT_COLOR)
+    menu_label = ctk.CTkLabel(toollist_container, text = "Tool List", font = (FONT, 16, "bold"), anchor = "w", text_color = TEXT_COLOR)
     menu_label.grid(row = 0, column = 0, padx = 12, pady = 6, sticky = "nsew")
 
     # Function to change the color of the pressed button
@@ -170,7 +174,7 @@ if __name__ == "__main__":
                                    border_width = 0, border_color = FRAME_COLOR)
 
         # Change the color of the currently pressed button
-        button.configure(fg_color = FRAME_COLOR, hover_color = ENTRY_COLOR, text_color = FADED_TEXT_COLOR, 
+        button.configure(fg_color = BASE_COLOR, hover_color = ENTRY_COLOR, text_color = FADED_TEXT_COLOR, 
                          border_width = 2, border_color = BORDER_COLOR)
         
         # Update the last pressed button to the current button
@@ -187,8 +191,8 @@ if __name__ == "__main__":
                 lambda: ytcf.yt_courier_tool(root, tool_frame)]
 
     for row, (button_text, command) in enumerate(zip(buttons, commands)):
-        button = ctk.CTkButton(toollist_button_frame, text = button_text, font = (FONT, 12, "bold"), fg_color = FG_COLOR, 
-                               hover_color = FG_HOVER_COLOR, text_color = BASE_COLOR, height = 32, width = 154,
+        button = ctk.CTkButton(toollist_button_frame, text = button_text, font = (FONT, 12, "bold"), fg_color = FG_COLOR,
+                               hover_color = FG_HOVER_COLOR, text_color = BASE_COLOR, height = 32, width = 152,
                                command = command)
         button.grid(row = row + 1, column = 0, padx = 12, pady = 4, sticky = "nsew")
         button.bind("<Button-1>", lambda event, button = button: change_button_color(button))

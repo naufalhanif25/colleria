@@ -138,7 +138,7 @@ def transcriber_tool(root, frame):
 
         # If there is a previously pressed button, reset its color
         if LAST_PRESSED is not None:
-            LAST_PRESSED.configure(fg_color = main.FRAME_COLOR, hover_color = main.ENTRY_COLOR, text_color = main.FADED_TEXT_COLOR, 
+            LAST_PRESSED.configure(fg_color = main.BASE_COLOR, hover_color = main.ENTRY_COLOR, text_color = main.FADED_TEXT_COLOR, 
                                    border_width = 1, border_color = main.BORDER_COLOR)
 
         # Change the color of the currently pressed button
@@ -151,7 +151,7 @@ def transcriber_tool(root, frame):
     # Function to create a language selection button
     def lang_button(text, row, column, frame):
         button = ctk.CTkButton(frame, text = text, font = (main.FONT, 10, "bold"), border_color = main.BORDER_COLOR, 
-                               text_color = main.FADED_TEXT_COLOR, fg_color = main.FRAME_COLOR, height = 24, width = 86,
+                               text_color = main.FADED_TEXT_COLOR, fg_color = main.BASE_COLOR, height = 24, width = 86,
                                border_width = 1, hover_color = main.ENTRY_COLOR, command = lambda: change_button_color(button))
         button.grid(row = 0, column = column, padx = 4, pady = 4, sticky = "nsew")
         button.bind("<Button-1>", lambda event: lang(event, button))
