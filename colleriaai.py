@@ -4,7 +4,7 @@ import colleriaai_frame as caf
 import is_widget
 
 # Load model
-MODEL = "llama-3.3-70b-versatile"
+MODEL = "llama-3.1-70b-versatile"
 MODEL_NAME = MODEL.replace("-", " ").title()
 
 # Declare global variable FRAME
