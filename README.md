@@ -45,7 +45,7 @@
 | **TaskFlow** | TaskFlow is a feature for creating to-do lists and marking completed tasks as done. |
 | **DocLab** | DocLab is a feature that can be used to convert any document to other formats. |
 | **Transcriberia** | Transcriber is a feature that can transcribe a video of any length into text in a short time. Transcriberia is powered by Google Speech Recognition. |
-| **Researchia** | Researcheria is a feature that is very suitable for students who want to search for journals or literature quickly with clear and reliable sources. |
+| **Researcheria** | Researcheria is a feature that is very suitable for students who want to search for journals or literature quickly with clear and reliable sources. |
 | **Collenguist** | Collenguist is a feature for translating languages ​​powered by Google Translate. |
 | **Colleria.AI** | Colleria.AI is a free and open source artificial intelligence that can be used to ask any question. Colleria.AI uses the Llama 3.1 70B Versatile model. |
 | **YT Courier** | YT Courier is a feature that can be used to download videos from YouTube. |
