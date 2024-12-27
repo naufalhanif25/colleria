@@ -311,7 +311,7 @@ pip install gtts
 2. Add **Python 3** to `PATH`
 3. Download and install **Git** at [Git](https://git-scm.com/downloads)
 4. Clone the repository, `git clone https://github.com/naufalhanif25/colleria.git`
-5. Run `set-up.bat` to install the required libraries.
+5. Run `setup.bat` to install the required libraries.
 6. Run `run.bat` to run **Colleria**
 
 <!-- Donation -->

@@ -179,8 +179,8 @@ def collenguist_tool(root, frame):
             popup.open_popup("Copied to clipboard", True)
             
     # Function to convert text to speech and play it
-    def say(text, role):        
-        def say_text():
+    def listen(text, role):        
+        def listen_speech():
             # Dictionary mapping language names to their TTS language codes
             TTS_LANG = {"English" : "en",
                         "French" : "fr",
@@ -218,7 +218,7 @@ def collenguist_tool(root, frame):
                         os.remove(path)  # Remove the temporary file
         
         # Create and start a new thread to run the say_text function
-        thread = threading.Thread(target = say_text)
+        thread = threading.Thread(target = listen_speech)
         
         thread.start()
 
@@ -234,11 +234,11 @@ def collenguist_tool(root, frame):
     domain_buttons_frame.grid(row = 0, column = 0, padx = 0, pady = 0, sticky = "e")
     domain_buttons_frame.grid_rowconfigure(0, weight = 1)
     
-    # Create the "Say" button for the domain language
-    domain_say_button = ctk.CTkButton(domain_buttons_frame, text = "Say", font = (main.FONT, 10, "bold"), fg_color = main.FG_COLOR, 
+    # Create the "Listen" button for the domain language
+    domain_listen_button = ctk.CTkButton(domain_buttons_frame, text = "Listen", font = (main.FONT, 10, "bold"), fg_color = main.FG_COLOR, 
                                       hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, height = 24, width = 64, border_width = 0, 
-                                      command = lambda: say(input_box.get("1.0", "end-1c"), "domain"))
-    domain_say_button.grid(row = 0, column = 0, padx = (0, 4), pady = 0, sticky = "e")
+                                      command = lambda: listen(input_box.get("1.0", "end-1c"), "domain"))
+    domain_listen_button.grid(row = 0, column = 0, padx = (0, 4), pady = 0, sticky = "e")
     
     # Create the "Copy" button for the domain language
     domain_copy_button = ctk.CTkButton(domain_buttons_frame, text = "Copy", font = (main.FONT, 10, "bold"), fg_color = main.FG_COLOR, 
@@ -251,11 +251,11 @@ def collenguist_tool(root, frame):
     target_buttons_frame.grid(row = 0, column = 1, padx = 0, pady = 0, sticky = "e")
     target_buttons_frame.grid_rowconfigure(0, weight = 1)
     
-    # Create the "Say" button for the target language
-    target_say_button = ctk.CTkButton(target_buttons_frame, text = "Say", font = (main.FONT, 10, "bold"), fg_color = main.FG_COLOR, 
+    # Create the "Listen" button for the target language
+    target_listen_button = ctk.CTkButton(target_buttons_frame, text = "Listen", font = (main.FONT, 10, "bold"), fg_color = main.FG_COLOR, 
                                       hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, height = 24, width = 64, border_width = 0, 
-                                      command = lambda: say(output_box.get("1.0", "end-1c"), "target"))
-    target_say_button.grid(row = 0, column = 0, padx = (12, 4), pady = 0, sticky = "e")
+                                      command = lambda: listen(output_box.get("1.0", "end-1c"), "target"))
+    target_listen_button.grid(row = 0, column = 0, padx = (12, 4), pady = 0, sticky = "e")
     
     # Create the "Copy" button for the target language
     target_copy_button = ctk.CTkButton(target_buttons_frame, text = "Copy", font = (main.FONT, 10, "bold"), fg_color = main.FG_COLOR, 
