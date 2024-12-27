@@ -144,7 +144,7 @@ def yt_courier_tool(root, frame):
     # Function to start the transcription process in a separate thread
     def run_yt_courier():
         """
-        Starts the document conversion process in a separate thread to avoid blocking the GUI.
+        Starts the YT Courier process in a separate thread to avoid blocking the GUI.
         """
 
         def check_internet_connection(url = "http://www.google.com/"):
@@ -160,7 +160,7 @@ def yt_courier_tool(root, frame):
                 response = requests.get(url, timeout = 5)  # Send an HTTP request with a timeout of 5 seconds
 
                 if response.status_code == 200:
-                    # If the connection is successful, start a thread to run the 'convert' function
+                    # If the connection is successful, start a thread to run the 'yt_courier' function
                     thread = threading.Thread(target = yt_courier)
 
                     thread.start()

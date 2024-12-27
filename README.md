@@ -41,14 +41,14 @@
 <!-- Features table -->
 | Feature | Description |
 | --- | --- |
-| **Notepedia** | Notepedia is a notes feature that can be used to record daily tasks, make small notes, diary, or create a to-do list. |
-| **TaskFlow** | TaskFlow is a feature for creating to-do lists and marking completed tasks as done. |
-| **DocLab** | DocLab is a feature that can be used to convert any document to other formats. |
-| **Transcriberia** | Transcriber is a feature that can transcribe a video of any length into text in a short time. Transcriberia is powered by Google Speech Recognition. |
+| **Notepedia** | Notepedia is a notes feature that can be used to record daily assignments, small notes, lesson summaries, or diaries. |
+| **TaskFlow** | TaskFlow is a feature for creating task lists and marking completed tasks as done. |
+| **DocLab** | DocLab is a feature that can be used to convert any document into other formats. |
+| **Transcriberia** | Transcriberia is a feature based on Google Speech Recognition that can transcribe videos of any length into text in a short time. |
 | **Researcheria** | Researcheria is a feature that is very suitable for students who want to search for journals or literature quickly with clear and reliable sources. |
-| **Collenguist** | Collenguist is a feature for translating languages ​​powered by Google Translate. |
-| **Colleria.AI** | Colleria.AI is a free and open source artificial intelligence that can be used to ask any question. Colleria.AI uses the Llama 3.1 70B Versatile model. |
-| **YT Courier** | YT Courier is a feature that can be used to download videos from YouTube. |
+| **Collenguist** | Collenguist is a language translation feature based on Google Translate. |
+| **Colleria.AI** | Colleria.AI is a free artificial intelligence that can be used to ask any question. Colleria.AI uses the Llama 3.1 70B Versatile model from Meta. |
+| **YT Courier** | YT Courier is a feature that can be used to download any video from YouTube just by using the video URL. |
 
 <!-- List of libraries and installation commands -->
 <h3>

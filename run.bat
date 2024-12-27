@@ -1,2 +1,3 @@
 @echo off
+echo Running Colleria...
 python main.py

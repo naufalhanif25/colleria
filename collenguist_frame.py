@@ -5,6 +5,7 @@ from deep_translator import GoogleTranslator
 from gtts import gTTS
 import playsound 
 import threading
+import requests
 import os
 import cleaner
 import main
@@ -272,30 +273,55 @@ def collenguist_tool(root, frame):
     # Function to translate the text
     def translate(event = None): 
         """
-        This function is used to start translating 
-        a text into another language.
+        This function is used to start translating a text into another language.
         """
-        def do_translate():
-            # Check if frame is destroyed if 
-            if is_widget.is_exist(FRAME): 
-                return  # If the frame is destroyed, exit the function
-    
-            text = input_box.get("1.0", tk.END)
+        
+        def check_internet_connection(url = "http://www.google.com/"):
+            """
+            This function checks the internet connection by sending an HTTP request to the provided URL.
+            If the connection is successful, it will start a thread to run the 'do_translate' function.
+            If the connection fails, it will show a popup message to check the internet connection.
 
-            translator = GoogleTranslator(source = LANG[DOMAIN], target = LANG[TARGET])
-            translation = translator.translate(text)
+            param url: URL used to check the internet connection. Default is http://www.google.com/
+            """
+            
+            # Function to translate languages
+            def do_translate():
+                # Check if frame is destroyed if 
+                if is_widget.is_exist(FRAME): 
+                    return  # If the frame is destroyed, exit the function
+        
+                text = input_box.get("1.0", tk.END)
 
-            cur_translation = output_box.get("1.0", tk.END).strip()
+                translator = GoogleTranslator(source = LANG[DOMAIN], target = LANG[TARGET])
+                translation = translator.translate(text)
 
-            if translation != cur_translation:
-                output_box.configure(state = "normal")
-                output_box.delete("1.0", tk.END)
-                output_box.insert(tk.END, translation)
-                output_box.configure(state = "disabled")
+                cur_translation = output_box.get("1.0", tk.END).strip()
 
-        # Create and start a new thread for the translation process
-        thread = threading.Thread(target = do_translate)
+                if translation != cur_translation:
+                    output_box.configure(state = "normal")
+                    output_box.delete("1.0", tk.END)
+                    output_box.insert(tk.END, translation)
+                    output_box.configure(state = "disabled")
 
+            try:
+                response = requests.get(url, timeout = 5)  # Send an HTTP request with a timeout of 5 seconds
+
+                if response.status_code == 200:
+                    # If the connection is successful, start a thread to run the 'do_translate' function
+                    thread = threading.Thread(target = do_translate)
+
+                    thread.start()
+                else:
+                    # If the connection fails (status code is not 200), show a popup message
+                    popup.open_popup("Unable to perform request.\nPlease check your internet connection", True)
+            except requests.ConnectionError:
+                # If a connection error occurs, show a popup message
+                popup.open_popup("Unable to perform request.\nPlease check your internet connection", True)
+
+        # Create and start a new thread to check the internet connection and start the translation process
+        thread = threading.Thread(target = check_internet_connection)
+        
         thread.start()
 
     # Bind the translate function to the KeyRelease event on the input box
