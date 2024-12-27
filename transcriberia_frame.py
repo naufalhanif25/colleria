@@ -201,8 +201,7 @@ def transcriber_tool(root, frame):
 
     # Label to display the transcription progress
     loading_label = ctk.CTkLabel(result_frame, text = "Transcribing (0.0%)", font = (main.FONT, 16, "bold"), text_color = main.FADED_LABEL_COLOR) 
-    loading_label.grid(row = 0, column = 0, padx = int((result_frame.winfo_reqwidth() / 2)), pady = int((result_frame.winfo_reqheight() / 2) + 16), 
-                    sticky = "nsew") 
+    loading_label.grid(row = 0, column = 0, padx = 16, pady = 16, sticky = "nsew") 
     loading_label.grid_forget()  # Hide the label initially
 
     # Textbox to display the transcription result
@@ -245,8 +244,7 @@ def transcriber_tool(root, frame):
             result_box.grid(row = 0, column = 0, padx = 12, pady = 12, sticky = "nsew")
         else:
             # Display loading label and hide the result box
-            loading_label.grid(row = 0, column = 0, padx = int((result_frame.winfo_reqwidth() / 2)), pady = int((result_frame.winfo_reqheight() / 2)), 
-                        sticky = "nsew")
+            loading_label.grid(row = 0, column = 0, padx = 16, pady = 16, sticky = "nsew") 
             result_box.grid_forget()
             
             # Call the transcriber function to process the video
