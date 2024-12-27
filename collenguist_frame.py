@@ -216,6 +216,8 @@ def collenguist_tool(root, frame):
                     # Handle permission error if it occurs
                     if os.path.isfile(path):
                         os.remove(path)  # Remove the temporary file
+            else:
+                popup.open_popup("No translation available", True)
         
         # Create and start a new thread to run the say_text function
         thread = threading.Thread(target = listen_speech)
