@@ -28,3 +28,5 @@ pip install sounddevice
 pip install soundfile
 pip install datetime
 pip install pywinstyles
+pip install deep-translator
+pip install gtts

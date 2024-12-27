@@ -68,7 +68,7 @@ def colleriaai_tool(root, frame):
         colleriaai_label = ctk.CTkLabel(frame, text = "Colleria.AI", font = (main.FONT, 24, "bold"), text_color = main.TEXT_COLOR)
         colleriaai_label.grid(row = 0, column = 0, padx = 24, pady = (24, 0), sticky = "nsew")
 
-        model_label = ctk.CTkLabel(frame, text = f"with {colleriaai.MODEL_NAME}", font = (main.FONT, 12, "bold"), text_color = main.TEXT_COLOR)
+        model_label = ctk.CTkLabel(frame, text = f"with {colleriaai.MODEL_NAME}", font = (main.FONT, 12, "normal"), text_color = main.TEXT_COLOR)
         model_label.grid(row = 1, column = 0, padx = 24, pady = (0, 8), sticky = "nsew")
 
         # Create a frame as a container

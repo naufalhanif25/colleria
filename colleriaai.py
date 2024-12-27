@@ -14,7 +14,7 @@ FRAME = None
 def colleriaai(frame, prompt):
     """
     This function contains the algorithm for running 
-    the Llama 3.3 70B Instruct Turbo AI model on which 
+    the Llama 3.1 70B Versatile AI model on which 
     the ColleriaAI is based
     """
 

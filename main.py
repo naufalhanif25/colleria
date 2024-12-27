@@ -5,6 +5,7 @@ import notepedia_frame as npf
 import doclab_frame as dlf
 import transcriberia_frame as tf
 import researcheria_frame as rf
+import collenguist_frame as clf
 import colleriaai_frame as caf
 import yt_courier_frame as ytcf
 import taskflow_frame as tff
@@ -14,30 +15,6 @@ import aboutus_popup
 import cleaner
 import webbrowser
 import getpath
-
-# Language options available for transcription
-LANG = {"Afrikaans" : "af-ZA",
-        "Arabic" : "ar-SA",
-        "Chinese" : "cmn-Hans-CN",
-        "Dutch" : "nl-NL",
-        "English (US)" : "en-US", 
-        "English (UK)" : "en-GB", 
-        "French" : "fr-FR", 
-        "German" : "de-DE",
-        "Hindi" : "hi-IN",
-        "Indonesian" : "id-ID", 
-        "Italian" : "it-IT", 
-        "Japanese" : "ja-JP",
-        "Javanese" : "jv-ID", 
-        "Korean" : "ko-KR", 
-        "Malaysia" : "ms-MY",
-        "Portuguese" : "pt-PT", 
-        "Russian" : "ru-RU", 
-        "Spanish" : "es-ES",
-        "Sundanese" : "su-ID",
-        "Thai" : "th-TH",
-        "Turkish" : "tr-TR",
-        "Vietnamese" : "vi-VN"}
 
 # Color constants for the application interface
 BASE_COLOR = "#FFFFFF"
@@ -181,12 +158,13 @@ if __name__ == "__main__":
         LAST_PRESSED = button
 
     # Create the toollist buttons and commands
-    buttons = ["Notepedia", "TaskFlow", "DocLab", "Transcriberia", "Researcheria", "Colleria.AI", "YT Courier"]
+    buttons = ["Notepedia", "TaskFlow", "DocLab", "Transcriberia", "Researcheria", "Collenguist", "Colleria.AI", "YT Courier"]
     commands = [lambda: npf.notepedia_tool(root, tool_frame),
                 lambda: tff.taskflow_tool(root, tool_frame),
                 lambda: dlf.doclab_tool(root, tool_frame),
                 lambda: tf.transcriber_tool(root, tool_frame), 
                 lambda: rf.researcheria_tool(root, tool_frame),
+                lambda: clf.collenguist_tool(root, tool_frame),
                 lambda: caf.colleriaai_tool(root, tool_frame),
                 lambda: ytcf.yt_courier_tool(root, tool_frame)]
 
