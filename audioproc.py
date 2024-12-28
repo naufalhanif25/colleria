@@ -4,6 +4,8 @@ import numpy as np
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
 from scipy.signal import butter, lfilter
+from scipy.io import wavfile
+import noisereduce as nr
 import speech_recognition as sr
 import transcriberia
 import os
@@ -81,7 +83,9 @@ def super_trim(frame):
         # Export each chunk as a separate wav file
         for index, chunk in enumerate(audio_chunk):
             chunk_path = os.path.join(DIR, f"chunk_{index}.wav")
-            chunk.export(chunk_path, format = "wav", bitrate = BITRATE)
+            loader_chunk = chunk + 12  # Increases audio volume by 12 dB
+            
+            loader_chunk.export(chunk_path, format = "wav", bitrate = BITRATE)
 
 # Function to return the filter coefficients
 def butter_bandpass(lowcut, highcut, fs, order = 5):
@@ -107,8 +111,53 @@ def bandpass_filter(data, lowcut, highcut, fs, order = 5):
 
     return y
 
+# Function to reduce noise in audio file
+def reduce_noise(input_path, output_path, chunk_size = 100000):
+    """ 
+    Reduces noise in an audio file by processing it in chunks. 
+    Parameters: 
+    - input_path: str, path to the input audio file. 
+    - output_path: str, path to save the noise-reduced audio file. 
+    - chunk_size: int, size of each chunk to process (default is 100000). 
+    
+    The function reads the audio file, splits it into smaller chunks, 
+    reduces the noise in each chunk, and then concatenates and saves the result. 
+    """
+    
+    # Read the audio file
+    rate, data = wavfile.read(input_path)
+
+    # If the audio has more than one channel (stereo), take the first channel
+    if len(data.shape) > 1:
+        data = data[:, 0]
+    
+    reduced_data = []
+    
+    # Process the audio in chunks
+    for i in range(0, len(data), chunk_size):
+        chunk = data[i:i + chunk_size]
+        reduced_chunk = nr.reduce_noise(y = chunk, sr = rate)
+        
+        reduced_data.append(reduced_chunk)
+    
+    # Concatenate the processed chunks
+    reduced_data = np.concatenate(reduced_data, axis = 0)
+    
+    # Save the noise-reduced audio to the specified output path
+    wavfile.write(output_path, rate, reduced_data)
+
 # Function to denoiser the audio
 def audio_denoiser(frame, input_path):
+    """ 
+    Applies noise reduction and bandpass filter to the input audio file. 
+    Parameters: 
+    - frame: The frame of the application to check if it is destroyed. 
+    - input_path: str, path to the input audio file. 
+    
+    The function performs noise reduction, applies a bandpass filter, 
+    and saves the filtered audio to the specified output path. 
+    """
+    
     global FRAME
 
     FRAME = frame  # Assign the frame to the global variable FRAME
@@ -117,11 +166,14 @@ def audio_denoiser(frame, input_path):
     if is_widget.is_exist(FRAME): 
         return  # If the frame is destroyed, exit the function
 
-    LOWCUT = 300 # Low cutoff frequency for the bandpass filter in Hz
-    HIGHCUT = 3000 # High cutoff frequency for the bandpass filter in Hz
+    LOWCUT = 120 # Low cutoff frequency for the bandpass filter in Hz
+    HIGHCUT = 8000 # High cutoff frequency for the bandpass filter in Hz
+    
+    # Perform noise reduction on the input audio file
+    reduce_noise(input_path, transcriberia.OUT)
 
     # Load the audio file
-    audio_segment = AudioSegment.from_wav(input_path)
+    audio_segment = AudioSegment.from_wav(transcriberia.OUT)
 
     # Get the audio samples as a numpy array
     samples = np.array(audio_segment.get_array_of_samples()) 

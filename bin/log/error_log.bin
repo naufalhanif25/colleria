@@ -1,1 +1,1 @@
-An error occurred: name 'requests' is not defined
+Requests to the Google Speech Recognition service failed; recognition connection failed: [Errno 11001] getaddrinfo failed

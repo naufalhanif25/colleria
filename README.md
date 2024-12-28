@@ -302,6 +302,14 @@ pip install deep-translator
 pip install gtts
 ```
 
+<h5>
+    <p>32. noisereduce</p>
+</h5>
+
+```
+pip install noisereduce
+```
+
 <!-- Setup -->
 <h3>
     <b>How to set up Colleria? 🛠️</b>
