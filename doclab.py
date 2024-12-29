@@ -243,7 +243,6 @@ def doclab(frame, input_path, output_path, input_ext, output_ext):
 
         with open(output_path, "wb") as pdf:
             pdf.write(pdf_chunks)
-            pdf.close()
 
         image.close()
 

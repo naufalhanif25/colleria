@@ -89,7 +89,6 @@ def run_courier(frame, textbox, url, output_path = "C:/Users/ASUS/Downloads", qu
                 text = f"An error occurred: {e}"
 
                 file.write(text.encode("utf-8"))
-                file.close()
 
             # Displays the log in the log box (textbox)
             log_message(f"[ERROR] A connection error occurred during the speed test")
@@ -101,7 +100,6 @@ def run_courier(frame, textbox, url, output_path = "C:/Users/ASUS/Downloads", qu
                 text = f"An error occurred: {e}"
 
                 file.write(text.encode("utf-8"))
-                file.close()
 
             # Displays the log in the log box (textbox)
             log_message(f"[ERROR] An error occurred during the speed test")
@@ -126,7 +124,6 @@ def run_courier(frame, textbox, url, output_path = "C:/Users/ASUS/Downloads", qu
                 text = f"An error occurred: {e}"
 
                 file.write(text.encode("utf-8"))
-                file.close()
 
             # Displays the log in the log box (textbox)
             log_message(f"[ERROR] Failed to get the video title [saved to: {error_log}]")
@@ -211,7 +208,6 @@ def run_courier(frame, textbox, url, output_path = "C:/Users/ASUS/Downloads", qu
             text = "Video stream not found"
 
             file.write(text.encode("utf-8"))
-            file.close()
 
         # Displays the log in the log box (textbox)
         log_message(f"[ERROR] Failed to download the video [saved to: {error_log}]")
@@ -234,7 +230,6 @@ def run_courier(frame, textbox, url, output_path = "C:/Users/ASUS/Downloads", qu
             text = "Audio stream not found"
 
             file.write(text.encode("utf-8"))
-            file.close()
 
         # Displays the log in the log box (textbox)
         log_message(f"[ERROR] Failed to download the audio [saved to: {error_log}]")
@@ -282,7 +277,6 @@ def run_courier(frame, textbox, url, output_path = "C:/Users/ASUS/Downloads", qu
             text = f"An error occurred: {e}"
 
             file.write(text.encode("utf-8"))
-            file.close()
 
         # Displays the log in the log box (textbox)
         log_message(f"[ERROR] Failed to combine video and audio [saved to: {error_log}]")

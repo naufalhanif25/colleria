@@ -24,9 +24,6 @@ def clean_file():
         with open(path, "wb") as file:
             pass
         
-        # Close the file after cleaning (not strictly necessary as the 'with' statement handles it)
-        file.close()
-
     # Deletes audio and video in temp directory if files exist
     for file_path in ["temp/video.mp4", "temp/audio.mp4"]:
         file_path = getpath.base(file_path)  # Get the absolute path of the file

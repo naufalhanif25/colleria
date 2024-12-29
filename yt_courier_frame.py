@@ -127,9 +127,6 @@ def yt_courier_tool(root, frame):
             quality = file.read()  # Read the quality setting from the file
             quality = quality.decode("utf-8")  # Decode the binary data to a UTF-8 string
 
-            # Close the file (this is done automatically with the 'with' statement)
-            file.close()
-
         # Check if the URL, output path, and quality are not empty
         if (url != "" and url != "Enter the YouTube URL") and (output_path != "" and output_path != "Browse path") and quality != "":
             # Run the courier function with the provided URL, output path, and quality
@@ -231,8 +228,6 @@ def yt_courier_tool(root, frame):
         with open(q_path, "wb") as file:
             if button_name in QUALITY:
                 file.write(button_name.encode("utf-8"))
-
-            file.close()
 
     # Function to create a quality selection button
     def quality_button(text, row, column, frame):

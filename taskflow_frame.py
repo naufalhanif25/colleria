@@ -256,7 +256,6 @@ def taskflow_tool(root, frame):
                 text = "Task log file not found. Starting with an empty task list"
 
                 file.write(text.encode("utf-8"))
-                file.close()
 
     # Load tasks from file when the program starts
     load_tasks()

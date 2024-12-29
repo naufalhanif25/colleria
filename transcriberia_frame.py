@@ -96,7 +96,7 @@ def transcriber_tool(root, frame):
     def on_drop(event): 
         path = event.data.strip("{}")
         extension = os.path.splitext(path)[1]
-        name = os.path.basename(path)
+        name = os.path.basename(path).lower()
 
         if extension not in VID_EXT:
             entry_var.set("Extension is not supported")
@@ -104,7 +104,6 @@ def transcriber_tool(root, frame):
         else:
             with open(path_log, "wb") as file:
                 file.write(path.encode("utf-8"))
-                file.close()
 
             entry.configure(state = "normal")
             entry_var.set(name) 
@@ -121,7 +120,7 @@ def transcriber_tool(root, frame):
     entry.dnd_bind('<<Drop>>', on_drop)
 
     # Label to display supported video file extensions
-    ext_label = ctk.CTkLabel(frame, text = f"Extension: {", ".join(VID_EXT)}", font = (main.FONT, 10, "normal"), text_color = main.FADED_LABEL_COLOR)
+    ext_label = ctk.CTkLabel(frame, text = f"Extension: {", ".join(sorted(VID_EXT))}", font = (main.FONT, 10, "normal"), text_color = main.FADED_LABEL_COLOR)
     ext_label.grid(row = 3, column = 0, padx = 12, pady = 0, sticky = "nsew")
 
     # Language selection frames and canvases
@@ -159,8 +158,6 @@ def transcriber_tool(root, frame):
                 bin_lang = LANG[button_name]
 
                 file.write(bin_lang.encode("utf-8"))
-
-            file.close()
 
     # Function to change the color of the pressed button
     def change_button_color(button):
@@ -227,14 +224,10 @@ def transcriber_tool(root, frame):
             path = file.read()
             path = path.decode("utf-8")
 
-            file.close()
-
         # Read the language from the log file
         with open(lang_path, "rb") as file:
             lang = file.read()
             lang = lang.decode("utf-8")
-
-            file.close()
 
         # Check if the path or language is empty
         if path == "" or lang == "":
@@ -269,8 +262,6 @@ def transcriber_tool(root, frame):
 
                     loading_label.grid_forget()
                     result_box.grid(row = 0 , column = 0, padx = 12, pady = 12, sticky = "nsew")
-
-                file.close()
 
     # Function to start the transcription process in a separate thread
     def start_transcribe():

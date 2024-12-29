@@ -136,20 +136,17 @@ def transcriber(frame, video_path, lang, label, label_text):
                     bin_text = text.encode("utf-8")
 
                     file.write(bin_text)
-                    file.close()
 
             except sr.UnknownValueError:
                 with open(error_path, "wb") as file:
                     text = "Audio not recognized"
 
                     file.write(text.encode("utf-8"))
-                    file.close()
             except sr.RequestError as e:
                 with open(error_path, "wb") as file:
                     text = f"Requests to the Google Speech Recognition service failed; {e}"
                     
                     file.write(text.encode("utf-8"))
-                    file.close()
 
             # Update the percentage label in the GUI
             percentage_label(label, label_text, 0) 

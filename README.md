@@ -47,6 +47,7 @@
 | **Transcriberia** | Transcriberia is a feature based on Google Speech Recognition that can transcribe videos of any length into text in a short time. |
 | **Researcheria** | Researcheria is a feature that is very suitable for students who want to search for journals or literature quickly with clear and reliable sources. |
 | **Collenguist** | Collenguist is a language translation feature based on Google Translate. |
+| **SmartLens** | SmartLens is a feature that can extract text from images, but this feature only works well for English |
 | **Colleria.AI** | Colleria.AI is a free artificial intelligence that can be used to ask any question. Colleria.AI uses the Llama 3.1 70B Versatile model from Meta. |
 | **YT Courier** | YT Courier is a feature that can be used to download any video from YouTube just by using the video URL. |
 
@@ -310,6 +311,22 @@ pip install gtts
 pip install noisereduce
 ```
 
+<h5>
+    <p>33. pytesseract</p>
+</h5>
+
+```
+pip install pytesseract
+```
+
+<h5>
+    <p>34. textblob</p>
+</h5>
+
+```
+pip install textblob
+```
+
 <!-- Setup -->
 <h3>
     <b>How to set up Colleria? 🛠️</b>
@@ -318,9 +335,10 @@ pip install noisereduce
 1. Download and install **Python 3** at [Python](https://www.python.org)
 2. Add **Python 3** to `PATH`
 3. Download and install **Git** at [Git](https://git-scm.com/downloads)
-4. Clone the repository, `git clone https://github.com/naufalhanif25/colleria.git`
-5. Run `setup.bat` to install the required libraries.
-6. Run `run.bat` to run **Colleria**
+4. Download and install **Tesseract OCR** at [Sourceforge](https://sourceforge.net/projects/tesseract-ocr.mirror/) and install it to `C:\Program Files\Tesseract-OCR`
+5. Clone the repository, `git clone https://github.com/naufalhanif25/colleria.git`
+6. Run `setup.bat` to install the required libraries.
+7. Run `run.bat` to run **Colleria**
 
 <!-- Donation -->
 <h2>

@@ -2,6 +2,7 @@ How to set up Colleria:
 1. Download and install Python 3 at https://www.python.org
 2. Add Python 3 to PATH
 3. Download and install Git at https://git-scm.com/downloads
-4. Clone the repository, git clone https://github.com/naufalhanif25/colleria.git
-5. Run setup.bat to install the required libraries.
-6. Run run.bat to run Colleria
+4. Download and install Tesseract OCR at https://sourceforge.net/projects/tesseract-ocr.mirror/ and install it to C:\Program Files\Tesseract-OCR
+5. Clone the repository, git clone https://github.com/naufalhanif25/colleria.git
+6. Run setup.bat to install the required libraries.
+7. Run run.bat to run Colleria

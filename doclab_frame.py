@@ -97,7 +97,7 @@ def doclab_tool(root, frame):
     doclab_label = ctk.CTkLabel(frame, text = "DocLab", font = (main.FONT, 24, "bold"), text_color = main.TEXT_COLOR)
     doclab_label.grid(row = 0, column = 0, padx = 24, pady = (24, 16), sticky = "nsew")\
     
-    # Variable to store the path of the dropped video file
+    # Variable to store the path of the dropped document file
     entry_var = ctk.StringVar()
     entry_var.set("Drop File Here")
 
@@ -105,7 +105,7 @@ def doclab_tool(root, frame):
     def on_drop(event): 
         path = event.data.strip("{}")
         extension = os.path.splitext(path)[1]
-        name = os.path.basename(path)
+        name = os.path.basename(path).lower()
 
         if extension not in list(set(DICT_KEYS)):
             entry_var.set("Extension is not supported")
@@ -113,13 +113,12 @@ def doclab_tool(root, frame):
         else:
             with open(getpath.base("bin/log/path_log.bin"), "wb") as file:
                 file.write(path.encode("utf-8"))
-                file.close()
 
             entry.configure(state = "normal")
             entry_var.set(name) 
             entry.configure(state = "disabled")
 
-    # Entry widget for drag-and-drop video files
+    # Entry widget for drag-and-drop document files
     entry = ctk.CTkEntry(frame, textvariable = entry_var, height = 160, justify = "center", width = 860, corner_radius = 8,
                             font = (main.FONT, 16, "bold"), text_color = main.FADED_TEXT_COLOR, border_color = main.BORDER_COLOR,
                             border_width = 2, fg_color = main.ENTRY_COLOR) 
@@ -129,7 +128,7 @@ def doclab_tool(root, frame):
     entry.drop_target_register(DND_FILES) 
     entry.dnd_bind('<<Drop>>', on_drop)
 
-    # Label to display supported video file extensions
+    # Label to display supported document file extensions
     ext_label = ctk.CTkLabel(frame, text = f"Extension: {", ".join(sorted(list(set(itertools.chain(DICT_VALUES, DICT_KEYS)))))}", 
                              font = (main.FONT, 10, "normal"), text_color = main.FADED_LABEL_COLOR)
     ext_label.grid(row = 2, column = 0, padx = 12, pady = 0, sticky = "nsew")
@@ -240,8 +239,6 @@ def doclab_tool(root, frame):
             if button_name in sorted(list(set(DICT_VALUES))):
                 file.write(button_name.encode("utf-8"))
 
-            file.close()
-
     # Function to change the color of the pressed button
     def change_button_color(button):
         global LAST_PRESSED
@@ -294,14 +291,10 @@ def doclab_tool(root, frame):
             path = file.read()
             path = path.decode("utf-8")
 
-            file.close()
-
         # Read the extension path from the log file
         with open(ext_path, "rb") as file:
             FILE_EXT = file.read()
             FILE_EXT = FILE_EXT.decode("utf-8")
-
-            file.close()
         
         output_path = output_entry_var.get()
 
@@ -362,7 +355,7 @@ def doclab_tool(root, frame):
             
             thread.start()
 
-    # Function to start the transcription process in a separate thread
+    # Function to start the conversion process in a separate thread
     def run_doclab():
         """
         Starts the document conversion process in a separate thread to avoid blocking the GUI.

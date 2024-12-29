@@ -45,8 +45,6 @@ def colleriaai_tool(root, frame):
         KEY = file.read()  # Read the API key from the file
         KEY = KEY.decode("utf-8")
 
-        file.close()
-
     # Function to display the page when the API key is available
     def key_entered(root, frame):
         # Clean specific files using the cleaner module
@@ -360,7 +358,6 @@ def colleriaai_tool(root, frame):
                         KEY = api_key
 
                         file.write(KEY.encode("utf-8"))
-                        file.close()
 
                     key_entered(root, frame)
                 else:

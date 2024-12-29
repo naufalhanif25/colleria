@@ -31,3 +31,5 @@ pip install pywinstyles
 pip install deep-translator
 pip install gtts
 pip install noisereduce
+pip install pytesseract
+pip install textblob
