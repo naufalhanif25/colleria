@@ -290,7 +290,7 @@ def colleriaai_tool(root, frame):
         colleriaai_label.grid(row = 0, column = 0, padx = 24, pady = (24, 0), sticky = "nsew")
 
         # Add a label for the colleria ai tool frame
-        getstarted_label = ctk.CTkLabel(frame, text = "Enter your API key to get started ✨", font = (main.FONT, 18, "bold"), 
+        getstarted_label = ctk.CTkLabel(frame, text = "Enter your API key to get started \u2728", font = (main.FONT, 18, "bold"), 
                                         text_color = main.FADED_TEXT_COLOR)
         getstarted_label.grid(row = 1, column = 0, padx = 24, pady = (132, 0), sticky = "nsew")
 

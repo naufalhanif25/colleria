@@ -65,11 +65,11 @@ def researcheria_tool(root, frame):
 
     # Add a label for the researcheria tool frame
     researcheria_label = ctk.CTkLabel(frame, text = "Researcheria", font = (main.FONT, 24, "bold"), text_color = main.TEXT_COLOR)
-    researcheria_label.grid(row = 0, column = 0, padx = 24, pady = (24, 16), sticky = "nsew")
+    researcheria_label.grid(row = 0, column = 0, padx = 24, pady = (24, 8), sticky = "nsew")
 
     # Create a frame for the search entry
     search_frame = ctk.CTkFrame(frame, width = 240, height = 16, fg_color = main.FRAME_COLOR)
-    search_frame.grid(row = 1, column = 0, padx = 160, pady = (8, 24), sticky = "nsew")
+    search_frame.grid(row = 1, column = 0, padx = 160, pady = (12, 16), sticky = "nsew")
     search_frame.grid_columnconfigure(0, weight = 1)
     search_frame.grid_rowconfigure(0, weight = 1)
     search_frame.grid_rowconfigure(2, weight = 1)
@@ -261,7 +261,7 @@ def researcheria_tool(root, frame):
             button = ctk.CTkButton(page_frame, text = str(index), font = (main.FONT, 12, "normal"), anchor = "center", border_color = main.FADED_TEXT_COLOR, 
                                    text_color = main.TEXT_COLOR, fg_color = main.BASE_COLOR, border_width = 1, hover_color = main.ENTRY_COLOR, 
                                    border_spacing = 4, command = lambda index = index: change_page(index)) 
-            button.grid(row = 0, column = index, padx = 4, pady = 4, sticky="nsew")
+            button.grid(row = 0, column = index, padx = 4, pady = (8, 16), sticky = "nsew")
 
             if index == 1:
                 change_button_color(button)
@@ -296,6 +296,8 @@ def researcheria_tool(root, frame):
             if len(RESULTS) == 0:
                 stop_animation()  # Stop the animation 
                 no_results_found(loading_label)  # Show a message indicating no results were found
+                
+                SEARCH = None  # Resets the values ​​of SEARCH
             elif RESULTS is None:
                 start_animation()  # Stop the animation 
 
@@ -304,6 +306,8 @@ def researcheria_tool(root, frame):
                 if len(RESULTS) == 0:
                     stop_animation()
                     no_results_found(loading_label)
+                    
+                    SEARCH = None  # Resets the values ​​of SEARCH
                 else:
                     stop_animation()  # Stop the animation 
                     create_buttons(CUR_PAGE)  # Create the buttons for the results

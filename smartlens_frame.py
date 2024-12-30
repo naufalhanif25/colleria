@@ -8,6 +8,7 @@ from textblob import TextBlob
 import threading
 import queue
 import requests
+import shutil
 import os
 import cleaner
 import main
@@ -74,8 +75,8 @@ def smartlens_tool(root, frame):
     # Function to handle the drop event for the entry widget
     def on_drop(event): 
         path = event.data.strip("{}")
-        extension = os.path.splitext(path)[1]
-        name = os.path.basename(path).lower()
+        extension = os.path.splitext(path)[1].lower()
+        name = os.path.basename(path)
 
         if extension not in EXT:
             entry_var.set("Extension is not supported")
@@ -110,7 +111,7 @@ def smartlens_tool(root, frame):
     
     # Create a switch
     switch_var = ctk.StringVar(value = 0)
-    switch = ctk.CTkSwitch(switch_frame, variable = switch_var, text = "Autocorrect", font = (main.FONT, 10, "normal"), text_color = main.TEXT_COLOR, 
+    switch = ctk.CTkSwitch(switch_frame, variable = switch_var, text = "Autocorrect (English)", font = (main.FONT, 10, "normal"), text_color = main.TEXT_COLOR, 
                            fg_color = main.SCROLLBAR_HOVER_COLOR, progress_color = main.FADED_BORDER_COLOR, button_color = main.FG_COLOR,
                            switch_height = 12, switch_width = 28, height = 12, width = 28, border_width = 0, button_hover_color = main.FG_HOVER_COLOR, 
                            offvalue = 0, onvalue = 1)
@@ -203,7 +204,13 @@ def smartlens_tool(root, frame):
         if is_widget.is_exist(FRAME): 
             return  # If the frame is destroyed, exit the function
     
-        ocr = "C:/Program Files/Tesseract-OCR/tesseract.exe"  # Tesseract OCR Path
+        # Automatically detect the Tesseract OCR Path
+        try:
+            ocr = shutil.which("tesseract")  # Tesseract OCR Path
+        except FileNotFoundError:
+            popup.open_popup("Tesseract OCR installation not found", True)
+            
+            return  # If Tesseract OCR is not installed, exit the function
         
         # Open and read the path from a binary file
         with open(getpath.base("bin/log/path_log.bin"), "rb") as file:
@@ -237,6 +244,7 @@ def smartlens_tool(root, frame):
                 final = text  # If the switch is off, use the original text
             
             result_box.configure(state = "normal")  # Enable editing the textbox
+            result_box.delete("1.0", tk.END)
             result_box.insert(tk.END, final)
             result_box.configure(state = "disabled")  # Disable editing the textbox
             

@@ -95,8 +95,8 @@ def transcriber_tool(root, frame):
     # Function to handle the drop event for the entry widget
     def on_drop(event): 
         path = event.data.strip("{}")
-        extension = os.path.splitext(path)[1]
-        name = os.path.basename(path).lower()
+        extension = os.path.splitext(path)[1].lower()
+        name = os.path.basename(path)
 
         if extension not in VID_EXT:
             entry_var.set("Extension is not supported")

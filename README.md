@@ -43,6 +43,7 @@
 | --- | --- |
 | **Notepedia** | Notepedia is a notes feature that can be used to record daily assignments, small notes, lesson summaries, or diaries. |
 | **TaskFlow** | TaskFlow is a feature for creating task lists and marking completed tasks as done. |
+| **SketchPad** | SketchPad is a feature that can be used to create sketches and paintings. |
 | **DocLab** | DocLab is a feature that can be used to convert any document into other formats. |
 | **Transcriberia** | Transcriberia is a feature based on Google Speech Recognition that can transcribe videos of any length into text in a short time. |
 | **Researcheria** | Researcheria is a feature that is very suitable for students who want to search for journals or literature quickly with clear and reliable sources. |
@@ -335,7 +336,7 @@ pip install textblob
 1. Download and install **Python 3** at [Python](https://www.python.org)
 2. Add **Python 3** to `PATH`
 3. Download and install **Git** at [Git](https://git-scm.com/downloads)
-4. Download and install **Tesseract OCR** at [Sourceforge](https://sourceforge.net/projects/tesseract-ocr.mirror/) and install it to `C:\Program Files\Tesseract-OCR`
+4. Download and install **Tesseract OCR** at [Sourceforge](https://sourceforge.net/projects/tesseract-ocr.mirror)
 5. Clone the repository, `git clone https://github.com/naufalhanif25/colleria.git`
 6. Run `setup.bat` to install the required libraries.
 7. Run `run.bat` to run **Colleria**

@@ -2,6 +2,8 @@
 import customtkinter as ctk
 from tkinterdnd2 import DND_FILES, TkinterDnD
 import notepedia_frame as npf
+import taskflow_frame as tff
+import sketchpad_frame as spf
 import doclab_frame as dlf
 import transcriberia_frame as tf
 import researcheria_frame as rf
@@ -9,8 +11,8 @@ import collenguist_frame as clf
 import smartlens_frame as slf
 import colleriaai_frame as caf
 import yt_courier_frame as ytcf
-import taskflow_frame as tff
-from PIL import Image
+from PIL import Image, ImageOps
+import pywinstyles
 import os
 import aboutus_popup
 import cleaner
@@ -119,7 +121,7 @@ if __name__ == "__main__":
 
     # Load the image using PIL and convert it to CTkImage
     image = Image.open(getpath.base("public/colleria.png"))
-    image = ctk.CTkImage(light_image = image, size = (160, 160))
+    image = ctk.CTkImage(light_image = image, size = (140, 140))
     
     # Add an icon label with the loaded image
     icon = ctk.CTkLabel(tool_frame, text = "", image = image)
@@ -131,12 +133,26 @@ if __name__ == "__main__":
                "effectively and efficiently")
 
     # Add a message label 
-    message_label = ctk.CTkLabel(tool_frame, text = message, font = (FONT, 16, "normal"), text_color = TEXT_COLOR)
-    message_label.grid(row = 3, column = 0, padx = 24, pady = (48, 0), sticky = "nsew")
+    message_label = ctk.CTkLabel(tool_frame, text = message, font = (FONT, 14, "normal"), text_color = TEXT_COLOR)
+    message_label.grid(row = 3, column = 0, padx = 24, pady = (36, 0), sticky = "nsew")
+    
+    # Add a support label 
+    support_label = ctk.CTkLabel(tool_frame, text = " Don't forget to support us by donating ", font = (FONT, 12, "normal"), text_color = TEXT_COLOR)
+    support_label.grid(row = 4, column = 0, padx = 24, pady = (16, 0), sticky = "nsew")
+    
+    pywinstyles.set_opacity(support_label, value = 0.75)  # Set the opacity of the support label
+    
+    # Load the logo using PIL and convert it to CTkImage
+    logo = Image.open(getpath.base("public/minku.png"))
+    logo = ctk.CTkImage(light_image = logo, size = (28, 28))
 
-    # Add a support label
-    support_label = ctk.CTkLabel(tool_frame, text = "Don't forget to support us by donating :)", font = (FONT, 14, "bold"), text_color = TEXT_COLOR)
-    support_label.grid(row = 4, column = 0, padx = 24, pady = (12, 0), sticky = "nsew")
+    # Add a logo label
+    logo_label = ctk.CTkLabel(tool_frame, text = "", image = logo)
+    logo_label.grid(row = 5, column = 0, padx = 24, pady = (0, 16), sticky = "s")
+    
+    pywinstyles.set_opacity(logo_label, value = 0.25)  # Set the opacity of the logo label
+    
+    tool_frame.grid_rowconfigure(5, weight = 1)
 
     # Label for the tool list
     menu_label = ctk.CTkLabel(toollist_container, text = "Tool List", font = (FONT, 16, "bold"), anchor = "w", text_color = TEXT_COLOR)
@@ -159,9 +175,10 @@ if __name__ == "__main__":
         LAST_PRESSED = button
 
     # Create the toollist buttons and commands
-    buttons = ["Notepedia", "TaskFlow", "DocLab", "Transcriberia", "Researcheria", "Collenguist", "SmartLens", "Colleria.AI", "YT Courier"]
+    buttons = ["Notepedia", "TaskFlow", "SketchPad", "DocLab", "Transcriberia", "Researcheria", "Collenguist", "SmartLens", "Colleria.AI", "YT Courier"]
     commands = [lambda: npf.notepedia_tool(root, tool_frame),
                 lambda: tff.taskflow_tool(root, tool_frame),
+                lambda: spf.sketchpad_tool(root, tool_frame),
                 lambda: dlf.doclab_tool(root, tool_frame),
                 lambda: tf.transcriber_tool(root, tool_frame), 
                 lambda: rf.researcheria_tool(root, tool_frame),

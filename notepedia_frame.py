@@ -14,9 +14,6 @@ PATH = ""
 NOTES = ""
 CHANGE = False
 
-# Hover color global variable
-HOVER_COLOR = "#DFE4EA"
-
 # Function to open the Notepedia frame
 def notepedia_tool(root, frame):
     """
