@@ -49,12 +49,13 @@ def open_popup(detail):
 
         text_box = ctk.CTkTextbox(popup, fg_color = main.BASE_COLOR, font = (main.FONT, 12, "normal"), border_color = main.FADED_LABEL_COLOR, 
                                   border_width = 1, text_color = main.TEXT_COLOR, scrollbar_button_color = main.SCROLLBAR_COLOR,
-                                  scrollbar_button_hover_color = main.SCROLLBAR_HOVER_COLOR, width = 320, height = 32)
+                                  scrollbar_button_hover_color = main.SCROLLBAR_HOVER_COLOR, width = 320, height = 32,
+                                  activate_scrollbars = True)
         text_box.grid(row = row, column = 1, padx = (8, 24), pady = pady, sticky = "e")
+
+        text_box.configure(wrap = "word")
         text_box.configure(state = "normal")  # Enable editing to insert text
-
-        text_box.insert("1.0", detail[row])
-
+        text_box.insert(ctk.END, detail[row])
         text_box.configure(state = "disabled")  # Disable editing after insertion
 
     # Function to get the value from the result box and copy it to the clipboard

@@ -205,7 +205,7 @@ def transcriber_tool(root, frame):
     result_box = ctk.CTkTextbox(result_frame, height = 120, fg_color = main.BASE_COLOR, font = (main.FONT, 12, "normal"), text_color = main.TEXT_COLOR, 
                                 scrollbar_button_color = main.SCROLLBAR_COLOR, scrollbar_button_hover_color = main.SCROLLBAR_HOVER_COLOR)
     result_box.grid(row = 0, column = 0, padx = 12, pady = 12, sticky = "nsew")
-    result_box.configure(state = "disabled")  # Disable editing the textbox
+    result_box.configure(state = "disabled", wrap = "word")  # Disable editing the textbox
     result_box.grid()
 
     # Configure the grid layout for the result_frame
@@ -236,6 +236,8 @@ def transcriber_tool(root, frame):
             loading_label.grid_forget()
             result_box.grid(row = 0, column = 0, padx = 12, pady = 12, sticky = "nsew")
         else:
+            root.configure(cursor = "watch")  # Change the shape of the cursor
+            
             # Display loading label and hide the result box
             loading_label.grid(row = 0, column = 0, padx = 16, pady = 16, sticky = "nsew") 
             result_box.grid_forget()
@@ -262,6 +264,8 @@ def transcriber_tool(root, frame):
 
                     loading_label.grid_forget()
                     result_box.grid(row = 0 , column = 0, padx = 12, pady = 12, sticky = "nsew")
+                    
+            root.configure(cursor = "arrow")  # Resets the cursor shape
 
     # Function to start the transcription process in a separate thread
     def start_transcribe():

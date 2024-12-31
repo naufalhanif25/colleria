@@ -1,8 +1,10 @@
 # Importing necessary libraries and modules
 import customtkinter as ctk
 import tkinter as tk
+from tkhtmlview import HTMLLabel
 import pywinstyles
 import webbrowser
+import markdown2
 import main
 import cleaner
 import colleriaai
@@ -15,6 +17,7 @@ import is_widget
 PROMPT = None  # To store the current prompt
 ANIM = False  # To control loading animation state
 KEY = None  # To store the api key
+RESPONSE = ""  # To store the response
 
 # Function to open the Notepedia frame
 def colleriaai_tool(root, frame):
@@ -31,12 +34,13 @@ def colleriaai_tool(root, frame):
     - frame: The current tool_frame to be replaced with the colleria ai tool interface
     """
 
-    global PROMPT, ANIM, KEY
+    global PROMPT, ANIM, KEY, RESPONSE
 
     # Resets variable values
     PROMPT = None
     ANIM = False
     KEY = None
+    RESPONSE = ""
 
     key_path = getpath.base("model/key.bin")
 
@@ -66,22 +70,24 @@ def colleriaai_tool(root, frame):
         colleriaai_label = ctk.CTkLabel(frame, text = "Colleria.AI", font = (main.FONT, 24, "bold"), text_color = main.TEXT_COLOR)
         colleriaai_label.grid(row = 0, column = 0, padx = 24, pady = (24, 0), sticky = "nsew")
 
+        # Add a label for the model name
         model_label = ctk.CTkLabel(frame, text = f"with {colleriaai.MODEL_NAME}", font = (main.FONT, 12, "normal"), text_color = main.TEXT_COLOR)
         model_label.grid(row = 1, column = 0, padx = 24, pady = (0, 8), sticky = "nsew")
 
         # Create a frame as a container
-        response_container = ctk.CTkFrame(frame, fg_color = main.BASE_COLOR, corner_radius = 8)
+        response_container = ctk.CTkFrame(frame, fg_color = main.BASE_COLOR, corner_radius = 16, border_width = 2, border_color = main.FADED_BORDER_COLOR)
         response_container.grid(row = 2, column = 0, padx = 120, pady = 0, sticky = "nsew")
         response_container.grid_columnconfigure(0, weight = 1)
         response_container.grid_rowconfigure(0, weight = 1)
 
-        # Create a frame for the response textbox
-        response_frame = ctk.CTkFrame(response_container, fg_color = main.BASE_COLOR, corner_radius = 0)
-        response_frame.grid(row = 0, column = 0, padx = 0, pady = 0, sticky = "nsew")
+        # Create a frame for the response label
+        response_frame = ctk.CTkScrollableFrame(response_container, fg_color = main.BASE_COLOR, scrollbar_fg_color = "transparent",  corner_radius = 16,
+                                                scrollbar_button_color = main.SCROLLBAR_COLOR, scrollbar_button_hover_color = main.SCROLLBAR_HOVER_COLOR)
+        response_frame.grid(row = 0, column = 0, padx = 6, pady = (6, 0), sticky = "nsew")
         response_frame.grid_columnconfigure(0, weight = 1)
         response_frame.grid_rowconfigure(0, weight = 1)
-
-        frame.grid_rowconfigure(2, weight = 1)
+        
+        frame.grid_rowconfigure(2, weight = 1)  # Ensure frame rows expand properly
 
         # Create a frame for the prompt entry and button
         prompt_frame = ctk.CTkFrame(frame, height = 64, fg_color = main.FRAME_COLOR)
@@ -92,31 +98,34 @@ def colleriaai_tool(root, frame):
         # Create a text variable for the prompt entry and set a placeholder text
         prompt_var = tk.StringVar() 
         prompt_var.set("Ask Colleria.AI")
-
-        # Textbox to display the response
-        response_box = ctk.CTkTextbox(response_frame, fg_color = main.BASE_COLOR, font = (main.FONT, 12, "normal"), text_color = main.TEXT_COLOR, 
-                                      scrollbar_button_color = main.SCROLLBAR_COLOR, scrollbar_button_hover_color = main.SCROLLBAR_HOVER_COLOR,
-                                      border_width = 0, corner_radius = 8)
-        response_box.grid(row = 0, column = 0, padx = 12, pady = (12, 0), sticky = "nsew")
-        response_box.configure(state = "disabled")
+        
+        # Create and configure the response label
+        response_label = HTMLLabel(response_frame, html = None)
+        response_label.grid(row = 0, column = 0, padx = 0, pady = 0, sticky = "nsew")
+        response_label.configure(background = main.BASE_COLOR)
+        
+        # Initially hide the response frame
+        response_frame.grid_forget()
 
         # Create a loading label to show the loading animation
         loading_label = ctk.CTkLabel(response_container, text = "Let me think for a moment", font = (main.FONT, 12, "normal"), 
-                                    text_color = main.FADED_LABEL_COLOR)
-        loading_label.grid(row = 0, column = 0, padx = 0, pady = (0, 320), sticky = "nsew")
+                                     text_color = main.FADED_LABEL_COLOR, corner_radius = 16)
+        loading_label.grid(row = 0, column = 0, padx = 6, pady = (6, 320), sticky = "nsew")
         loading_label.grid_forget()  # Hide the label initially
 
         # Create a button frame to hold the copy button
-        button_frame = ctk.CTkFrame(response_container, height = 28, fg_color = main.BASE_COLOR)
+        button_frame = ctk.CTkFrame(response_container, height = 24, fg_color = main.BASE_COLOR)
         button_frame.grid(row = 1, column = 0, padx = 12, pady = (0, 12), sticky = "e")
         button_frame.grid_forget()
         button_frame.grid_columnconfigure(0, weight = 1)
         button_frame.grid_rowconfigure(0, weight = 1)
 
+        # Ensure the response container expands properly
         response_container.grid(row = 2, column = 0, padx = 120, pady = (6, 8), sticky = "nsew")
         response_container.grid_rowconfigure(0, weight = 1)
         response_container.grid_columnconfigure(0, weight = 1)
 
+        # Ensure the main frame column expands properly
         frame.grid_columnconfigure(0, weight = 1)
 
         # Function to handle entry click (focus in)
@@ -162,34 +171,68 @@ def colleriaai_tool(root, frame):
 
         # Function to run the model with the user's prompt
         def colleria_ai(prompt):
-            response_box.grid_forget()
+            global RESPONSE
+
+            # Hide the response frame and button frame initially
+            response_frame.grid_forget()
             button_frame.grid_forget()
 
-            start_animation()
+            root.configure(cursor = "watch")  # Change the shape of the cursor
 
+            start_animation()  # Start the loading animation
+
+            # Configure and display the loading label
             loading_label.configure(text = "Let me think for a moment")
-            loading_label.grid(row = 0, column = 0, padx = 0, pady = (0, 320), sticky = "nsew")
+            loading_label.grid(row = 0, column = 0, padx = 6, pady = (6, 320), sticky = "nsew")
             
+            # Check if the prompt is not the default placeholder text
             if prompt_var.get() != "Ask Colleria.AI": 
-                prompt_entry.delete(0, tk.END)
+                prompt_entry.delete(0, tk.END)  # Clear the prompt entry field and reset focus
                 frame.focus()
-                prompt_entry.configure(text_color = main.TEXT_COLOR)
-                prompt_var.set("Ask Colleria.AI") 
+                prompt_entry.configure(text_color = main.TEXT_COLOR)  # Set the text color for the prompt entry
+                prompt_var.set("Ask Colleria.AI")  # Reset the prompt variable to default placeholder text
 
+                # Run the Colleria.AI model with the provided prompt
                 response = colleriaai.colleriaai(frame, str(prompt))
+                
+                # Convert the model's response from markdown to HTM
+                content = markdown2.markdown(response)
+                
+                # Store the response globally
+                RESPONSE = response
+                
+                # Apply custom styles to various HTML tags in the content
+                content = content.replace("<a>", f"<a style=\"font-size: 10px; font-family: {main.FONT}; color: {main.TEXT_COLOR};\">")
+                content = content.replace("<b>", f"<b style=\"font-size: 10px; font-family: {main.FONT}; color: {main.TEXT_COLOR};\">")
+                content = content.replace("<code>", f"<code style=\"font-size: 10px; color: {main.TEXT_COLOR};\">")
+                content = content.replace("<em>", f"<em style=\"font-size: 10px; font-family: {main.FONT}; color: {main.TEXT_COLOR};\">")
+                content = content.replace("<h1>", f"<h1 style=\"font-size: 18px; font-family: {main.FONT}; color: {main.TEXT_COLOR};\">")
+                content = content.replace("<h2>", f"<h2 style=\"font-size: 16px; font-family: {main.FONT}; color: {main.TEXT_COLOR};\">")
+                content = content.replace("<h3>", f"<h3 style=\"font-size: 14px; font-family: {main.FONT}; color: {main.TEXT_COLOR};\">")
+                content = content.replace("<h4>", f"<h4 style=\"font-size: 12px; font-family: {main.FONT}; color: {main.TEXT_COLOR};\">")
+                content = content.replace("<h5>", f"<h5 style=\"font-size: 10px; font-family: {main.FONT}; color: {main.TEXT_COLOR};\">")
+                content = content.replace("<h6>", f"<h6 style=\"font-size: 8px; font-family: {main.FONT}; color: {main.TEXT_COLOR};\">")
+                content = content.replace("<i>", f"<i style=\"font-size: 10px; font-family: {main.FONT}; color: {main.TEXT_COLOR};\">")
+                content = content.replace("<li>", f"<li style=\"font-size: 10px; font-family: {main.FONT}; color: {main.TEXT_COLOR};\">")
+                content = content.replace("<mark>", f"<mark style=\"font-size: 10px; color: {main.TEXT_COLOR};\">")
+                content = content.replace("<ol>", f"<ol style=\"font-size: 10px; font-family: {main.FONT}; color: {main.TEXT_COLOR};\">")
+                content = content.replace("<p>", f"<p style=\"font-size: 10px; font-family: {main.FONT}; color: {main.TEXT_COLOR};\">")
+                content = content.replace("<pre>", f"<pre style=\"font-size: 10px; font-family: {main.FONT}; color: {main.TEXT_COLOR};\">")
+                content = content.replace("<strong>", f"<strong style=\"font-size: 10px; font-family: {main.FONT}; color: {main.TEXT_COLOR};\">")
+                content = content.replace("<u>", f"<u style=\"font-size: 10px; font-family: {main.FONT}; color: {main.TEXT_COLOR};\">")
+                content = content.replace("<ul>", f"<ul style=\"font-size: 10px; font-family: {main.FONT}; color: {main.TEXT_COLOR};\">")
+                
+                # Set the HTML content for the response label and adjust its height
+                response_label.set_html(content)
+                response_label.fit_height()
 
-                response_box.configure(state = "normal")
-
-                if response_box.get("1.0", tk.END) != "":
-                    response_box.delete("1.0", tk.END)
-
-                response_box.insert(tk.END, response)
-                response_box.configure(state = "disabled")
-
-                stop_animation()
-
+                stop_animation()  # Stop the loading animation
+                
+                root.configure(cursor = "arrow")  # Resets the cursor shape
+                
+                # Hide the loading label and show the response frame and button frame
                 loading_label.grid_forget()
-                response_box.grid(row = 0, column = 0, padx = 12, pady = (12, 0), sticky = "nsew")
+                response_frame.grid(row = 0, column = 0, padx = 6, pady = (6, 0), sticky = "nsew")
                 button_frame.grid(row = 1, column = 0, padx = 12, pady = (0, 12), sticky = "e")
 
         # Function to run the colleria ai function
@@ -235,14 +278,15 @@ def colleriaai_tool(root, frame):
             If the response box is empty, it displays an error message.
             """
 
-            value = response_box.get("1.0", "end-1c")
-
-            if value == "":
+            # Check if the global RESPONSE variable is empty
+            if RESPONSE == "":
+                # If empty, open a popup to indicate no response is available
                 popup.open_popup("No response available", True)
             else:
-                root.clipboard_clear()
-                root.clipboard_append(value)
+                root.clipboard_clear()  # Clear the current clipboard content
+                root.clipboard_append(RESPONSE)  # Append the RESPONSE to the clipboard
 
+                # Open a popup to indicate the response has been copied to the clipboard
                 popup.open_popup("Copied to clipboard", True)
 
         # Entry to display the prompt
@@ -260,8 +304,8 @@ def colleriaai_tool(root, frame):
         ask_button.grid(row = 0, column = 1, padx = (8, 0), pady = 12, sticky = "nsew")
 
         # Button to copy the response to the clipboard
-        copy_button = ctk.CTkButton(button_frame, text = "Copy", font = (main.FONT, 12, "bold"), fg_color = main.FG_COLOR,
-                                    hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, width = 64,
+        copy_button = ctk.CTkButton(button_frame, text = "Copy", font = (main.FONT, 10, "bold"), fg_color = main.FG_COLOR, height = 24,
+                                    hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, width = 58, corner_radius = 8,
                                     command = get_value)
         copy_button.grid(row = 0, column = 0, padx = 0, pady = 0, sticky = "e")
 

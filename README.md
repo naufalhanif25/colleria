@@ -328,6 +328,22 @@ pip install pytesseract
 pip install textblob
 ```
 
+<h5>
+    <p>35. tkhtmlview</p>
+</h5>
+
+```
+pip install tkhtmlview
+```
+
+<h5>
+    <p>36. markdown2</p>
+</h5>
+
+```
+pip install markdown2
+```
+
 <!-- Setup -->
 <h3>
     <b>How to set up Colleria? 🛠️</b>

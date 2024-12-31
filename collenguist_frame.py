@@ -151,13 +151,14 @@ def collenguist_tool(root, frame):
                                scrollbar_button_color = main.SCROLLBAR_COLOR, scrollbar_button_hover_color = main.SCROLLBAR_HOVER_COLOR,
                                corner_radius = 8)
     input_box.grid(row = 0, column = 0, padx = (0, 6), pady = 0, sticky = "nsew")
+    input_box.configure(wrap = "word")
 
     # Create the output text box
     output_box = ctk.CTkTextbox(io_frame, fg_color = main.BASE_COLOR, font = (main.FONT, 14, "normal"), text_color = main.TEXT_COLOR, 
                                 scrollbar_button_color = main.SCROLLBAR_COLOR, scrollbar_button_hover_color = main.SCROLLBAR_HOVER_COLOR,
                                 corner_radius = 8)
     output_box.grid(row = 0, column = 1, padx = (6, 0), pady = 0, sticky = "nsew")
-    output_box.configure(state = "disabled")
+    output_box.configure(state = "disabled", wrap = "word")
     
     # Function to get the values ​​from a text box and copy them to the clipboard
     def get_value(role):

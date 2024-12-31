@@ -22,7 +22,7 @@ async def get_sinta_ranking(session, journal):
     - journal: The name of the journal to search for.
 
     Returns:
-    - The Sinta ranking of the journal if found, otherwise False.
+    - The Sinta ranking of the journal if found, otherwise "N/A".
     """
 
     # Check if frame is destroyed if 
@@ -47,11 +47,9 @@ async def get_sinta_ranking(session, journal):
                     return ranking[:2]  # Return the first 2 characters of the ranking
 
     except aiohttp.ClientError as e:
-        popup.open_popup("Unable to perform request.\nPlease check your internet connection", True) # Show error popup
+        popup.open_popup("Unable to reach sinta.kemdikbud.go.id.\nPlease check your internet connection", True) # Show error popup
 
-        raise SystemExit(f"Program terminated due to exception: {e}")
-
-    return False  # Return False if ranking not found or request failed
+    return "N/A"  # Return "N/A" if ranking not found or request failed
 
 def get_apa_citation(authors, title, journal, year, volume, issue, page):
     """
@@ -104,7 +102,7 @@ async def search_journal(query, rows = 100):
                     return await response.json()  # Return JSON response
 
     except aiohttp.ClientError as e:
-        popup.open_popup("Unable to perform request.\nPlease check your internet connection", True)  # Show error popup
+        popup.open_popup("Cannot run API properly.\nPlease check your internet connection", True)  # Show error popup
 
         raise SystemExit(f"Program terminated due to exception: {e}")
 
@@ -145,7 +143,7 @@ async def process_item(session, item):
     ranking = await get_sinta_ranking(session, journal)
 
     # If Sinta ranking is not found, use an alternative ranking source
-    if not ranking:
+    if not ranking or ranking == "N/A":
         ranking = f"https://www.scimagojr.com/journalsearch.php?q={journal}"
 
     # Create an APA citation for the journal article

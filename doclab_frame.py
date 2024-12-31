@@ -326,6 +326,8 @@ def doclab_tool(root, frame):
                     loading_label.configure(font = (main.FONT, 16, "bold"), text = "Converting")
 
                 if any(input_ext == DICT_KEYS[index] and FILE_EXT == DICT_VALUES[index] for index in range(len(EXT_DICT))):
+                    root.configure(cursor = "watch")  # Change the shape of the cursor
+                    
                     # Start the loading animation
                     start_animation()
 
@@ -334,6 +336,8 @@ def doclab_tool(root, frame):
 
                     # Stop the loading animation
                     stop_animation()
+                    
+                    root.configure(cursor = "arrow")  # Resets the cursor shape
 
                     # Truncate the input name
                     input_name = truncate(input_name)

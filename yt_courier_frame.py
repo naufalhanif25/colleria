@@ -96,7 +96,7 @@ def yt_courier_tool(root, frame):
                              scrollbar_button_color = main.SCROLLBAR_COLOR, scrollbar_button_hover_color = main.SCROLLBAR_HOVER_COLOR,
                              border_color = main.BORDER_COLOR, border_width = 2, corner_radius = 8)
     log_box.grid(row = 1, column = 0, padx = 0, pady = 0, sticky = "nsew")
-    log_box.configure(state = "disabled")  # Disable editing the textbox
+    log_box.configure(state = "disabled", wrap = "word")  # Disable editing the textbox
 
     frame.grid_rowconfigure(4, weight = 1)
 
@@ -117,7 +117,7 @@ def yt_courier_tool(root, frame):
     # Function to run the yt courier algorithm
     def yt_courier(event = None):
         global DONE
-
+        
         # Get the URL and output path from the user input fields
         url = url_entry.get()
         output_path = output_path_entry.get()
@@ -129,11 +129,15 @@ def yt_courier_tool(root, frame):
 
         # Check if the URL, output path, and quality are not empty
         if (url != "" and url != "Enter the YouTube URL") and (output_path != "" and output_path != "Browse path") and quality != "":
+            root.configure(cursor = "watch")  # Change the shape of the cursor
+            
             # Run the courier function with the provided URL, output path, and quality
             courier.run_courier(frame, log_box, url, output_path, quality)
 
             # The video download has been completed
             DONE = True
+            
+            root.configure(cursor = "arrow")  # Resets the cursor shape
         else:
             # Open a popup to notify the user to provide the necessary inputs
             popup.open_popup("Please drop a video or select quality\nor browse output directory", True)

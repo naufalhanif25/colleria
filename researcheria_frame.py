@@ -69,7 +69,7 @@ def researcheria_tool(root, frame):
 
     # Create a frame for the search entry
     search_frame = ctk.CTkFrame(frame, width = 240, height = 16, fg_color = main.FRAME_COLOR)
-    search_frame.grid(row = 1, column = 0, padx = 160, pady = (12, 16), sticky = "nsew")
+    search_frame.grid(row = 1, column = 0, padx = 160, pady = (16, 8), sticky = "nsew")
     search_frame.grid_columnconfigure(0, weight = 1)
     search_frame.grid_rowconfigure(0, weight = 1)
     search_frame.grid_rowconfigure(2, weight = 1)
@@ -100,7 +100,7 @@ def researcheria_tool(root, frame):
 
     # Create a loading label to show the loading animation
     loading_label = ctk.CTkLabel(frame, text = "Looking for a match", font = (main.FONT, 12, "normal"), text_color = main.FADED_LABEL_COLOR)
-    loading_label.grid(row = 2, column = 0, padx = 0, pady = 0, sticky = "nsew")
+    loading_label.grid(row = 2, column = 0, padx = 0, pady = 16, sticky = "nsew")
     loading_label.grid_forget()  # Hide the label initially
 
     # Create a button frame to hold the buttons
@@ -281,7 +281,9 @@ def researcheria_tool(root, frame):
         page_frame.grid_forget()
 
         loading_label.configure(text = "Looking for a match")
-        loading_label.grid(row = 2, column = 0, padx = 0, pady = 0, sticky = "nsew")
+        loading_label.grid(row = 2, column = 0, padx = 0, pady = 16, sticky = "nsew")
+        
+        root.configure(cursor = "watch")  # Change the shape of the cursor
 
         start_animation()
 
@@ -297,8 +299,12 @@ def researcheria_tool(root, frame):
                 stop_animation()  # Stop the animation 
                 no_results_found(loading_label)  # Show a message indicating no results were found
                 
+                root.configure(cursor = "arrow")  # Resets the cursor shape
+                
                 SEARCH = None  # Resets the values ​​of SEARCH
             elif RESULTS is None:
+                root.configure(cursor = "watch")  # Change the shape of the cursor
+                
                 start_animation()  # Stop the animation 
 
                 RESULTS = asyncio.run(researcheria.researcheria(frame, query))
@@ -307,10 +313,14 @@ def researcheria_tool(root, frame):
                     stop_animation()
                     no_results_found(loading_label)
                     
+                    root.configure(cursor = "arrow")  # Resets the cursor shape
+                    
                     SEARCH = None  # Resets the values ​​of SEARCH
                 else:
                     stop_animation()  # Stop the animation 
                     create_buttons(CUR_PAGE)  # Create the buttons for the results
+                    
+                    root.configure(cursor = "arrow")  # Resets the cursor shape
 
                     if len(RESULTS) > 10:
                         create_pagination()  # Create the pagination buttons
@@ -322,6 +332,8 @@ def researcheria_tool(root, frame):
             else:
                 stop_animation()  # Stop the animation 
                 create_buttons(CUR_PAGE) # Create the buttons for the results
+                
+                root.configure(cursor = "arrow")  # Resets the cursor shape
 
                 if len(RESULTS) > 10:
                     create_pagination()  # Create the pagination buttons
@@ -336,6 +348,8 @@ def researcheria_tool(root, frame):
 
             # Stop animation if an exception occurs
             stop_animation()
+            
+            root.configure(cursor = "arrow")  # Resets the cursor shape
 
     # Function to start the search process
     def start_search(event = None):

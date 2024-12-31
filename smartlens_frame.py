@@ -162,7 +162,7 @@ def smartlens_tool(root, frame):
     result_box = ctk.CTkTextbox(result_frame, height = 120, fg_color = main.BASE_COLOR, font = (main.FONT, 12, "normal"), text_color = main.TEXT_COLOR, 
                                 scrollbar_button_color = main.SCROLLBAR_COLOR, scrollbar_button_hover_color = main.SCROLLBAR_HOVER_COLOR)
     result_box.grid(row = 0, column = 0, padx = 12, pady = 12, sticky = "nsew")
-    result_box.configure(state = "disabled")  # Disable editing the textbox
+    result_box.configure(state = "disabled", wrap = "word")  # Disable editing the textbox
     result_box.grid()
 
     # Configure the grid layout for the result_frame
@@ -221,6 +221,8 @@ def smartlens_tool(root, frame):
         if entry_var.get() == "Drop Image Here":
             popup.open_popup("Please drop an image", True)
         else:
+            root.configure(cursor = "watch")  # Change the shape of the cursor
+            
             start_animation()  # Start loading animation
             
             loading_label.grid(row = 0, column = 0, padx = 16, pady = 16, sticky = "nsew") 
@@ -252,6 +254,8 @@ def smartlens_tool(root, frame):
             result_box.grid(row = 0, column = 0, padx = 12, pady = 12, sticky = "nsew")
             
             stop_animation()  # Stop loading animation
+            
+            root.configure(cursor = "arrow")  # Resets the cursor shape
     
     # Function to start the extraction process in a separate thread
     def run_smartlens(frame):

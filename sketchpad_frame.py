@@ -381,19 +381,17 @@ def sketchpad_tool(root, frame):
                                corner_radius = 4, width = 24, height = 16, command = command)
         button.grid(row = 0, column = index, padx = 4, pady = 12, sticky = "nsew")
         
-        # Bind event to change the color of the button when pressed
-        if index != (len(colors) - 1):
-            button.bind("<Button-1>", lambda event, button = button: color_button_config(event, button))
-        
         # Automatically configure the color for the default button
         if index == 0:
             color_button_config(None, button)
         
         # Configure the last button as a custom color picker
         if index == (len(colors) - 1):
-            button.configure(text = "\u2795", font = (main.FONT, 8, "normal"), width = 26, text_color = main.TEXT_COLOR, border_width = 1, 
-                             border_color = main.BORDER_COLOR)
+            button.configure(text = "\u2795", font = (main.FONT, 8, "normal"), width = 26, text_color = main.TEXT_COLOR)
             button.grid_configure(pady = 10)
+            
+        # Bind event to change the color of the button when pressed
+        button.bind("<Button-1>", lambda event, button = button: color_button_config(event, button))
     
     # Create a frame for the slider inside the tools frame
     slider_frame = ctk.CTkFrame(tools_frame, height = 32, fg_color = main.ENTRY_COLOR, corner_radius = 8)
@@ -404,7 +402,7 @@ def sketchpad_tool(root, frame):
     # Create a slider inside the slider frame
     slider = ctk.CTkSlider(slider_frame, from_ = 1, to = 100, fg_color = main.BASE_COLOR, button_color = main.FG_COLOR, height = 16,
                            button_hover_color = main.FG_HOVER_COLOR, progress_color = main.FADED_BORDER_COLOR)
-    slider.grid(row = 0, column = 0, padx = 12, pady = 8, sticky = "nsew")
+    slider.grid(row = 0, column = 0, padx = 12, pady = 12, sticky = "nsew")
     slider.set(2)  # Set the default value of the slider
 
     # Create a canvas for drawing
@@ -458,7 +456,7 @@ def sketchpad_tool(root, frame):
         LAST_X = event.x
         LAST_Y = event.y
         
-        update_title()  # Update the title each time a line is drawn
+        update_title()  # Update the title each time a line is erase
     
     # Function to set the last mouse position for the eraser
     def set_last_erase(event):
@@ -478,6 +476,8 @@ def sketchpad_tool(root, frame):
         
         LAST_X = event.x
         LAST_Y = event.y
+        
+        update_title()  # Update the title each time a line is drawn
 
     # Function to reset the last mouse position
     def reset(event):
@@ -487,17 +487,21 @@ def sketchpad_tool(root, frame):
         LAST_Y = None
     
     # Function to switch between drawing and erasing modes
-    def set_mode(mode):
-        if mode == "draw":  # Drawing mode
+    def set_mode(mode):        
+        if mode == "draw":  # Drawing mode            
             canvas.bind("<Button-1>", set_last_draw)
             canvas.bind("<B1-Motion>", draw)
-        elif mode == "erase":  # Erasing mode
+            canvas.configure(cursor = "plus")  # Change the shape of the cursor
+        elif mode == "erase":  # Erasing mode            
             canvas.bind("<Button-1>", set_last_erase)
             canvas.bind("<B1-Motion>", erase)
+            canvas.configure(cursor = "target")  # Change the shape of the cursor
         elif mode == "clear":
             canvas.delete("all")  # Clear the canvas
         
         canvas.bind("<ButtonRelease-1>", reset)
+        
+        update_title()  # Update the title every time the mode is changed
 
     # Bind mouse events to the canvas
     canvas.bind("<Button-1>", set_last_draw)

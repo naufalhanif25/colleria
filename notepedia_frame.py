@@ -210,6 +210,7 @@ def notepedia_tool(root, frame):
                                  scrollbar_button_color = main.SCROLLBAR_COLOR, scrollbar_button_hover_color = main.SCROLLBAR_HOVER_COLOR,
                                  corner_radius = 8)
     notepad_box.grid(row = 1, column = 0, padx = 8, pady = (0, 8), sticky = "nsew")
+    notepad_box.configure(wrap = "word")
     notepad_box.insert(tk.END, NOTES)
 
     # Function to update the filename label

@@ -33,3 +33,5 @@ pip install gtts
 pip install noisereduce
 pip install pytesseract
 pip install textblob
+pip install tkhtmlview
+pip install markdown2
