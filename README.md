@@ -50,6 +50,7 @@
 | **Collenguist** | Collenguist is a language translation feature based on Google Translate. |
 | **SmartLens** | SmartLens is a feature that can extract text from images, but this feature only works well for English |
 | **Colleria.AI** | Colleria.AI is a free artificial intelligence that can be used to ask any question. Colleria.AI uses the Llama 3.1 70B Versatile model from Meta. |
+| **Flassencia** | Flassencia is a feature that can be used to summarize long texts powered by artificial intelligence. |
 | **YT Courier** | YT Courier is a feature that can be used to download any video from YouTube just by using the video URL. |
 
 <!-- List of libraries and installation commands -->
@@ -342,6 +343,30 @@ pip install tkhtmlview
 
 ```
 pip install markdown2
+```
+
+<h5>
+    <p>37. Sastrawi</p>
+</h5>
+
+```
+pip install Sastrawi 
+```
+
+<h5>
+    <p>38. sumy</p>
+</h5>
+
+```
+pip install sumy 
+```
+
+<h5>
+    <p>39. nltk</p>
+</h5>
+
+```
+pip install nltk
 ```
 
 <!-- Setup -->

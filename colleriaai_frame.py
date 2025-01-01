@@ -305,7 +305,7 @@ def colleriaai_tool(root, frame):
 
         # Button to copy the response to the clipboard
         copy_button = ctk.CTkButton(button_frame, text = "Copy", font = (main.FONT, 10, "bold"), fg_color = main.FG_COLOR, height = 24,
-                                    hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, width = 58, corner_radius = 8,
+                                    hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, width = 64, corner_radius = 32,
                                     command = get_value)
         copy_button.grid(row = 0, column = 0, padx = 0, pady = 0, sticky = "e")
 
@@ -422,6 +422,9 @@ def colleriaai_tool(root, frame):
                                      hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, width = 72, 
                                      command = lambda event = None: enter(event, root, frame))
         enter_button.grid(row = 0, column = 1, padx = (8, 0), pady = 0, sticky = "nsew")
+        
+        # Get the current children of the frame
+        is_widget.WIDGETS = frame.winfo_children()
 
     # Check if the API key is already available
     if KEY != "":

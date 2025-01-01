@@ -3,7 +3,8 @@ import customtkinter as ctk
 from tkinterdnd2 import DND_FILES, TkinterDnD
 import tkinter as tk
 from PIL import Image 
-from pytesseract import pytesseract 
+from pytesseract import pytesseract
+from deep_translator import GoogleTranslator
 from textblob import TextBlob
 import threading
 import queue
@@ -111,7 +112,7 @@ def smartlens_tool(root, frame):
     
     # Create a switch
     switch_var = ctk.StringVar(value = 0)
-    switch = ctk.CTkSwitch(switch_frame, variable = switch_var, text = "Autocorrect (English)", font = (main.FONT, 10, "normal"), text_color = main.TEXT_COLOR, 
+    switch = ctk.CTkSwitch(switch_frame, variable = switch_var, text = "Autocorrect", font = (main.FONT, 10, "normal"), text_color = main.TEXT_COLOR, 
                            fg_color = main.SCROLLBAR_HOVER_COLOR, progress_color = main.FADED_BORDER_COLOR, button_color = main.FG_COLOR,
                            switch_height = 12, switch_width = 28, height = 12, width = 28, border_width = 0, button_hover_color = main.FG_HOVER_COLOR, 
                            offvalue = 0, onvalue = 1)
@@ -182,8 +183,23 @@ def smartlens_tool(root, frame):
         - input_text: str, the text to be corrected.
         """
         
+        # Initialize the GoogleTranslator object
+        translator = GoogleTranslator()
+        
+        # Detect the language of the input text
+        detected_lang = "auto"
+        
+        # If the language is not English, translate to English
+        if detected_lang != "en":
+            input_text = translator.translate(text = input_text, source = detected_lang, target = "en")
+        
+        # Correct the text in English
         blob = TextBlob(input_text)
         corrected_text = blob.correct()
+        
+        # If the original language was not English, translate corrected text back to the original language
+        if detected_lang != "en":
+            corrected_text = translator.translate(text = corrected_text, source = "en", target = detected_lang)
     
         queue_var.put(str(corrected_text))  # Put corrected text
     
@@ -316,3 +332,6 @@ def smartlens_tool(root, frame):
     copy_button = ctk.CTkButton(frame, text = "Copy", font = (main.FONT, 12, "bold"), fg_color = main.FG_COLOR,
                                 hover_color = main.FG_HOVER_COLOR, text_color = main.BASE_COLOR, height = 32, command = get_value)
     copy_button.grid(row = 7, column = 0, padx = 360, pady = 24, sticky = "nsew")
+    
+    # Get the current children of the frame
+    is_widget.WIDGETS = frame.winfo_children()

@@ -10,6 +10,7 @@ import researcheria_frame as rf
 import collenguist_frame as clf
 import smartlens_frame as slf
 import colleriaai_frame as caf
+import flassencia_frame as ff
 import yt_courier_frame as ytcf
 from PIL import Image, ImageOps
 import pywinstyles
@@ -78,27 +79,34 @@ if __name__ == "__main__":
     toollist_container.grid_rowconfigure(1, weight = 1)
 
     toollist_frame = ctk.CTkFrame(toollist_container, width = 164, height = 640, fg_color = FRAME_COLOR)
-    toollist_frame.grid(row = 1, column = 0, padx = 0, pady = (0, 8), sticky = "nsew")
+    toollist_frame.grid(row = 1, column = 0, padx = 0, pady = (0, 12), sticky = "nsew")
     toollist_frame.grid_columnconfigure(0, weight = 1)
     toollist_frame.grid_rowconfigure(0, weight = 1)
 
     toollist_canvas = ctk.CTkCanvas(toollist_frame, width = 164, height = 632, bg = FRAME_COLOR, highlightthickness = 0)
     toollist_canvas.grid(row = 0, column = 0, sticky = "nsew") 
     toollist_canvas.grid_columnconfigure(0, weight = 1)
+    toollist_canvas.grid_rowconfigure(0, weight = 1)
 
     toollist_button_frame = ctk.CTkFrame(toollist_canvas, width = 152, height = 632, fg_color = FRAME_COLOR) 
     toollist_button_frame.grid(row = 0, column = 0, sticky = "nsew") 
+    toollist_button_frame.grid_columnconfigure(0, weight = 1)
 
-    scrollbar = ctk.CTkScrollbar(toollist_frame, orientation = "vertical", command = toollist_canvas.yview, width = 12, fg_color = FRAME_COLOR, 
-                                 button_color = SCROLLBAR_COLOR, button_hover_color = SCROLLBAR_HOVER_COLOR) 
-    scrollbar.grid(row = 0, column = 1, padx = 4, pady = 0, sticky = "nsew") 
+    scrollbar = ctk.CTkScrollbar(toollist_frame, orientation = "vertical", command = toollist_canvas.yview, width = 12,
+                                 button_color = SCROLLBAR_COLOR, button_hover_color = SCROLLBAR_HOVER_COLOR)
+    scrollbar.grid(row = 0, column = 1, padx = 4, pady = 0, sticky = "nsew")
 
-    # Configure canvas for scrollbar 
-    toollist_canvas.configure(yscrollcommand = scrollbar.set) 
-    toollist_canvas.create_window((0, 0), window = toollist_button_frame, anchor = "nw")
+    # Configure canvas for scrollbar
+    toollist_canvas.configure(yscrollcommand = scrollbar.set)
+    toollist_canvas.create_window((0, 0), window = toollist_button_frame, anchor = "nw", tags = "toollist_button_frame")
 
-    # Update scroll region when the frame size changes 
-    toollist_button_frame.bind("<Configure>", lambda e: toollist_canvas.configure(scrollregion = toollist_canvas.bbox("all")))
+    # Update scroll region and width when the frame size changes 
+    def on_configure(event): 
+        toollist_canvas.configure(scrollregion = toollist_canvas.bbox("all")) 
+        toollist_canvas.itemconfig("toollist_button_frame", width = toollist_canvas.winfo_width())
+        
+    # Bind <Configure> event to on_configure function 
+    toollist_canvas.bind("<Configure>", on_configure)
 
     # Create a frame to hold the other buttons
     other_frame = ctk.CTkFrame(left_panel_frame, width = 164, height = 120, fg_color = FRAME_COLOR)
@@ -174,7 +182,8 @@ if __name__ == "__main__":
         LAST_PRESSED = button
 
     # Create the toollist buttons and commands
-    buttons = ["Notepedia", "TaskFlow", "SketchPad", "DocLab", "Transcriberia", "Researcheria", "Collenguist", "SmartLens", "Colleria.AI", "YT Courier"]
+    buttons = ["Notepedia", "TaskFlow", "SketchPad", "DocLab", "Transcriberia", "Researcheria", "Collenguist", 
+               "SmartLens", "Colleria.AI", "Flassencia", "YT Courier"]
     commands = [lambda: npf.notepedia_tool(root, tool_frame),
                 lambda: tff.taskflow_tool(root, tool_frame),
                 lambda: spf.sketchpad_tool(root, tool_frame),
@@ -184,16 +193,15 @@ if __name__ == "__main__":
                 lambda: clf.collenguist_tool(root, tool_frame),
                 lambda: slf.smartlens_tool(root, tool_frame),
                 lambda: caf.colleriaai_tool(root, tool_frame),
+                lambda: ff.flassencia_tool(root, tool_frame),
                 lambda: ytcf.yt_courier_tool(root, tool_frame)]
 
     for row, (button_text, command) in enumerate(zip(buttons, commands)):
         button = ctk.CTkButton(toollist_button_frame, text = button_text, font = (FONT, 12, "bold"), fg_color = FG_COLOR,
                                hover_color = FG_HOVER_COLOR, text_color = BASE_COLOR, height = 32, width = 152,
                                command = command)
-        button.grid(row = row + 1, column = 0, padx = 12, pady = 4, sticky = "nsew")
+        button.grid(row = row + 1, column = 0, padx = (12, 0), pady = 4, sticky = "nsew")
         button.bind("<Button-1>", lambda event, button = button: change_button_color(button))
-
-        toollist_button_frame.grid_columnconfigure(row + 1, weight = 1)
 
     # Create the other buttons
     other_buttons = ["Donate", "About us"]

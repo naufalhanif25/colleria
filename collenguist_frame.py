@@ -201,12 +201,16 @@ def collenguist_tool(root, frame):
             # Check if the text is not empty
             if text:
                 try:
+                    root.configure(cursor = "watch")  # Change the shape of the cursor
+                    
                     # Convert text to speech and save to a temporary file
                     text_to_speech = gTTS(text = text, lang = lang)
                     path = getpath.base("temp/audio.mp3")
                     
                     # Save the audio file
                     text_to_speech.save(path)
+                    
+                    root.configure(cursor = "arrow")  # Resets the cursor shape
                     
                     # Play the saved audio file
                     playsound.playsound(path)
@@ -291,7 +295,9 @@ def collenguist_tool(root, frame):
                 # Check if frame is destroyed if 
                 if is_widget.is_exist(FRAME): 
                     return  # If the frame is destroyed, exit the function
-        
+
+                root.configure(cursor = "watch")  # Change the shape of the cursor
+
                 text = input_box.get("1.0", tk.END)
 
                 translator = GoogleTranslator(source = LANG[DOMAIN], target = LANG[TARGET])
@@ -304,6 +310,8 @@ def collenguist_tool(root, frame):
                     output_box.delete("1.0", tk.END)
                     output_box.insert(tk.END, translation)
                     output_box.configure(state = "disabled")
+                    
+                root.configure(cursor = "arrow")  # Resets the cursor shape
 
             try:
                 response = requests.get(url, timeout = 5)  # Send an HTTP request with a timeout of 5 seconds
@@ -327,3 +335,6 @@ def collenguist_tool(root, frame):
 
     # Bind the translate function to the KeyRelease event on the input box
     input_box.bind("<KeyRelease>", translate)
+    
+    # Get the current children of the frame
+    is_widget.WIDGETS = frame.winfo_children()

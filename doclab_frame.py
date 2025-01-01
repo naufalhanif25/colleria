@@ -255,7 +255,7 @@ def doclab_tool(root, frame):
         # Update the last pressed button to the current button
         LAST_PRESSED = button
 
-    # Function to create a language selection button
+    # Function to create a extension selection button
     def ext_button(text, row, column, frame):
         button = ctk.CTkButton(frame, text = text, font = (main.FONT, 10, "bold"), border_color = main.BORDER_COLOR, 
                                 text_color = main.FADED_TEXT_COLOR, fg_color = main.BASE_COLOR, height = 24, width = 86,

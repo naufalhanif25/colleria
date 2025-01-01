@@ -35,3 +35,6 @@ pip install pytesseract
 pip install textblob
 pip install tkhtmlview
 pip install markdown2
+pip install Sastrawi 
+pip install sumy 
+pip install nltk
