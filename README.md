@@ -360,7 +360,7 @@ pip install markdown2
 <!-- Donation -->
 <>
     ❤️ Support us
-    <h5>
+    <h5>&nbsp;&nbsp;
         <a href="https://saweria.co/minkudeveloper" target="_blank" style="justify: center;"> 
             <button>
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2n797tizOh5Lk4p0xeQsYjsVkW6mZ7uN4BipecBl7My2s4LFc-sU_MGhrz-mS4s5k6N8&usqp=CAU" alt="Donate via Saweria" style="width: 200px; height: 120px; vertical-align: middle;">
