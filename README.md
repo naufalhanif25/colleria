@@ -358,7 +358,7 @@ pip install markdown2
 7. Run `run.bat` to run **Colleria**
 
 <!-- Donation -->
-<>
+<h2>
     ❤️ Support us
     <h5>
         <a href="https://saweria.co/minkudeveloper" target="_blank" style="justify: center;"> 
