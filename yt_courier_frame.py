@@ -199,7 +199,7 @@ def yt_courier_tool(root, frame):
 
     # Horizontal scrollbar 
     scrollbar = ctk.CTkScrollbar(quality_selection_frame, orientation = "horizontal", command = quality_selection_canvas.xview, height = 12,
-                                    button_color = main.SCROLLBAR_COLOR, button_hover_color = main.SCROLLBAR_HOVER_COLOR) 
+                                 button_color = main.SCROLLBAR_COLOR, button_hover_color = main.SCROLLBAR_HOVER_COLOR) 
     scrollbar.grid(row = 1, column = 0, sticky = "nsew") 
     
     # Configure canvas for scrollbar 

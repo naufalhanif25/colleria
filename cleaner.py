@@ -30,6 +30,13 @@ def clean_file():
 
         if os.path.exists(file_path):
             os.remove(file_path)
+    
+    # Temporary image path
+    temp_image = getpath.base("temp/temp.png")
+    
+    # Remove the temporary image file
+    if os.path.exists(temp_image):
+        os.remove(temp_image)
 
 def clean_audio(directory="temp"):
     """

@@ -120,8 +120,8 @@ def doclab_tool(root, frame):
 
     # Entry widget for drag-and-drop document files
     entry = ctk.CTkEntry(frame, textvariable = entry_var, height = 160, justify = "center", width = 860, corner_radius = 8,
-                            font = (main.FONT, 16, "bold"), text_color = main.FADED_TEXT_COLOR, border_color = main.BORDER_COLOR,
-                            border_width = 2, fg_color = main.ENTRY_COLOR) 
+                         font = (main.FONT, 16, "bold"), text_color = main.FADED_TEXT_COLOR, border_color = main.BORDER_COLOR,
+                         border_width = 2, fg_color = main.ENTRY_COLOR) 
     entry.grid(row = 1, column = 0, padx = 160, pady = (16, 4), sticky = "nsew")
     entry.configure(state = "disabled")
 
@@ -149,7 +149,7 @@ def doclab_tool(root, frame):
 
     # Horizontal scrollbar 
     scrollbar = ctk.CTkScrollbar(ext_selection_frame, orientation = "horizontal", command = ext_selection_canvas.xview, height = 12,
-                                    button_color = main.SCROLLBAR_COLOR, button_hover_color = main.SCROLLBAR_HOVER_COLOR) 
+                                 button_color = main.SCROLLBAR_COLOR, button_hover_color = main.SCROLLBAR_HOVER_COLOR) 
     scrollbar.grid(row = 1, column = 0, sticky = "nsew") 
     
     # Configure canvas for scrollbar 
@@ -258,8 +258,8 @@ def doclab_tool(root, frame):
     # Function to create a extension selection button
     def ext_button(text, row, column, frame):
         button = ctk.CTkButton(frame, text = text, font = (main.FONT, 10, "bold"), border_color = main.BORDER_COLOR, 
-                                text_color = main.FADED_TEXT_COLOR, fg_color = main.BASE_COLOR, height = 24, width = 86,
-                                border_width = 1, hover_color = main.ENTRY_COLOR, command = lambda: change_button_color(button))
+                               text_color = main.FADED_TEXT_COLOR, fg_color = main.BASE_COLOR, height = 24, width = 86,
+                               border_width = 1, hover_color = main.ENTRY_COLOR, command = lambda: change_button_color(button))
         button.grid(row = 0, column = column, padx = 4, pady = 4, sticky = "nsew")
         button.bind("<Button-1>", lambda event: ext(event, button))
 

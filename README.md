@@ -52,6 +52,7 @@
 | **Colleria.AI** | Colleria.AI is a free artificial intelligence that can be used to ask any question. Colleria.AI uses the Llama 3.1 70B Versatile model from Meta. |
 | **Flassencia** | Flassencia is a feature that can be used to summarize long texts powered by artificial intelligence. |
 | **YT Courier** | YT Courier is a feature that can be used to download any video from YouTube just by using the video URL. |
+| **Swift-QR** | Swift-QR is a useful feature for generating QR codes using the website URL. |
 
 <!-- List of libraries and installation commands -->
 <h3>
@@ -367,6 +368,14 @@ pip install sumy
 
 ```
 pip install nltk
+```
+
+<h5>
+    <p>40. segno</p>
+</h5>
+
+```
+pip install segno
 ```
 
 <!-- Setup -->
