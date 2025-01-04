@@ -51,6 +51,7 @@
 | **SmartLens** | SmartLens is a feature that can extract text from images, but this feature only works well for English |
 | **Colleria.AI** | Colleria.AI is a free artificial intelligence that can be used to ask any question. Colleria.AI uses the Llama 3.1 70B Versatile model from Meta. |
 | **Flassencia** | Flassencia is a feature that can be used to summarize long texts powered by artificial intelligence. |
+| **CIMS** | CIMS (Colleria Integrated Math Scripts) is a code used to solve mathematical problems more effectively and efficiently. |
 | **YT Courier** | YT Courier is a feature that can be used to download any video from YouTube just by using the video URL. |
 | **Swift-QR** | Swift-QR is a useful feature for generating QR codes using the website URL. |
 

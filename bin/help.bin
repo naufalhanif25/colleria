@@ -1,0 +1,91 @@
+[DESCRIPTION]
+CIMS (Colleria Integrated Math Scripts) is a code used to solve mathematical problems more effectively and efficiently.
+
+[SYNTAX]
+Script:
+$script SCRIPT
+Each script must begin with the keyword '$script'
+
+1. equation: Type 'equ(ARGUMENT)' to solve a mathematical equation
+   - addition (+):
+     example: '$script equ(2 + 3)' -> 5
+   - subtraction (-):
+     example: '$script equ(3 - 2)' -> 1
+   - multiplication (×):
+     example: '$script equ(3 * 3)' -> 9
+   - division (÷):
+     example: '$script equ(3 / 3)' -> 1
+   - modulo (%):
+     example: '$script equ(3 % 2)' -> 0
+   - power:
+     example: '$script equ(3 ** 2)' -> 9
+     example: '$script equ(pow(3, 2))' -> 9.0
+   - absolute:
+     example: '$script equ(abs(-3))' -> 3
+   - round:
+     example: '$script equ(round(3.141))' -> 3
+     example: '$script equ(round(3.141), 2)' -> 3.14
+   - sine:
+     example: '$script equ(sin(pi / 2))' -> 1.0
+   - cosine:
+     example: '$script equ(cos(0))' -> 1.0
+   - tangent:
+     example: '$script equ(tan(pi / 4))' -> 0.999...
+   - arc sine:
+     example: '$script equ(asin(-1))' -> -1.571...
+   - arc cosine:
+     example: '$script equ(acos(0))' -> 1.571...
+   - arc tangent:
+     example: '$script equ(atan(pi / 4))' -> 1.326...
+   - square root:
+     example: '$script equ(sqrt(16))' -> 4.0
+   - cube root:
+     example (cube root): '$script equ(cbrt(144))' -> 5.241...
+   - logarithm (base 10):
+     example: '$script equ(log(1))' -> 0.0
+   - combination:
+     example: '$script equ(comb(16, 2))' -> 120
+   - factorial:
+     example: '$script equ(fact(8))' -> 40320
+   - sum:
+     The sum method can only be used in loops
+   - pi:
+     example (pi): '$script equ(pi)' -> 3.141...
+   - exponential (euler):
+     example: '$script equ(exp(1))' -> 2.718...
+     example: '$script equ(euler)' -> 2.718...
+   - tau:
+     example (tau): '$script equ(tau)' -> 6.283...
+   - phi:
+     example (phi): '$script equ(phi)' -> 1.618...
+2. print: Use ("...") or ('...') to print results to the console
+   - example: '$script "Hello world"' -> Hello world
+3. container: Type 'ctr(ARGUMENT)' to use a container that can run multiple scripts simultaneously
+   - example: '$script ctr($script "Hello World"; $script equ(2 + 3))' -> Hello World, 5
+
+Command:
+$command COMMAND
+Every command must begin with the keyword '$command'
+
+1. manual: The 'help' command is used to display the manual
+   - example: '$command help'
+2. clear all: The 'clearall' command is used to clear all the contents of the console
+   - example: '$command clearall'
+3. reset sum: The 'resetsum' command is used to reset the value of the SUM instance variable
+   - example: '$command clearall'
+
+Loop:
+$loop SYNTAX CONDITION
+Every loop must begin with the keyword '$loop'
+
+1. times: Use the keyword 'times' at the end of the loop script to specify the number of iterations
+   - example: '$loop ($script "Hello World") 100 times' -> Hello World, Hello World, Hello World, ..., Hello World
+2. until: Use the 'until(CONDITION)' method to provide conditions to the loop. The 'until' method can only be used if there is a 'sum' method
+   - example: '$loop ($script equ(sum(2))) until(SUM == 8)' -> 2, 4, 6, 8
+
+Ignore:
+$ignore COMMENT
+Every comment must begin with the keyword '$ignore'
+
+1. comment: Type '$ignore' to write a comment
+   - example: '$ignore This is a comment'

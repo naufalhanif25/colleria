@@ -11,6 +11,7 @@ import collenguist_frame as clf
 import smartlens_frame as slf
 import colleriaai_frame as caf
 import flassencia_frame as ff
+import cims_frame as cimsf
 import yt_courier_frame as ytcf
 import swiftqr_frame as sqrf
 from PIL import Image, ImageOps
@@ -184,7 +185,7 @@ if __name__ == "__main__":
 
     # Create the toollist buttons and commands
     buttons = ["Notepedia", "TaskFlow", "SketchPad", "DocLab", "Transcriberia", "Researcheria", "Collenguist", 
-               "SmartLens", "Colleria.AI", "Flassencia", "YT Courier", "Swift-QR"]
+               "SmartLens", "Colleria.AI", "Flassencia", "CIMS", "YT Courier", "Swift-QR"]
     commands = [lambda: npf.notepedia_tool(root, tool_frame),
                 lambda: tff.taskflow_tool(root, tool_frame),
                 lambda: spf.sketchpad_tool(root, tool_frame),
@@ -195,6 +196,7 @@ if __name__ == "__main__":
                 lambda: slf.smartlens_tool(root, tool_frame),
                 lambda: caf.colleriaai_tool(root, tool_frame),
                 lambda: ff.flassencia_tool(root, tool_frame),
+                lambda: cimsf.cims_tool(root, tool_frame),
                 lambda: ytcf.yt_courier_tool(root, tool_frame),
                 lambda: sqrf.swiftqr_tool(root, tool_frame)]
 
