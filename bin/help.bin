@@ -3,7 +3,7 @@ CIMS (Colleria Integrated Math Scripts) is a code used to solve mathematical pro
 
 [SYNTAX]
 Script:
-$script SCRIPT
+$script [SCRIPT]
 Each script must begin with the keyword '$script'
 
 1. equation: Type 'equ(ARGUMENT)' to solve a mathematical equation
@@ -49,22 +49,61 @@ Each script must begin with the keyword '$script'
      example: '$script equ(fact(8))' -> 40320
    - sum:
      The sum method can only be used in loops
+   - var:
+     Details of the var method are in the variables section
+     example: '$script equ(var{&a})' -> 1
+     example: '$script equ(var{&c})' -> [2, 3, 5]
+   - mean:
+     $script equ(mean(var{&ARRINT/ARRFLOAT}))
+     example: '$var array is arrint [1, 1, 2, 3, 3, 3]' -> '$script equ(mean(var{&a}))' -> 2.166...
+   - median:
+     $script equ(med(var{&ARRINT/ARRFLOAT}))
+     example: '$var array is arrint [1, 1, 2, 3, 3, 3]' -> '$script equ(med(var{&array}))' -> 2.5
+   - mode:
+     $script equ(mode(var{&ARRINT/ARRFLOAT}))
+     example: '$var array is arrint [1, 1, 2, 3, 3, 3]' -> '$script equ(mode(var{&array}))' -> 3
    - pi:
-     example (pi): '$script equ(pi)' -> 3.141...
-   - exponential (euler):
+     example: '$script equ(pi)' -> 3.141...
+   - exponential/euler:
      example: '$script equ(exp(1))' -> 2.718...
      example: '$script equ(euler)' -> 2.718...
    - tau:
-     example (tau): '$script equ(tau)' -> 6.283...
+     example: '$script equ(tau)' -> 6.283...
    - phi:
-     example (phi): '$script equ(phi)' -> 1.618...
+     example: '$script equ(phi)' -> 1.618...
 2. print: Use ("...") or ('...') to print results to the console
    - example: '$script "Hello world"' -> Hello world
 3. container: Type 'ctr(ARGUMENT)' to use a container that can run multiple scripts simultaneously
    - example: '$script ctr($script "Hello World"; $script equ(2 + 3))' -> Hello World, 5
+4. format: Type form(ARGUMENT) to print results using a format
+   - example: '$script form("Sum: %SUM, index: %IDX")' -> Sum: 5, index: 5
+     explain: - %IDX for index variable
+              - %SUM for sum variable
+              - %VARK for keys of variables
+              - %VARV for values of variables
+              - %VAR for variables
+
+Variable:
+$var [NAME] is [TYPE] [VALUE]
+Each variable initializer must be preceded by the keyword '$var'
+
+1. Data type:
+   - int: Data type for integers (..., -3, -2, -1, 0, 1, 2, 3, ...)
+     example: '$var a is int 5' -> '$script equ(var{&a})' -> 5
+   - float: Data type for decimal numbers (..., -3.6, -2.4, -1.2, 0.0, 1.2, 2.4, 3.6, ...)
+     example: '$var a is float 5.5' -> '$script equ(var{&a})' -> 5.5
+   - str: Data types for characters, letters, words, and sentences ("Hello World")
+     example: '$var a is str "Hello World"' -> '$script equ(var{&a})' -> Hello World
+   - arrint: Data type for the set of integers ([1, 2, 3, 4, 5])
+     example: '$var a is arrint [1, 2, 3, 4, 5]' -> '$loop (equ(sum(var{&a}[IDX]))) until IDX == 3' -> 1, 2, 3, 4
+   - arrfloat: Data type for the set of decimal numbers ([1.2, 2.4, 3.6])
+     example: '$var a is arrfloat [1.2, 2.4, 3.6]' -> '$loop (equ(sum(var{&a}[IDX]))) until IDX == 2' -> 1.2, 2.4, 3.6
+   - arrstr: Data type for the set of characters, letters, words, and sentences (["Hello", "World])
+     example: '$var a is arrstr ["Hello", "World"]' -> '$loop ($script equ(var{&a}[IDX])) until(IDX == 2)' -> Hello, World
+                                                    -> '$loop ($script equ(var{&a}[IDX])) 2 times' -> Hello, World
 
 Command:
-$command COMMAND
+$command [COMMAND]
 Every command must begin with the keyword '$command'
 
 1. manual: The 'help' command is used to display the manual
@@ -72,10 +111,14 @@ Every command must begin with the keyword '$command'
 2. clear all: The 'clearall' command is used to clear all the contents of the console
    - example: '$command clearall'
 3. reset sum: The 'resetsum' command is used to reset the value of the SUM instance variable
-   - example: '$command clearall'
+   - example: '$command resetsum'
+4. reset index: The 'resetidx' command is used to reset the value of the IDX instance variable
+   - example: '$command resetidx'
+5. reset variable: The 'resetvar' command is used to reset the value of the VAR instance variable
+   - example: '$command resetvar'
 
 Loop:
-$loop SYNTAX CONDITION
+$loop [SYNTAX] [CONDITION]
 Every loop must begin with the keyword '$loop'
 
 1. times: Use the keyword 'times' at the end of the loop script to specify the number of iterations
@@ -84,7 +127,7 @@ Every loop must begin with the keyword '$loop'
    - example: '$loop ($script equ(sum(2))) until(SUM == 8)' -> 2, 4, 6, 8
 
 Ignore:
-$ignore COMMENT
+$ignore [COMMENT]
 Every comment must begin with the keyword '$ignore'
 
 1. comment: Type '$ignore' to write a comment
