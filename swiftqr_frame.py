@@ -33,6 +33,10 @@ def swiftqr_tool(root, frame):
     
     # Clean specific files using the cleaner module
     cleaner.clean_file()
+    
+    # Reset the cursor icon
+    if root.cget("cursor") != "arrow":
+        root.configure(cursor = "arrow")
 
     # Destroy the existing frame
     frame.destroy()
@@ -210,7 +214,7 @@ def swiftqr_tool(root, frame):
             
     # Entry to display the url
     url_entry = ctk.CTkEntry(url_frame, textvariable = url_var, width = 860, height = 32, fg_color = main.BASE_COLOR, font = (main.FONT, 12, "normal"), 
-                             corner_radius = 16, text_color = main.FADED_LABEL_COLOR, border_color = main.FADED_TEXT_COLOR, border_width = 2)
+                             corner_radius = 16, text_color = main.FADED_LABEL_COLOR, border_color = main.FADED_BORDER_COLOR, border_width = 2)
     url_entry.grid(row = 0, column = 0, padx = 0, pady = 0, sticky = "nsew")
     url_entry.bind("<FocusIn>", on_entry_click) 
     url_entry.bind("<FocusOut>", on_focus_out)

@@ -39,6 +39,10 @@ def notepedia_tool(root, frame):
 
     # Clean specific files using the cleaner module
     cleaner.clean_file()
+    
+    # Reset the cursor icon
+    if root.cget("cursor") != "arrow":
+        root.configure(cursor = "arrow")
 
     # Destroy the existing frame
     frame.destroy()

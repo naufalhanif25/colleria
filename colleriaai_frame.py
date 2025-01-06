@@ -53,6 +53,10 @@ def colleriaai_tool(root, frame):
     def key_entered(root, frame):
         # Clean specific files using the cleaner module
         cleaner.clean_file()
+        
+        # Reset the cursor icon
+        if root.cget("cursor") != "arrow":
+            root.configure(cursor = "arrow")
 
         # Destroy the existing frame
         frame.destroy()
@@ -71,7 +75,7 @@ def colleriaai_tool(root, frame):
         colleriaai_label.grid(row = 0, column = 0, padx = 24, pady = (24, 0), sticky = "nsew")
 
         # Add a label for the model name
-        model_label = ctk.CTkLabel(frame, text = f"with {colleriaai.MODEL_NAME}", font = (main.FONT, 12, "normal"), text_color = main.TEXT_COLOR)
+        model_label = ctk.CTkLabel(frame, text = f"with {colleriaai.MODEL_NAME}", font = (main.FONT, 12, "normal"), text_color = main.FADED_TEXT_COLOR)
         model_label.grid(row = 1, column = 0, padx = 24, pady = (0, 8), sticky = "nsew")
 
         # Create a frame as a container
@@ -291,7 +295,7 @@ def colleriaai_tool(root, frame):
 
         # Entry to display the prompt
         prompt_entry = ctk.CTkEntry(prompt_frame, textvariable = prompt_var, height = 32, fg_color = main.BASE_COLOR, font = (main.FONT, 12, "normal"), 
-                                    corner_radius = 16, text_color = main.FADED_LABEL_COLOR, border_color = main.FADED_TEXT_COLOR, border_width = 2)
+                                    corner_radius = 16, text_color = main.FADED_LABEL_COLOR, border_color = main.BORDER_COLOR, border_width = 2)
         prompt_entry.grid(row = 0, column = 0, padx = 0, pady = 12, sticky = "nsew")
         prompt_entry.bind("<FocusIn>", on_entry_click) 
         prompt_entry.bind("<FocusOut>", on_focus_out)
@@ -316,6 +320,10 @@ def colleriaai_tool(root, frame):
     def enter_key(root, frame):
         # Clean specific files using the cleaner module
         cleaner.clean_file()
+        
+        # Reset the cursor icon
+        if root.cget("cursor") != "arrow":
+            root.configure(cursor = "arrow")
 
         # Destroy the existing frame
         frame.destroy()
@@ -335,7 +343,7 @@ def colleriaai_tool(root, frame):
 
         # Add a label for the colleria ai tool frame
         getstarted_label = ctk.CTkLabel(frame, text = "Enter your API key to get started \u2728", font = (main.FONT, 18, "bold"), 
-                                        text_color = main.FADED_TEXT_COLOR)
+                                        text_color = main.FADED_LABEL_COLOR)
         getstarted_label.grid(row = 1, column = 0, padx = 24, pady = (132, 0), sticky = "nsew")
 
         # Create a frame for the key entry and button
@@ -411,7 +419,7 @@ def colleriaai_tool(root, frame):
 
         # Entry widget to enter the API key
         key_entry = ctk.CTkEntry(key_frame, textvariable = key_var, height = 32, fg_color = main.BASE_COLOR, font = (main.FONT, 12, "normal"), 
-                                 corner_radius = 16, text_color = main.FADED_LABEL_COLOR, border_color = main.FADED_TEXT_COLOR, border_width = 2)
+                                 corner_radius = 16, text_color = main.FADED_LABEL_COLOR, border_color = main.FADED_BORDER_COLOR, border_width = 2)
         key_entry.grid(row = 0, column = 0, padx = 0, pady = 0, sticky = "nsew")
         key_entry.bind("<FocusIn>", on_entry_click) 
         key_entry.bind("<FocusOut>", on_focus_out)

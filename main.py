@@ -24,15 +24,15 @@ import getpath
 
 # Color constants for the application interface
 BASE_COLOR = "#FFFFFF"
-FRAME_COLOR = "#F0F9FF"
+FRAME_COLOR = "#F9FAFB"
 FG_COLOR = "#38BDF8"
 FG_HOVER_COLOR = "#0EA5E9"
 FADED_BORDER_COLOR = "#7DD3FC"
 BORDER_COLOR = "#38BDF8"
-FADED_TEXT_COLOR = "#38BDF8"
-FADED_LABEL_COLOR = "#0EA5E9"
+FADED_TEXT_COLOR = "#52525B"
+FADED_LABEL_COLOR = "#38BDF8"
 ENTRY_COLOR = "#E0F2FE"
-TEXT_COLOR = "#082F49"
+TEXT_COLOR = "#09090B"
 SCROLLBAR_COLOR = "#E0F2FE"
 SCROLLBAR_HOVER_COLOR = "#BAE6FD"
 
@@ -121,11 +121,11 @@ if __name__ == "__main__":
     tool_frame.grid_columnconfigure(0, weight = 1)
 
     # Add a welcome label 
-    welcome_label = ctk.CTkLabel(tool_frame, text = "Welcome to Colleria", font = (FONT, 36, "bold"), text_color = FADED_TEXT_COLOR)
+    welcome_label = ctk.CTkLabel(tool_frame, text = "Welcome to Colleria", font = (FONT, 36, "bold"), text_color = FADED_LABEL_COLOR)
     welcome_label.grid(row = 0, column = 0, padx = 24, pady = (86, 0), sticky = "nsew")
 
     # Add a version label
-    version_label = ctk.CTkLabel(tool_frame, text = "Version 1.0.0 Beta", font = (FONT, 10, "normal"), text_color = TEXT_COLOR)
+    version_label = ctk.CTkLabel(tool_frame, text = "Version 1.0.0 Beta", font = (FONT, 10, "normal"), text_color = FADED_TEXT_COLOR)
     version_label.grid(row = 1, column = 0, padx = 24, pady = (0, 0), sticky = "nsew")
 
     # Load the image using PIL and convert it to CTkImage
@@ -146,10 +146,8 @@ if __name__ == "__main__":
     message_label.grid(row = 3, column = 0, padx = 24, pady = (36, 0), sticky = "nsew")
     
     # Add a support label 
-    support_label = ctk.CTkLabel(tool_frame, text = " Don't forget to support us by donating ", font = (FONT, 12, "normal"), text_color = TEXT_COLOR)
+    support_label = ctk.CTkLabel(tool_frame, text = " Don't forget to support us by donating ", font = (FONT, 12, "normal"), text_color = FADED_TEXT_COLOR)
     support_label.grid(row = 4, column = 0, padx = 24, pady = (16, 0), sticky = "nsew")
-    
-    pywinstyles.set_opacity(support_label, value = 0.75)  # Set the opacity of the support label
     
     # Load the logo using PIL and convert it to CTkImage
     logo = Image.open(getpath.base("public/minku.png"))
@@ -157,7 +155,7 @@ if __name__ == "__main__":
 
     # Add a logo label
     logo_label = ctk.CTkLabel(tool_frame, text = "", image = logo)
-    logo_label.grid(row = 5, column = 0, padx = 24, pady = (0, 16), sticky = "s")
+    logo_label.grid(row = 5, column = 0, padx = 24, pady = (0, 24), sticky = "s")
     
     pywinstyles.set_opacity(logo_label, value = 0.25)  # Set the opacity of the logo label
     
@@ -177,7 +175,7 @@ if __name__ == "__main__":
                                    border_width = 0, border_color = FRAME_COLOR)
 
         # Change the color of the currently pressed button
-        button.configure(fg_color = BASE_COLOR, hover_color = ENTRY_COLOR, text_color = FADED_TEXT_COLOR, 
+        button.configure(fg_color = BASE_COLOR, hover_color = ENTRY_COLOR, text_color = FADED_LABEL_COLOR, 
                          border_width = 2, border_color = BORDER_COLOR)
         
         # Update the last pressed button to the current button

@@ -34,6 +34,10 @@ def taskflow_tool(root, frame):
 
     # Clean specific files using the cleaner module
     cleaner.clean_file()
+    
+    # Reset the cursor icon
+    if root.cget("cursor") != "arrow":
+        root.configure(cursor = "arrow")
 
     # Destroy the existing frame
     frame.destroy()
@@ -183,7 +187,7 @@ def taskflow_tool(root, frame):
 
             # Create a button for the new task
             button = ctk.CTkButton(task_buttons_frame, text = "", font = (main.FONT, 12, "normal"), anchor = "center",
-                                   border_color = main.FADED_TEXT_COLOR, text_color = main.TEXT_COLOR, fg_color = main.BASE_COLOR,
+                                   border_color = main.BORDER_COLOR, text_color = main.TEXT_COLOR, fg_color = main.BASE_COLOR,
                                    border_width = 1, hover_color = main.ENTRY_COLOR, border_spacing = 8,
                                    command = lambda: task_done(button, time_label, task_label))
             button.grid(row = ROW, column = 0, padx = 0, pady = 4, sticky = "nsew")
@@ -199,7 +203,7 @@ def taskflow_tool(root, frame):
                 button.configure(fg_color = main.FRAME_COLOR)
 
             # Create a label for displaying time within the button
-            time_label = ctk.CTkButton(button, text = time, font = (main.FONT, 12, "normal"), text_color = main.TEXT_COLOR, fg_color = main.FRAME_COLOR, 
+            time_label = ctk.CTkButton(button, text = time, font = (main.FONT, 12, "normal"), text_color = main.FADED_TEXT_COLOR, fg_color = main.FRAME_COLOR, 
                                        hover_color = main.FRAME_COLOR, anchor = "w", command = lambda: task_done(button, time_label, task_label))
             time_label.grid(row = 0, column = 0, padx = (12, 0), pady = 4, sticky = "w")
 

@@ -62,6 +62,20 @@ Each script must begin with the keyword '$script'
    - mode:
      $script equ(mode(var{&ARRINT/ARRFLOAT}))
      example: '$var array is arrint [1, 1, 2, 3, 3, 3]' -> '$script equ(mode(var{&array}))' -> 3
+   - alen:
+     Calculates the length of an array
+     $script equ(alen(var{&ARRINT/ARRFLOAT}))
+     example: '$var array is arrint [1, 1, 2, 3, 3, 3]' -> '$script equ(alen(var{&array}))' -> 6
+   - max:
+     $script equ(max(var{&ARRINT/ARRFLOAT}))
+     example: '$var array is arrint [1, 1, 2, 3, 3, 3]' -> '$script equ(max(var{&array}))' -> 3
+   - min:
+     $script equ(min(var{&ARRINT/ARRFLOAT}))
+     example: '$var array is arrint [1, 1, 2, 3, 3, 3]' -> '$script equ(min(var{&array}))' -> 1
+   - asum:
+     Same as 'sum' but does not require a loop
+     $script equ(asum(var{&ARRINT/ARRFLOAT}))
+     example: '$var array is arrint [1, 1, 2, 3, 3, 3]' -> '$script equ(asum(var{&array}))' -> 13
    - pi:
      example: '$script equ(pi)' -> 3.141...
    - exponential/euler:
@@ -125,6 +139,9 @@ Every loop must begin with the keyword '$loop'
    - example: '$loop ($script "Hello World") 100 times' -> Hello World, Hello World, Hello World, ..., Hello World
 2. until: Use the 'until(CONDITION)' method to provide conditions to the loop. The 'until' method can only be used if there is a 'sum' method
    - example: '$loop ($script equ(sum(2))) until(SUM == 8)' -> 2, 4, 6, 8
+
+   Looping until it ends (reaches the index range limit)
+   - example: '$var array is arrint [1, 1, 2, 3, 3, 3]' -> '$loop ($script equ(sum(var{&array}[IDX]))) until(END)' -> 1, 2, 4, 7, 10, 13
 
 Ignore:
 $ignore [COMMENT]

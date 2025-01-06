@@ -80,6 +80,10 @@ def doclab_tool(root, frame):
 
     # Clean specific files using the cleaner module
     cleaner.clean_file()
+    
+    # Reset the cursor icon
+    if root.cget("cursor") != "arrow":
+        root.configure(cursor = "arrow")
 
     # Destroy the existing frame
     frame.destroy()
@@ -120,7 +124,7 @@ def doclab_tool(root, frame):
 
     # Entry widget for drag-and-drop document files
     entry = ctk.CTkEntry(frame, textvariable = entry_var, height = 160, justify = "center", width = 860, corner_radius = 8,
-                         font = (main.FONT, 16, "bold"), text_color = main.FADED_TEXT_COLOR, border_color = main.BORDER_COLOR,
+                         font = (main.FONT, 16, "bold"), text_color = main.FADED_LABEL_COLOR, border_color = main.BORDER_COLOR,
                          border_width = 2, fg_color = main.ENTRY_COLOR) 
     entry.grid(row = 1, column = 0, padx = 160, pady = (16, 4), sticky = "nsew")
     entry.configure(state = "disabled")
@@ -130,7 +134,7 @@ def doclab_tool(root, frame):
 
     # Label to display supported document file extensions
     ext_label = ctk.CTkLabel(frame, text = f"Extension: {", ".join(sorted(list(set(itertools.chain(DICT_VALUES, DICT_KEYS)))))}", 
-                             font = (main.FONT, 10, "normal"), text_color = main.FADED_LABEL_COLOR)
+                             font = (main.FONT, 10, "normal"), text_color = main.FADED_TEXT_COLOR)
     ext_label.grid(row = 2, column = 0, padx = 12, pady = 0, sticky = "nsew")
 
     # Extension selection frames and canvases
@@ -245,7 +249,7 @@ def doclab_tool(root, frame):
 
         # If there is a previously pressed button, reset its color
         if LAST_PRESSED is not None:
-            LAST_PRESSED.configure(fg_color = main.BASE_COLOR, hover_color = main.ENTRY_COLOR, text_color = main.FADED_TEXT_COLOR, 
+            LAST_PRESSED.configure(fg_color = main.BASE_COLOR, hover_color = main.ENTRY_COLOR, text_color = main.FADED_LABEL_COLOR, 
                                     border_width = 1, border_color = main.BORDER_COLOR)
 
         # Change the color of the currently pressed button
@@ -258,7 +262,7 @@ def doclab_tool(root, frame):
     # Function to create a extension selection button
     def ext_button(text, row, column, frame):
         button = ctk.CTkButton(frame, text = text, font = (main.FONT, 10, "bold"), border_color = main.BORDER_COLOR, 
-                               text_color = main.FADED_TEXT_COLOR, fg_color = main.BASE_COLOR, height = 24, width = 86,
+                               text_color = main.FADED_LABEL_COLOR, fg_color = main.BASE_COLOR, height = 24, width = 86,
                                border_width = 1, hover_color = main.ENTRY_COLOR, command = lambda: change_button_color(button))
         button.grid(row = 0, column = column, padx = 4, pady = 4, sticky = "nsew")
         button.bind("<Button-1>", lambda event: ext(event, button))
@@ -422,7 +426,7 @@ def doclab_tool(root, frame):
 
     # Entry to display the output file path
     output_path_entry = ctk.CTkEntry(output_path_frame, textvariable = output_entry_var, height = 24, fg_color = main.BASE_COLOR, font = (main.FONT, 12, "normal"), 
-                                corner_radius = 16, text_color = main.FADED_LABEL_COLOR, border_color = main.FADED_TEXT_COLOR, border_width = 2)
+                                     corner_radius = 16, text_color = main.FADED_LABEL_COLOR, border_color = main.FADED_BORDER_COLOR, border_width = 2)
     output_path_entry.grid(row = 0, column = 0, padx = 0, pady = 12, sticky = "nsew")
     output_path_entry.configure(state = "disabled")
 

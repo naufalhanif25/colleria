@@ -42,6 +42,10 @@ def yt_courier_tool(root, frame):
 
     # Clean specific files using the cleaner module
     cleaner.clean_file()
+    
+    # Reset the cursor icon
+    if root.cget("cursor") != "arrow":
+        root.configure(cursor = "arrow")
 
     # Destroy the existing frame
     frame.destroy()
@@ -177,7 +181,7 @@ def yt_courier_tool(root, frame):
 
     # Entry to display the url
     url_entry = ctk.CTkEntry(url_frame, textvariable = url_var, width = 860, height = 32, fg_color = main.BASE_COLOR, font = (main.FONT, 12, "normal"), 
-                             corner_radius = 16, text_color = main.FADED_LABEL_COLOR, border_color = main.FADED_TEXT_COLOR, border_width = 2)
+                             corner_radius = 16, text_color = main.FADED_LABEL_COLOR, border_color = main.FADED_BORDER_COLOR, border_width = 2)
     url_entry.grid(row = 0, column = 0, padx = 0, pady = (0, 2), sticky = "nsew")
     url_entry.bind("<FocusIn>", on_entry_click) 
     url_entry.bind("<FocusOut>", on_focus_out)
@@ -215,7 +219,7 @@ def yt_courier_tool(root, frame):
 
         # If there is a previously pressed button, reset its color
         if LAST_PRESSED is not None:
-            LAST_PRESSED.configure(fg_color = main.BASE_COLOR, hover_color = main.ENTRY_COLOR, text_color = main.FADED_TEXT_COLOR, 
+            LAST_PRESSED.configure(fg_color = main.BASE_COLOR, hover_color = main.ENTRY_COLOR, text_color = main.FADED_LABEL_COLOR, 
                                    border_width = 1, border_color = main.BORDER_COLOR)
 
         # Change the color of the currently pressed button
@@ -236,7 +240,7 @@ def yt_courier_tool(root, frame):
     # Function to create a quality selection button
     def quality_button(text, row, column, frame):
         button = ctk.CTkButton(frame, text = text, font = (main.FONT, 10, "bold"), border_color = main.BORDER_COLOR, 
-                               text_color = main.FADED_TEXT_COLOR, fg_color = main.BASE_COLOR, height = 24, width = 86,
+                               text_color = main.FADED_LABEL_COLOR, fg_color = main.BASE_COLOR, height = 24, width = 86,
                                border_width = 1, hover_color = main.ENTRY_COLOR, command = lambda: change_button_color(button))
         button.grid(row = 0, column = column, padx = 4, pady = 4, sticky = "nsew")
         button.bind("<Button-1>", lambda event: quality(event, button))
@@ -282,7 +286,7 @@ def yt_courier_tool(root, frame):
     direct_button.grid(row = 0, column = 0, padx = 0, pady = (8, 0), sticky = "nsew")
 
     # Create a frame for the output path entry and button
-    output_path_frame = ctk.CTkFrame(frame, height = 32, fg_color = main.FRAME_COLOR)
+    output_path_frame = ctk.CTkFrame(frame, height = 24, fg_color = main.FRAME_COLOR)
     output_path_frame.grid(row = 3, column = 0, padx = 160, pady = (0, 12), sticky = "nsew")
     output_path_frame.grid_columnconfigure(0, weight = 1)
     output_path_frame.grid_rowconfigure(0, weight = 1)
@@ -292,8 +296,8 @@ def yt_courier_tool(root, frame):
     output_entry_var.set("Browse path")
 
     # Entry to display the output file path
-    output_path_entry = ctk.CTkEntry(output_path_frame, textvariable = output_entry_var, height = 32, fg_color = main.BASE_COLOR, font = (main.FONT, 12, "normal"), 
-                                     corner_radius = 16, text_color = main.FADED_LABEL_COLOR, border_color = main.FADED_TEXT_COLOR, border_width = 2)
+    output_path_entry = ctk.CTkEntry(output_path_frame, textvariable = output_entry_var, height = 24, fg_color = main.BASE_COLOR, font = (main.FONT, 12, "normal"), 
+                                     corner_radius = 16, text_color = main.FADED_LABEL_COLOR, border_color = main.FADED_BORDER_COLOR, border_width = 2)
     output_path_entry.grid(row = 0, column = 0, padx = 0, pady = 12, sticky = "nsew")
     output_path_entry.configure(state = "disabled")
 

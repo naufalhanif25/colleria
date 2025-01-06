@@ -65,6 +65,10 @@ def sketchpad_tool(root, frame):
 
     # Clean specific files using the cleaner module
     cleaner.clean_file()
+    
+    # Reset the cursor icon
+    if root.cget("cursor") != "arrow":
+        root.configure(cursor = "arrow")
 
     # Destroy the existing frame
     frame.destroy()
@@ -279,7 +283,7 @@ def sketchpad_tool(root, frame):
                                    border_width = 0, border_color = main.ENTRY_COLOR)
 
         # Change the color of the currently pressed button
-        button.configure(fg_color = main.BASE_COLOR, hover_color = main.ENTRY_COLOR, text_color = main.FADED_TEXT_COLOR,
+        button.configure(fg_color = main.BASE_COLOR, hover_color = main.ENTRY_COLOR, text_color = main.FADED_LABEL_COLOR,
                          border_width = 1, border_color = main.BORDER_COLOR)
         
         # Update the last pressed button to the current button

@@ -19,7 +19,7 @@
     <h3>
         <b>What's Colleria? 🤷🏻</b>
         <h5>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Colleria is an open source software that aims to be a tool that can make it easier for students to complete their assignments. Colleria can only run on Windows operating systems and Linux-based operating systems. Apart from that, Colleria is open source and has fairly complete documentation, so anyone can contribute to the development of this software.</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Colleria is an open source software that aims to be a tool that can make it easier for students to complete their assignments. Colleria can only run on Windows operating systems. Apart from that, Colleria is open source and has fairly complete documentation, so anyone can contribute to the development of this software.</p>
         </h5>
     </h3>
     <h3>

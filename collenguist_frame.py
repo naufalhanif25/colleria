@@ -69,6 +69,10 @@ def collenguist_tool(root, frame):
 
     # Clean specific files using the cleaner module
     cleaner.clean_file()
+    
+    # Reset the cursor icon
+    if root.cget("cursor") != "arrow":
+        root.configure(cursor = "arrow")
 
     # Destroy the existing frame
     frame.destroy()
@@ -87,7 +91,7 @@ def collenguist_tool(root, frame):
     collenguist_label.grid(row = 0, column = 0, padx = 24, pady = (24, 0), sticky = "nsew")
 
     # Add a label for the llm
-    llm_label = ctk.CTkLabel(frame, text = "with Google Translate", font = (main.FONT, 12, "normal"), text_color = main.TEXT_COLOR)
+    llm_label = ctk.CTkLabel(frame, text = "with Google Translate", font = (main.FONT, 12, "normal"), text_color = main.FADED_TEXT_COLOR)
     llm_label.grid(row = 1, column = 0, padx = 24, pady = 0, sticky = "nsew")
 
     # Create a frame as a container
